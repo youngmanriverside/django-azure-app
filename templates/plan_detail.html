@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+        sendrequest();
+    });
+</script>
+{% endblock %}
+
+{% block title %}<title>Plan detail</title>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div style="background-color: #EEEEEE; margin: 10px; padding: 10px; border-radius: 10px; width: 100%">
+            您詢問了 <strong style="color: red;">{{ query1 }}</strong>
+        </div>
+        <div class="row">
+            <div>
+                <textarea class="response" id="generated-text" rows="10" cols="50">
+                    {{ response_text1 }}
+                </textarea>
+            </div>
+        </div>
+    </div>
+        <div class="row">
+        <div style="background-color: #EEEEEE; margin: 10px; padding: 10px; border-radius: 10px; width: 100%">
+            您詢問了 <strong style="color: red;">{{ query2 }}</strong>
+        </div>
+        <div class="row">
+            <div>
+                <textarea class="response" id="generated-text" rows="10" cols="50">
+                    {{ response_text2 }}
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

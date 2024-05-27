@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+    });
+</script>
+{% endblock %}
+
+{% block title %}<title>Home</title>{% endblock %}
+
+{% block content %}
+<div style="display: none;">
+    {{ all_plans_details.1.benefit }}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="m-3">
+                <form method="post" id="user-form">
+                    {% csrf_token %}
+                    <div>
+                        {{ user_qurey_form }}
+                        <button id="user-query-button" type="submit">Query</button>
+                    </div>
+                </form>
+            </div>
+            <div class="m-3">
+                <div>
+                    <h4>使用者資料</h4>
+                    <table class="table">
+                    <thead>
+                        <tr>
+                            <th>使用者</th>
+                            <th>就業狀態</th>
+                            <th>性別</th>
+                            <th>年齡區間</th>
+                            <th>待業區間</th>
+                            <th>身份別</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="row-value">{{ employee.name }}</td>
+                            <td class="row-value">
+                                {% for current in employee_current %}
+                                    {{ current }}
+                                {% endfor %}
+                            </td>
+                            <td>{{ employee.gender }}</td>
+                            <td>{{ employee.age }}</td>
+                            <td>{{ employee.unemployment_duration }}</td>
+                            <td>
+                                {% for identity in employee_identity %}
+                                    {{ identity }}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <div class="div-plans">
+                    {% if employee %}
+                    <h4>
+                        共有 <strong style="color: red;">{{ plans_for_employees_current|length }}</strong> 個就促工具可能適用。
+                    </h4>
+                    <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="th">計畫名稱</th>
+                            <th class="th">所屬科室</th>
+                            <th class="th">計畫別</th>
+                            <th class="th">申請資格</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for plan in plans_for_employees_current %}
+                        <tr>
+                            <td class="td">{{ plan.plan_name }}</td>
+                            <td class="td">{{ plan.division }}</td>
+                            <td class="td">{{ plan.type }}</td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-outline-primary collapsed" data-bs-toggle="collapse" data-bs-target="#{{ plan.plan_name }}" aria-expanded="false" aria-controls="collapseProduct0">
+                                        展開
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="collapseContainingDiv">
+                            <td colspan="6">
+                                <div class="collapse" id="{{ plan.plan_name }}" style="">
+                                    {% for object in all_plans_details %}
+                                    {% if plan.plan_name == object.plan_name %}
+                                    <div class="card card-body">
+                                        {% load highlight %}
+                                        {{ object.apply|highlight:"公立就業服務機構"}}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                    </table>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h3 id="helper-header">智能就業小幫手</h3>
+            <div class="loader"></div>
+            <textarea id="openai-text" style="width: 100%; height: 200px; border:none; border-radius: 10px" readonly></textarea>
+            <div>
+                <button type="button" class="btn btn-secondary">公立就業服務機構</button>
+                <button type="button" class="btn btn-secondary">婦女再就業計畫</button>
+                <button type="button" class="btn btn-secondary">非自願離職</button>
+            </div>
+            <div class="d-flex" style="margin-top: 10px">
+                <div class="input-group w-auto">
+                    <input type="text" id="openai-input" class="form-control" placeholder="問小幫手任何問題~">
+                    <button data-mdb-button-init data-mdb-ripple-init id="openai-button" class="btn btn-primary" type="button" id="button-addon1" data-mdb-ripple-color="dark">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

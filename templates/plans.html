@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Plans</title>{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div>
+        <h1>就促工具列表</h1>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>計畫Id</th>
+                <th>計畫名稱</th>
+                <th>所屬科室</th>
+                <th>計畫別</th>
+                <th>勞工就業狀態</th>
+                <th>性別限定</th>
+                <th>年齡下限</th>
+                <th>年齡上限</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan in plans %}
+            <tr>
+                <td class="row-value">{{ plan.id }}</td>
+                <td class="row-value">{{ plan.plan_name }}</td>
+                <td>{{ plan.division }}</td>
+                <td>{{ plan.type }}</td>
+                <td>{{ plan.employee_current }}</td>
+                <td>{{ plan.gender }}</td>
+                <td>{{ plan.age_lower_bound }}</td>
+                <td>{{ plan.age_upper_bound }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}

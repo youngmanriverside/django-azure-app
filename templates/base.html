@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/mycss.css' %}?{% now "U" %}">
+    <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
+	<script src="{% static 'main.js' %}"></script>
+	<script src="{% static 'key.js' %}"></script>
+    {% block javascript %}
+    {% endblock %}
+    {% block title %}
+    {% endblock %}
+</head>
+<body>
+	<nav class="navbar-custom">
+		<div class="container-fluid">
+		<div class="navbar-inner site-top-nav">
+			<ul class="nav">
+				<li class="nav-item">
+					<a class="home-link" href="/">WDA</a>
+				</li>
+				<li class="nav-item">
+					<a href="/plans" class="nav-link">就促工具</a>
+				</li>
+				<li class="nav-item">
+					<a href="#" class="nav-link">雇主</a>
+				</li>
+				<li class="nav-item">
+					<a href="/employee" class="nav-link">勞工</a>
+				</li>
+				<li class="nav-item">
+					<a href="/employee/applicants" class="nav-link">登錄列表</a>
+				</li>
+				<li class="nav-item">
+					<a href="/test" class="nav-link">Test API</a>
+				</li>
+			</ul>
+		</div>
+		</div>
+	</nav>
+  	<main class="main">
+		{% block content %}
+		{% endblock %}
+	</main>
+</body>
+</html>

@@ -29,18 +29,11 @@
                 <td>{{ employee.age }}</td>
                 <td>{{ employee.education }}</td>
                 <td>
-                {% for person in applicants_current %}
-                {% if employee.name == person.employee_name %}
-                {{ person.current }}
-                {% endif %}
-                {% endfor %}
+                {{ employee.current_status1 }}, {{ employee.current_status2 }}, {{ employee.current_status3 }}, {{ employee.current_status4 }}
                 </td>
                 <td>
-                {% for person in applicants_identity %}
-                {% if employee.name == person.employee_name %}
-                {{ person.identity }}
-                {% endif %}
-                {% endfor %}
+                {{ employee.identity1 }}, {{ employee.identity2 }}, {{ employee.identity3 }}, {{ employee.identity4 }}, {{ employee.identity5 }}, {{ employee.identity6 }},
+                {{ employee.identity7 }}, {{ employee.identity8 }}
                 </td>
                 <td>{{ employee.unemployment_duration }}</td>
             </tr>

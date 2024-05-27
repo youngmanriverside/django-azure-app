@@ -37,13 +37,13 @@ DATABASES = {
    }
 }
 
-CACHES = {
-        "default": {  
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": os.environ.get('AZURE_REDIS_CONNECTIONSTRING'),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-                "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
-        },
-    }
-}
+# CACHES = {
+#         "default": {  
+#             "BACKEND": "django_redis.cache.RedisCache",
+#             "LOCATION": os.environ.get('AZURE_REDIS_CONNECTIONSTRING'),
+#             "OPTIONS": {
+#                 "CLIENT_CLASS": "django_redis.client.DefaultClient",
+#                 "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+#         },
+#     }
+# }

@@ -4,12 +4,27 @@
 
 {% block content %}
 {% load crispy_forms_tags %}
-<div class="form">
-    <h1>勞工登錄</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-            {% crispy form_employee form_employee.helper %}
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <div class="form">
+                <h1>勞工登錄</h1>
+                <form method="post" action=".">
+                    {% csrf_token %}
+                        {% crispy form_employee form_employee.helper %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
+            <h3 id="helper-header">名詞小幫手</h3>
+            <div class="loader"></div>
+            <textarea id="openai-text" style="width: 100%; height: 200px; border:none; border-radius: 10px" readonly></textarea>
+            <div>
+                <button type="button" class="btn btn-secondary">就業服務法24-1條</button>
+                <button type="button" class="btn btn-secondary">非自願離職</button>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

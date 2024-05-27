@@ -13,7 +13,6 @@ class EmployeeForm(forms.ModelForm):
     name = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                'placeholder': 'name',
                 }),
         label='姓名')
     
@@ -27,7 +26,6 @@ class EmployeeForm(forms.ModelForm):
     age = forms.IntegerField(
         widget=forms.NumberInput(
             attrs={
-                'placeholder': 'age',
                 }),
         label='年齡')
     
@@ -35,10 +33,22 @@ class EmployeeForm(forms.ModelForm):
         choices=choices_unemployment_duration,
         widget=forms.RadioSelect(
             attrs={
-                'id': 'unemployment_duration',
-                'class': 'px-3 py-3 text-lg'
                 }),
         label='失業週期')
+    
+    current_status = forms.MultipleChoiceField(
+        choices=choices_current,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                }),
+        label='就業狀況')
+    
+    identity = forms.MultipleChoiceField(
+        choices=choices_identity,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                }),
+        label='身份別')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

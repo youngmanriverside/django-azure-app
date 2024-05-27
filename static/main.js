@@ -27,6 +27,7 @@ function sendrequest(prompt) {
         '公立就業服務機構': '請問公立就業服務機構是什麼？ 請列出幾個就業服務站',
         '婦女再就業計畫': '請問婦女再就業計畫是什麼？',
         '非自願離職': '請問非自願離職的定義是什麼？',
+        '就業服務法24-1條': '就業服務法24-1條的內容是什麼？',
     }
 
     prompt = prompts_dict[prompt];
@@ -42,8 +43,8 @@ function sendrequest(prompt) {
                 "content": prompt
             }
         ],
-        "max_tokens": 200,
-        "temperature": 0.7,
+        "max_tokens": 1000,
+        "temperature": 0.2,
         "frequency_penalty": 0,
         "presence_penalty": 0,
         "top_p": 0.95,

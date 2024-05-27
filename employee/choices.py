@@ -43,8 +43,8 @@ choices_identity = [
 choices_current = [
     ('unemployed', '待業中'),
     ('training', '職訓中'),
-    ('employed', '就業中'),
-    ('retired', '退休'),
+    ('employed', '在職中'),
+    ('retired', '已退休'),
     ('student', '學生'),
     ('freelancer', '自由工作者'),
 ]

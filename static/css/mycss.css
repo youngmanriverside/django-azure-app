@@ -22,7 +22,14 @@
 }
 
 /* Div */
-.col {
+.col-6 {
+    background-color: #EEEEEE;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.col-4 {
     background-color: #EEEEEE;
     margin: 10px;
     padding: 10px;

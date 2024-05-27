@@ -59,13 +59,10 @@
     border-radius: 10px;
 }
 
-#id_name {
-    width: 100%;
+.form-label {
+    font-weight: bold;
+    font-size: medium;
 }
-
-/* blueForm {
-    overflow: hidden;
-} */
 
 .form-check input[type="radio"] {
     opacity: 0.01;

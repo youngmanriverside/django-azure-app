@@ -1,7 +1,7 @@
 from django import forms
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit, Layout
-from crispy_forms.bootstrap import StrictButton
+from crispy_forms.layout import Submit, Layout, Field
+from crispy_forms.bootstrap import StrictButton, InlineField
 from .models import *
 from .choices import *
 
@@ -54,6 +54,10 @@ class EmployeeForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field('name, age', css_class='form-label'),
+
+        )
     
 # class IdentityForm(forms.ModelForm):
 #     class Meta:

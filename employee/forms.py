@@ -59,39 +59,4 @@ class EmployeeForm(forms.ModelForm):
 
         )
     
-# class IdentityForm(forms.ModelForm):
-#     class Meta:
-#         model = Employee_identity
-#         fields = ['identity']
-
-#     identity = forms.MultipleChoiceField(
-#         choices=choices_identity,
-#         widget=forms.CheckboxSelectMultiple(
-#             attrs={
-#                 'class': 'px-3 py-3 text-lg'
-#                 }),
-#         label='特殊身份別')
-    
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.form_tag = False
-
-# class CurrentForm(forms.ModelForm):
-#     class Meta:
-#         model = Employee_current
-#         fields = ['current']
-
-#     current = forms.MultipleChoiceField(
-#         choices=choices_current,
-#         widget=forms.CheckboxSelectMultiple(
-#             attrs={
-#                 'class': 'px-3 py-3 text-lg'
-#                 }),
-#         label='就業狀況')
-    
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.form_tag = False
     

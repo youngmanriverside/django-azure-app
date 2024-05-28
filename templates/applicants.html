@@ -10,30 +10,33 @@
         <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>姓名</th>
                 <th>性別</th>
                 <th>年齡</th>
-                <th>學歷</th>
                 <th>就業狀態</th>
                 <th>身份別</th>
                 <th>待業區間</th>
             </tr>
         </thead>
         <tbody>
-        {% for employee in applicants_employee %}
+        {% for employee in employee_list %}
             <tr>
-                <td>{{ employee.id }}</td>
                 <td>{{ employee.name }}</td>
                 <td>{{ employee.gender }}</td>
                 <td>{{ employee.age }}</td>
-                <td>{{ employee.education }}</td>
                 <td>
-                {{ employee.current_status1 }}, {{ employee.current_status2 }}, {{ employee.current_status3 }}, {{ employee.current_status4 }}
+                {% for employeeObj in employee_current_list %}
+                {% if employeeObj.employee_name == employee %}
+                    {{ employeeObj.current_status }}<br>
+                {% endif %}
+                {% endfor %}
                 </td>
                 <td>
-                {{ employee.identity1 }}, {{ employee.identity2 }}, {{ employee.identity3 }}, {{ employee.identity4 }}, {{ employee.identity5 }}, {{ employee.identity6 }},
-                {{ employee.identity7 }}, {{ employee.identity8 }}
+                {% for employeeObj in employee_identity_list %}
+                {% if employeeObj.employee_name == employee %}
+                    {{ employeeObj.identity }}<br>
+                {% endif %}
+                {% endfor %}
                 </td>
                 <td>{{ employee.unemployment_duration }}</td>
             </tr>

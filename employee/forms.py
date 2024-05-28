@@ -55,8 +55,13 @@ class EmployeeForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Field('name, age', css_class='form-label'),
-
+            # Set all fields css_class to form-label
+            Field('name', css_class='form-label'),
+            Field('gender', css_class='form-label'),
+            Field('age', css_class='form-label'),
+            Field('unemployment_duration', css_class='form-label'),
+            Field('current_status', css_class='form-label'),
+            Field('identity', css_class='form-label'),
         )
     
     

@@ -11,7 +11,7 @@
 
 {% block content %}
 <div style="display: none;">
-    {{ all_plans_details.1.benefit }}
+    {{ all_plan_employee_details_list.1.benefit }}
 </div>
 <div class="container">
     <div class="row">
@@ -43,7 +43,7 @@
                         <tr>
                             <td class="row-value">{{ employee.name }}</td>
                             <td class="row-value">
-                                {% for current in employee_current %}
+                                {% for current in employee_current_list %}
                                     {{ current }}
                                 {% endfor %}
                             </td>
@@ -51,7 +51,7 @@
                             <td>{{ employee.age }}</td>
                             <td>{{ employee.unemployment_duration }}</td>
                             <td>
-                                {% for identity in employee_identity %}
+                                {% for identity in employee_identity_list %}
                                     {{ identity }}
                                 {% endfor %}
                             </td>
@@ -62,23 +62,21 @@
                 <div class="div-plans">
                     {% if employee %}
                     <h4>
-                        共有 <strong style="color: red;">{{ plans_for_employees_current|length }}</strong> 個就促工具可能適用。
+                        共有 <strong style="color: red;">{{ plan_employee_current_status_list|length }}</strong> 個就促工具可能適用。
                     </h4>
                     <table class="table table-hover">
                     <thead>
                         <tr>
                             <th class="th">計畫名稱</th>
-                            <th class="th">所屬科室</th>
                             <th class="th">計畫別</th>
                             <th class="th">申請資格</th>
                         </tr>
                     </thead>
                     <tbody>
-                    {% for plan in plans_for_employees_current %}
+                    {% for plan in plan_employee_current_status_list %}
                         <tr>
                             <td class="td">{{ plan.plan_name }}</td>
-                            <td class="td">{{ plan.division }}</td>
-                            <td class="td">{{ plan.type }}</td>
+                            <td class="td">{{ plan.plan_type }}</td>
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-outline-primary collapsed" data-bs-toggle="collapse" data-bs-target="#{{ plan.plan_name }}" aria-expanded="false" aria-controls="collapseProduct0">
@@ -90,7 +88,7 @@
                         <tr class="collapseContainingDiv">
                             <td colspan="6">
                                 <div class="collapse" id="{{ plan.plan_name }}" style="">
-                                    {% for object in all_plans_details %}
+                                    {% for object in all_plan_employee_details_list %}
                                     {% if plan.plan_name == object.plan_name %}
                                     <div class="card card-body">
                                         {% load highlight %}

@@ -129,3 +129,4 @@ dmypy.json
 
 .azure
 dockerfile
+test.py

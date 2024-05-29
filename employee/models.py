@@ -20,12 +20,20 @@ class employee_current(models.Model):
     employee_name = models.ForeignKey(Employee, on_delete=models.CASCADE)
     current_status = models.CharField(max_length=100, null=True, blank=True)
 
+    class Meta:
+        unique_together = ('employee_name', 'current_status')
+
     def __str__(self):
         return f'{self.employee_name} {self.current_status}'
 
 class employee_identity(models.Model):
     employee_name = models.ForeignKey(Employee, on_delete=models.CASCADE)
     identity = models.CharField(max_length=100, null=True, blank=True)
+
+    class Meta:
+        unique_together = ('employee_name', 'identity')
+        verbose_name_plural = 'employee_identities'
+
 
     def __str__(self):
         return f'{self.employee_name} {self.identity}'

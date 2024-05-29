@@ -15,9 +15,12 @@ class plan_employee(models.Model):
 
     class Meta:
         ordering = ['id']
-    def __str__(self):
-        return self.plan_name
+        verbose_name_plural = 'plan_employee'
 
+    def __str__(self):
+        return f'{self.plan_name}__{self.plan_type}'
+    
+    
 class plan_employee_details(models.Model):
     plan_name = models.CharField(max_length=100, db_column='計畫名稱')
     division = models.CharField(max_length=100, db_column='所屬科室')
@@ -31,5 +34,9 @@ class plan_employee_details(models.Model):
     contact = models.TextField(db_column='計畫窗口', null=True, blank=True)
     phone = models.CharField(max_length=100, db_column='電話', null=True, blank=True)
 
+    class Meta:
+        ordering = ['id']
+        verbose_name_plural = 'plan_employee_details'
+
     def __str__(self):
-        return self.plan_name
+        return f'{self.plan_name}__{self.plan_type}'

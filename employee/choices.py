@@ -25,7 +25,6 @@ choices_education = [
 ]
 
 choices_identity = [
-    ('None', '無'),
     ('Laidoff', '非自願離職'),
     ('Lowincome', '中低收入戶 (含低收入戶)'),
     ('Disability', '身心障礙'),
@@ -40,13 +39,24 @@ choices_identity = [
     ('Newimmigrant', '新住民'),
 ]
 
+choices_24_1 = {
+    ('Lowincome', '中低收入戶 (含低收入戶)'),
+    ('Disability', '身心障礙'),
+    ('Onlyincome', '獨立負擔家計者'),
+    ('Aboriginal', '原住民'),
+    ('Longterm', '長期失業'),
+    ('rehabilitation', '更生人'),
+    ('Abused', '家暴被害人'),
+    ('Rejoinwomen', '二度就業婦女'),
+}
+
 choices_current = [
     ('unemployed', '待業中'),
     ('training', '職訓中'),
+    ('freelancer', '自由工作者'),
     ('employed', '在職中'),
     ('retired', '已退休'),
     ('student', '學生'),
-    ('freelancer', '自由工作者'),
 ]
 
 choices_unemployment_duration = [
@@ -54,7 +64,9 @@ choices_unemployment_duration = [
     ('15-29', '15-29天'),
     ('30-59', '30-59天'),
     ('60-89', '60-89天'),
-    ('90+', '90天以上'),
+    ('90-179', '90-179天'),
+    ('180+', '180天以上'),
+    ('None', '未曾就業')
 ]
 
 choices_anticipation = [

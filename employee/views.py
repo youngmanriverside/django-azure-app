@@ -13,6 +13,10 @@ def employee(request):
         # Create the Employee object
         employee = Employee.objects.create(name=name, gender=gender, age=age, unemployment_duration=unemployment_duration)
         
+        # If age is 45-65, create employee_identity object with '就服法24-1條之對象'
+        if int(age) >= 45 and int(age) <= 65:
+            employee_identity.objects.create(employee_name=employee, identity='就服法24-1條之對象')
+        
         # Create the employee_current object
         current_status_list = request.POST.getlist('current_status')
 
@@ -21,9 +25,27 @@ def employee(request):
 
         # Create the employee_identity object
         identity_list = request.POST.getlist('identity')
+        
+        # Check if '就服法24-1條之對象' is in the identity_list
+        choices_24_1 = [
+            'Lowincome',
+            'Disability',
+            'Onlyincome',
+            'Aboriginal',
+            'Longterm',
+            'rehabilitation',
+            'Abused',
+            'Rejoinwomen',
+        ]
 
         for identity in identity_list:
-            employee_identity.objects.create(employee_name=employee, identity=identity)
+            if identity in choices_24_1:
+                try:
+                    employee_identity.objects.create(employee_name=employee, identity='就服法24-1條之對象')
+                except:
+                    continue
+            else:
+                employee_identity.objects.create(employee_name=employee, identity=identity)
 
 
         employee_list = Employee.objects.all()

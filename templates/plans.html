@@ -5,8 +5,43 @@
 {% block content %}
 
 <div class="container">
-    <div>
+    <div class="row">
         <h1>就促工具列表</h1>
+        <table class="table">
+        <thead>
+            <tr>
+                <th>計畫名稱</th>
+                <th>計畫別</th>
+                <th>勞工就業狀態</th>
+                <th>性別限定</th>
+                <th>年齡下限</th>
+                <th>年齡上限</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for plan in plans_employee %}
+            <tr>
+                <td class="row-value">{{ plan.plan_name }}</td>
+                <td>{{ plan.plan_type }}</td>
+                <td>{{ plan.required_employee_current }}</td>
+                {% if plan.required_employee_gender == "nan" %}
+                <td>--</td>
+                {% else %}
+                <td>{{ plan.required_employee_gender }}</td>
+                {% endif %}
+                <td>{{ plan.employee_age_lower_bound }}</td>
+                {% if plan.employee_age_upper_bound == 100 %}
+                <td>--</td>
+                {% else %}
+                <td>{{ plan.employee_age_upper_bound }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <h1>雇主計畫列表</h1>
         <table class="table">
         <thead>
             <tr>

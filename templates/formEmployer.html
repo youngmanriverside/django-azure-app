@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}<title>Employee form</title>{% endblock %}
+{% block title %}<title>Employer form</title>{% endblock %}
 
 {% block content %}
 {% load crispy_forms_tags %}
@@ -8,10 +8,10 @@
     <div class="row">
         <div class="col-6">
             <div class="form">
-                <h1>勞工登錄</h1>
+                <h1>雇主登錄</h1>
                 <form method="post" action="." class="form-inline">
                     {% csrf_token %}
-                        {% crispy form_employee form_employee.helper %}
+                        {% crispy form_employer form_employer.helper %}
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>

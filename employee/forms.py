@@ -16,12 +16,7 @@ class EmployeeForm(forms.ModelForm):
                 }),
         label='姓名')
     
-    gender = forms.ChoiceField(
-        choices=choices_gender,
-        widget=forms.RadioSelect(
-            attrs={
-                }),
-        label='性別')
+    gender = forms.ChoiceField(choices=choices_gender, widget=forms.RadioSelect(), label='性別', )
 
     age = forms.IntegerField(
         widget=forms.NumberInput(

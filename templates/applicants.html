@@ -5,44 +5,69 @@
 {% block content %}
 
 <div class="container">
-    <div>
-        <h1>勞工列表</h1>
-        <table class="table">
-        <thead>
-            <tr>
-                <th>姓名</th>
-                <th>性別</th>
-                <th>年齡</th>
-                <th>就業狀態</th>
-                <th>身份別</th>
-                <th>待業區間</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for employee in employee_list %}
-            <tr>
-                <td>{{ employee.name }}</td>
-                <td>{{ employee.gender }}</td>
-                <td>{{ employee.age }}</td>
-                <td>
-                {% for employeeObj in employee_current_list %}
-                {% if employeeObj.employee_name == employee %}
-                    {{ employeeObj.current_status }}<br>
-                {% endif %}
-                {% endfor %}
-                </td>
-                <td>
-                {% for employeeObj in employee_identity_list %}
-                {% if employeeObj.employee_name == employee %}
-                    {{ employeeObj.identity }}<br>
-                {% endif %}
-                {% endfor %}
-                </td>
-                <td>{{ employee.unemployment_duration }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-        </table>
+    <div class="row">
+        <div class="col-5">
+            <h1>勞工列表</h1>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>性別</th>
+                    <th>年齡</th>
+                    <th>就業狀態</th>
+                    <th>身份別</th>
+                    <th>待業區間</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for employee in employee_list %}
+                <tr>
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.gender }}</td>
+                    <td>{{ employee.age }}</td>
+                    <td>
+                    {% for employeeObj in employee_current_list %}
+                    {% if employeeObj.employee_name == employee %}
+                        {{ employeeObj.current_status }}<br>
+                    {% endif %}
+                    {% endfor %}
+                    </td>
+                    <td>
+                    {% for employeeObj in employee_identity_list %}
+                    {% if employeeObj.employee_name == employee %}
+                        {{ employeeObj.identity }}<br>
+                    {% endif %}
+                    {% endfor %}
+                    </td>
+                    <td>{{ employee.unemployment_duration }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        <div class="col-5">
+            <h1>雇主列表</h1>
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>單位名稱</th>
+                    <th>單位類型</th>
+                    <th>是否為就保單位</th>
+                    <th>補助需求項目</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for employer in employer_list %}
+                <tr>
+                    <td>{{ employer.name }}</td>
+                    <td>{{ employer.organization }}</td>
+                    <td>{{ employer.employment_insurance }}</td>
+                    <td>{{ employer.subsidy_requirement }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
     </div>
 </div>
 {% endblock %}

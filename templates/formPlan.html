@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}<title>計畫新增表單</title>{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1>計畫登錄</h1>
+            {% csrf_token %}
+                {% crispy form_employee form_employee.helper %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+{% endblock %}

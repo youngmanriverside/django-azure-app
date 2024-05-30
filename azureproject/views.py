@@ -18,7 +18,7 @@ def index(request):
         plan_employee_list1 = plan_employee.objects.filter(required_employee_current__in=employee_current_list)
         
         if employee.gender == 'Male':
-            plan_employee_list1 = plan_employee_list1.filter(required_employee_gender='nan')
+            plan_employee_list1 = plan_employee_list1.exclude(required_employee_gender='female')
         
         plan_employee_list1 = plan_employee_list1.filter(employee_age_lower_bound__lte=employee.age)
         plan_employee_list1 = plan_employee_list1.filter(employee_age_upper_bound__gte=employee.age)

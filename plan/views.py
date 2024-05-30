@@ -12,3 +12,6 @@ def plans(request):
         'plans_employer': plans_employer
     }
     return render(request, 'plans.html', context)
+
+def planForm(request):
+    return render(request, 'planForm.html')

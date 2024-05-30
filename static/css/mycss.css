@@ -21,6 +21,22 @@
     background-color: #F5F5F5;
 }
 
+/* Header */
+.header img {
+    margin-right: 10px;
+    float: left;
+    width: 36px;
+    height: 36px;
+    background-color: #EEEEEE;
+}
+
+.header h1 {
+    position: relative;
+    top: 8px;
+    left: 10px;
+}
+
+
 /* Div */
 .col-6 {
     background-color: #EEEEEE;

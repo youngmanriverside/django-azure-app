@@ -14,8 +14,14 @@ def index(request):
         employee_identity_list = list(employee_identity.objects.values_list('identity', flat=True).filter(employee_name=employee))
 
         # Get the plan_employee object
-        # Filter the plan_employee object by current_status list
-        plan_employee_current_status_list = plan_employee.objects.filter(required_employee_current__in=employee_current_list)
+        # Filter the plan_employee object by current_status list, gender and age
+        plan_employee_list1 = plan_employee.objects.filter(required_employee_current__in=employee_current_list)
+        
+        if employee.gender == 'Male':
+            plan_employee_list1 = plan_employee_list1.filter(required_employee_gender='nan')
+        
+        plan_employee_list1 = plan_employee_list1.filter(employee_age_lower_bound__lte=employee.age)
+        plan_employee_list1 = plan_employee_list1.filter(employee_age_upper_bound__gte=employee.age)
 
         # Filter the plan_employee object by identity list
 
@@ -29,7 +35,7 @@ def index(request):
             'employee': employee,
             'employee_current_list': employee_current_list,
             'employee_identity_list': employee_identity_list,
-            'plan_employee_current_status_list': plan_employee_current_status_list,
+            'plan_employee_list1': plan_employee_list1,
             'all_plan_employee_details_list': all_plan_employee_details_list,
         }
 

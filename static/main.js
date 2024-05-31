@@ -1,13 +1,18 @@
 $(document).ready(function(){
+    // if button with id robot is clicked, button with id "Public Employment Service Institutionswitch" to english mode
+
+    // if button with id openai-button is clicked, call sendrequest function
     $("#openai-button").click(function(){
         var prompt = $("#openai-input").val();
         sendrequest(prompt);
     });
+
     // if button with class btn-secondary is clicked, call sendrequest function
     $(".btn-secondary").click(function(){
         var prompt = $(this).text();
         sendrequest(prompt);
     });
+
     // if anchor with class wda-link is clicked, call sendrequest function
     $(".wda-link").click(function(){
         console.log("wda-link clicked");
@@ -30,7 +35,10 @@ function sendrequest(prompt) {
         '就業服務法24-1條': '就業服務法24-1條的內容是什麼？',
     }
 
-    prompt = prompts_dict[prompt];
+    // if prompt is not in the prompts_dict, prompt will be the same as the input
+    if (prompt in prompts_dict) {
+        prompt = prompts_dict[prompt];
+    }
 
     var params = {
         "messages":[

@@ -8,9 +8,12 @@
     {% bootstrap_javascript %}
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/mycss.css' %}?{% now "U" %}">
+	<link rel="stylesheet" href="{% static 'css/chatbot.css' %}?{% now "U" %}">
     <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
 	<script src="{% static 'main.js' %}"></script>
 	<script src="{% static 'key.js' %}"></script>
+	<!-- Google Fonts Link For Icons -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     {% block javascript %}
     {% endblock %}
     {% block title %}
@@ -19,25 +22,31 @@
 <body>
 	<nav class="navbar-custom">
 		<div class="container-fluid">
-		<div class="navbar-inner site-top-nav">
-			<ul class="nav">
-				<li class="nav-item">
-					<a class="home-link" href="/">WDA</a>
-				</li>
-				<li class="nav-item">
-					<a href="/plan" class="nav-link">就促工具</a>
-				</li>
-				<li class="nav-item">
-					<a href="/employer" class="nav-link">雇主</a>
-				</li>
-				<li class="nav-item">
-					<a href="/employee" class="nav-link">勞工</a>
-				</li>
-				<li class="nav-item">
-					<a href="/employee/applicants" class="nav-link">登錄列表</a>
-				</li>
-			</ul>
-		</div>
+			<div class="navbar-inner site-top-nav">
+				<ul class="nav">
+					<li class="nav-item">
+						<a class="home-link" href="/">WDA</a>
+					</li>
+					<li class="nav-item">
+						<a href="/plan" class="nav-link">就促工具</a>
+					</li>
+					<li class="nav-item">
+						<a href="/employer" class="nav-link">雇主</a>
+					</li>
+					<li class="nav-item">
+						<a href="/employee" class="nav-link">勞工</a>
+					</li>
+					<li class="nav-item">
+						<a href="/chatbot" class="nav-link">Chatbot</a>
+					</li>
+					<li class="nav-item">
+						<a href="/plan/form" class="nav-link">資料補登</a>
+					</li>
+					<li class="nav-item">
+						<a href="/employee/applicants" class="nav-link">登錄列表</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
   	<main class="main">

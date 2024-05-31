@@ -1,6 +1,4 @@
 $(document).ready(function(){
-    // if button with id robot is clicked, button with id "Public Employment Service Institutionswitch" to english mode
-
     // if button with id openai-button is clicked, call sendrequest function
     $("#openai-button").click(function(){
         var prompt = $("#openai-input").val();

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Chatbot</title>{% endblock %}
+
+{% block content %}
+<div class="chatbot">
+    <header>
+        <h2>Chatbot</h2>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <p>Hi! How can I help you today?</p>
+        </li>
+        <li class="chat outgoing">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro ad officia magnam, aliquid alias doloribus sed error maiores quae quaerat minus adipisci illo, ut nisi sit sunt molestias. Amet, dignissimos?</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="Enter a message..." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined" >send</span>
+    </div>
+</div>
+{% endblock %}

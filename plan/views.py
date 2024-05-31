@@ -13,5 +13,5 @@ def plans(request):
     }
     return render(request, 'plans.html', context)
 
-def planForm(request):
-    return render(request, 'planForm.html')
+def form(request):
+    return render(request, 'form.html')

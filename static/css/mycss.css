@@ -27,7 +27,6 @@
     float: left;
     width: 36px;
     height: 36px;
-    background-color: #EEEEEE;
 }
 
 .header h1 {
@@ -39,17 +38,13 @@
 
 /* Div */
 .col-6 {
-    background-color: #EEEEEE;
     margin: 10px;
     padding: 10px;
-    border-radius: 10px;
 }
 
 .col-5 {
-    background-color: #EEEEEE;
     margin: 10px;
     padding: 10px;
-    border-radius: 10px;
 }
 
 .div-plans {

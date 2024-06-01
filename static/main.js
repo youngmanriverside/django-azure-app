@@ -37,7 +37,8 @@ function handleChat() {
         // Append "Thinking..." message to chatbox
         $(".chatbox").append(createChatLi("Thinking...", "incoming"));
     }, 500);
-
+    // Execute a function when the user presses a key on the keyboard
+    
     // Scroll to the bottom of the chatbox to show the latest message
 
 

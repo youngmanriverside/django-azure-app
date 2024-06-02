@@ -21,6 +21,21 @@ $(document).ready(function(){
     $("#send-btn").click(function(){
         handleChat();
     });
+
+    // Enable TextArea to re-size automatically
+    $(".chat-input textarea").on("input", function() {
+        // this.style.height = "auto";
+        // this.style.height = (this.scrollHeight) + "px";
+    });
+
+    // Execute a function when the user presses a key on the keyboard
+    $(".chat-input textarea").keydown(function(e) {
+        // if the key is Enter, call handleChat function
+        if (e.key === "Enter" && !e.shiftKey) {
+            e.preventDefault();
+            handleChat();
+        }
+    });
 });
 
 function handleChat() {
@@ -28,14 +43,25 @@ function handleChat() {
     // if userMessage is None, return
     if (!userMessage) {
         return;
-    }
+    }    
+
+    // Clear the textarea after sending the message
+    $(".chat-input textarea").val("");
+
+    // Resize the chat input textarea to its original height
+    // $(".chat-input textarea").css("height", "auto");
+
     // Append userMessage to chatbox
     $(".chatbox").append(createChatLi(userMessage, "outgoing"));
     
+    // Auto scroll to the bottom of the chatbox if the chatbox is overflowed
+    $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
+
     // set timeout to display "Thinking..." message while waiting for the response
     setTimeout(function() {
         // Append "Thinking..." message to chatbox
         $(".chatbox").append(createChatLi("Thinking...", "incoming"));
+        $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     }, 500);
     // Execute a function when the user presses a key on the keyboard
     
@@ -92,23 +118,27 @@ function generateResponse(userMessage) {
         type: "POST",
         data: JSON.stringify(params),
     })
+    // if success, replace createChatLi with response message
     .done(function(data) {
-        // if success, show response message
-        $(".chatbox").append(createChatLi(data.choices[0].message.content, "incoming"));
+        $(".chatbox li:contains('Thinking...')").replaceWith(createChatLi(data.choices[0].message.content, "incoming"));
+        $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     })
-    // if failed, show error message
+    // if failed, show error message in chatbox and append error class to p under chat incoming
     .fail(function() {
-        $(".chatbox").append(createChatLi("Sorry, I couldn't get that. Please try again.", "incoming"));
-    });
-    
+        // Append error message to chatbox
+        $(".chatbox li:contains('Thinking...')").replaceWith(createChatLi("Oops! Something weng wrong. Please try again.", "incoming"));
+        $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
+    });   
 }
 
 function createChatLi(message, className) {
     // Create a chat <li> element with passed message and className
     var chatLi = document.createElement("li");
     chatLi.classList.add("chat", className);
-    var chatContent = className === "outgoing" ? `<p>${message}</p>` : `<span class="material-symbols-outlined">smart_toy</span><p>${message}</p>`;
+    var chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
+    chatLi.querySelector("p").textContent = message;
+
     return chatLi;
 }
 

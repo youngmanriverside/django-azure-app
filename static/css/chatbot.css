@@ -64,10 +64,16 @@ body {
 	background: #44b0eb;
 	border-radius: 10px 10px 0 10px;
 	color: white;
+  white-space: pre-wrap;
 	font-size: 0.95rem;
 	max-width: 75%;
 	padding: 12px 16px;
 	white-space: pre-wrap;
+}
+
+.chatbox .chat p.error {
+  background: #f8d7da;
+  color: #721c24;
 }
 
 .chatbox .incoming p {

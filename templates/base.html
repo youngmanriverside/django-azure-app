@@ -20,34 +20,34 @@
     {% endblock %}
 </head>
 <body>
-	<nav class="navbar-custom">
-		<div class="container-fluid">
-			<div class="navbar-inner site-top-nav">
-				<ul class="nav">
-					<li class="nav-item">
-						<a class="home-link" href="/">WDA</a>
-					</li>
-					<li class="nav-item">
-						<a href="/plan" class="nav-link">就促工具</a>
-					</li>
-					<li class="nav-item">
-						<a href="/employer" class="nav-link">雇主</a>
-					</li>
-					<li class="nav-item">
-						<a href="/employee" class="nav-link">勞工</a>
-					</li>
-					<li class="nav-item">
-						<a href="/plan/form" class="nav-link">資料補登</a>
-					</li>
-					<li class="nav-item">
-						<a href="/employee/applicants" class="nav-link">登錄列表</a>
-					</li>
-					<li class="nav-item">
-						<a href="/chatbot" class="nav-link">Chatbot</a>
-					</li>
-				</ul>
-			</div>
-		</div>
+	<nav class="navbar">
+		<ul class="nav">
+			<li class="nav-item">
+				<a href="/" class="navbar-brand">WDA</a>
+			</li>
+			<li class="nav-item">
+				<a href="/plan" class="nav-link">就促工具</a>
+			</li>
+			<li class="nav-item">
+				<a href="/employer" class="nav-link">雇主</a>
+			</li>
+			<li class="nav-item">
+				<a href="/employee" class="nav-link">勞工</a>
+			</li>
+			<li class="nav-item">
+				<a href="/chatbot" class="nav-link">Chatbot</a>
+			</li>
+		</ul>
+		<nav class="navbar">
+			<ul class="nav">
+				<li class="nav-item">
+					<a href="/plan/form" class="nav-link">資料補登</a>
+				</li>
+				<li class="nav-item">
+					<a href="/employee/applicants" class="nav-link">登錄列表</a>
+				</li>
+			</ul>
+		</nav>
 	</nav>
   	<main class="main">
 		{% block content %}

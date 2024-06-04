@@ -22,6 +22,26 @@ $(document).ready(function(){
         handleChat();
     });
 
+    // Put some buttons inside chatbox at the bottom
+    var buttons = [
+        "我想找工作",
+        "我想找職訓課程",
+    ];
+    buttons.forEach(function(button) {
+        var buttonElement = document.createElement("button");
+        buttonElement.classList.add("btn-secondary");
+        buttonElement.textContent = button;
+        $(".chatbox").append(buttonElement);
+    }
+    );
+    
+    // Mimic user chat-input when buttons with class btn-secondary are clicked
+    $(".btn-secondary").click(function() {
+        var userMessage = $(this).text();
+        $(".chat-input textarea").val(userMessage);
+        handleChat();
+    });
+
     // Enable TextArea to re-size automatically
     $(".chat-input textarea").on("input", function() {
         // this.style.height = "auto";
@@ -57,10 +77,10 @@ function handleChat() {
     // Auto scroll to the bottom of the chatbox if the chatbox is overflowed
     $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
 
-    // set timeout to display "Thinking..." message while waiting for the response
+    // set timeout to display "思考中..." message while waiting for the response
     setTimeout(function() {
-        // Append "Thinking..." message to chatbox
-        $(".chatbox").append(createChatLi("Thinking...", "incoming"));
+        // Append "思考中..." message to chatbox
+        $(".chatbox").append(createChatLi("思考中...", "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     }, 500);
     // Execute a function when the user presses a key on the keyboard
@@ -95,7 +115,7 @@ function generateResponse(userMessage) {
         "messages":[
             {
                 "role": "system",
-                "content": "你是一個熟悉臺灣法律規範的機器人，語言模式為繁體中文"
+                "content": "你是一個幫助人們就業的機器人，語言模式為繁體中文"
             },
             {
                 "role": "user",
@@ -120,13 +140,13 @@ function generateResponse(userMessage) {
     })
     // if success, replace createChatLi with response message
     .done(function(data) {
-        $(".chatbox li:contains('Thinking...')").replaceWith(createChatLi(data.choices[0].message.content, "incoming"));
+        $(".chatbox li:contains('思考中...')").replaceWith(createChatLi(data.choices[0].message.content, "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     })
     // if failed, show error message in chatbox and append error class to p under chat incoming
     .fail(function() {
         // Append error message to chatbox
-        $(".chatbox li:contains('Thinking...')").replaceWith(createChatLi("Oops! Something weng wrong. Please try again.", "incoming"));
+        $(".chatbox li:contains('思考中...')").replaceWith(createChatLi("Oops! 出事啦", "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     });   
 }
@@ -165,7 +185,7 @@ function sendrequest(prompt) {
         "messages":[
             {
                 "role": "system",
-                "content": "你是一個熟悉臺灣法律規範的機器人，語言模式為繁體中文"
+                "content": "你是一個幫助人們就業的機器人，語言模式為繁體中文"
             },
             {
                 "role": "user",

@@ -26,6 +26,12 @@
     background-color: #E3F2FD;
 }
 
+.row {
+    margin: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
 /* Header */
 .header img {
     margin-right: 10px;
@@ -67,49 +73,64 @@
 
 /* Form */
 .employee-form {
-    list-style-type: none;
     margin: 25px 0 0 0;
     padding: 0;
-  }
-  
-  .employee-form li {
+}
+
+.employee-form li {
+    list-style-type: none;
     float: left;
     margin: 0 5px 0 0;
     width: 100px;
     height: 40px;
     position: relative;
-  }
-  
-  .employee-form label,
-  .employee-form input {
+}
+
+.employee-form li:hover {
+    color: white;
+}
+
+.employee-form label,
+.employee-form input {
     display: block;
     position: absolute;
+    background-color: #66b6d2;
+    border-radius: 5px;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-  }
-  
-  .employee-form input[type="radio"] {
+    cursor: pointer;
+}
+
+.employee-form input[type="radio"] {
     opacity: 0.01;
     z-index: 100;
-  }
-  
-  .employee-form input[type="radio"]:checked+label,
-  .Checked+label {
-    background: yellow;
-  }
-  
-  .employee-form label {
+}
+
+.employee-form input[type="radio"]:checked+label,
+.Checked+label {
+    background: #fca503;
+}
+
+.employee-form input[type="checkbox"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+.employee-form input[type="checkbox"]:checked+label,
+.Checked+label {
+    background: #fca503;
+}
+
+.employee-form label {
+    text-align: center;
+    font-size: 1.2em;
     padding: 5px;
-    border: 1px solid #CCC;
-    cursor: pointer;
     z-index: 90;
-  }
-  
-  .employee-form label:hover {
-    background: #DDD;
-  }
+}
+
+/*-------------------*/
 
 .form {
     display: flex;

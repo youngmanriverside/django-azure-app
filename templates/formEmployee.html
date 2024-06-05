@@ -1,5 +1,23 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+<script>
+// Wait for the DOM to be ready
+document.addEventListener("DOMContentLoaded", function(event) {
+
+    var choices_current = {{ choices_current|safe }}
+    var str = ''
+
+    choices_current.forEach(function(slide) {
+    str += '<li>' + `<input type="checkbox" name="current_status" value="${slide}"></input>` + '<label>' + slide + '</label>' +'</li>';
+    }); 
+
+    document.getElementById("slideContainer").innerHTML = str;
+    
+    });
+</script>
+{% endblock %}
+
 {% block title %}<title>Employee form</title>{% endblock %}
 
 {% block content %}
@@ -11,16 +29,24 @@
                 <h1>勞工登錄</h1>
                 <form method="post" action="." class="form-inline">
                     {% csrf_token %}
-                    <ul class="employee-form">
-                        <li>
-                            <input type="radio" id="Male" name="gender" />
-                            <label for="Male">Male</label>
-                        </li>
-                        <li>
-                            <input type="radio" id="Female" name="gender" />
-                            <label for="Female">Female</label>
-                        </li>
-                    </ul>
+                    <div class="container">
+                        <div class="row">                    
+                            <ul class="employee-form">
+                                <li>
+                                    <input type="radio" name="gender" value="Male"/>
+                                    <label for="Male">Male</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="gender" value="Female"/>
+                                    <label for="Female">Female</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <ul class="employee-form" id="slideContainer">
+                            </ul>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 <form method="post" action="." class="form-inline">

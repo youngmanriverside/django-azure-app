@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from .views import index, chatbot
+from .routers import router
 
 urlpatterns = [
     path('', index, name='index'),
@@ -24,5 +25,6 @@ urlpatterns = [
     path('employee/', include('employee.urls')),
     path('employer/', include('employer.urls')),
     path('plan/', include('plan.urls')),
-    path('chatbot', chatbot, name='chatbot')
+    path('chatbot', chatbot, name='chatbot'),
+    path('api/', include(router.urls))
 ]

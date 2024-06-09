@@ -29,8 +29,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 <h1>勞工登錄</h1>
                 <form method="post" action="." class="form-inline">
                     {% csrf_token %}
-                        {% crispy form_employee form_employee.helper %}
+                    <div class="container">
+                        <div class="row">                    
+                            <ul class="employee-form">
+                                <li>
+                                    <input type="radio" name="gender" value="Male"/>
+                                    <label for="Male">Male</label>
+                                </li>
+                                <li>
+                                    <input type="radio" name="gender" value="Female"/>
+                                    <label for="Female">Female</label>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <ul class="employee-form" id="slideContainer">
+                            </ul>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <form method="post" action="." class="form-inline">
+                    {% csrf_token %}
+                        {# {% crispy form_employee form_employee.helper %} #}
+                    {# <button type="submit" class="btn btn-primary">Submit</button> #}
                 </form>
             </div>
         </div>

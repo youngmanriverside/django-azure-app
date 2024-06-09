@@ -8,22 +8,23 @@ from .choices import *
 class EmployeeForm(forms.ModelForm):
     class Meta:
         model = Employee
+        fields = '__all__'
         # fields = ['name', 'gender', 'age', 'unemployment_duration']
-        fields = ['unemployment_duration']
+        # fields = ['unemployment_duration']
 
-    # name = forms.CharField(
-    #     widget=forms.TextInput(
-    #         attrs={
-    #             }),
-    #     label='姓名')
+    name = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                }),
+        label='姓名')
     
-    # gender = forms.ChoiceField(choices=choices_gender, widget=forms.RadioSelect(), label='性別', )
+    gender = forms.ChoiceField(choices=choices_gender, widget=forms.RadioSelect(), label='性別', )
 
-    # age = forms.IntegerField(
-    #     widget=forms.NumberInput(
-    #         attrs={
-    #             }),
-    #     label='年齡')
+    age = forms.IntegerField(
+        widget=forms.NumberInput(
+            attrs={
+                }),
+        label='年齡')
     
     unemployment_duration = forms.ChoiceField(
         choices=choices_unemployment_duration,
@@ -33,19 +34,26 @@ class EmployeeForm(forms.ModelForm):
                 }),
         label='失業週期')
     
-    # current_status = forms.MultipleChoiceField(
-    #     choices=choices_current,
-    #     widget=forms.CheckboxSelectMultiple(
-    #         attrs={
-    #             }),
-    #     label='就業狀況')
+    education = forms.ChoiceField(
+        choices=choices_education,
+        widget=forms.Select(
+            attrs={
+                }),
+        label='學歷')
     
-    # identity = forms.MultipleChoiceField(
-    #     choices=choices_identity,
-    #     widget=forms.CheckboxSelectMultiple(
-    #         attrs={
-    #             }),
-    #     label='身份別')
+    current_status = forms.MultipleChoiceField(
+        choices=choices_current,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                }),
+        label='就業狀況')
+    
+    identity = forms.MultipleChoiceField(
+        choices=choices_identity,
+        widget=forms.CheckboxSelectMultiple(
+            attrs={
+                }),
+        label='身份別')
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

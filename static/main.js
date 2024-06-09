@@ -6,17 +6,10 @@ $(document).ready(function(){
     });
 
     // if button with class btn-secondary is clicked, call sendrequest function
-    $(".btn-secondary").click(function(){
-        var prompt = $(this).text();
-        sendrequest(prompt);
-    });
-
-    // if anchor with class wda-link is clicked, call sendrequest function
-    $(".wda-link").click(function(){
-        console.log("wda-link clicked");
-        var prompt = $(this).text();
-        sendrequest(prompt);
-    });
+    // $(".btn-secondary").click(function(){
+    //     var prompt = $(this).text();
+    //     sendrequest(prompt);
+    // });
 
     $("#send-btn").click(function(){
         handleChat();
@@ -36,11 +29,11 @@ $(document).ready(function(){
     );
     
     // Mimic user chat-input when buttons with class btn-secondary are clicked
-    $(".btn-secondary").click(function() {
-        var userMessage = $(this).text();
-        $(".chat-input textarea").val(userMessage);
-        handleChat();
-    });
+    // $(".btn-secondary").click(function() {
+    //     var userMessage = $(this).text();
+    //     $(".chat-input textarea").val(userMessage);
+    //     handleChat();
+    // });
 
     // Enable TextArea to re-size automatically
     $(".chat-input textarea").on("input", function() {
@@ -89,7 +82,7 @@ function handleChat() {
 
 
     // Generate response from OpenAI
-    generateResponse(userMessage);
+    // generateResponse(userMessage);
 }
 
 function generateResponse(userMessage) {

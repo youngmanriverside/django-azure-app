@@ -5,7 +5,7 @@ from plan.models import plan_employee, plan_employee_details
 from itertools import chain
 
 
-def index(request):
+def benefit(request):
     if request.method == 'POST':
         # Get the employee object
         name = request.POST.get('employee')
@@ -47,7 +47,7 @@ def index(request):
         'user_qurey_form': user_qurey_form,
     }
 
-    return render(request, 'index.html', context)
+    return render(request, 'benefit.html', context)
 
 def chatbot(request):
     return render(request, 'chatbot.html')

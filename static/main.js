@@ -1,21 +1,11 @@
 $(document).ready(function(){
-    // if button with id openai-button is clicked, call sendrequest function
+    // 就促工具列表頁面, openai-button is clicked, call sendrequest function
     $("#openai-button").click(function(){
         var prompt = $("#openai-input").val();
         sendrequest(prompt);
     });
 
-    // if button with class btn-secondary is clicked, call sendrequest function
-    // $(".btn-secondary").click(function(){
-    //     var prompt = $(this).text();
-    //     sendrequest(prompt);
-    // });
-
-    $("#send-btn").click(function(){
-        handleChat();
-    });
-
-    // Put some buttons inside chatbox at the bottom
+    // 聊天機器人頁面，機器人方的按鈕
     var buttons = [
         "我想找工作",
         "我想找職訓課程",
@@ -28,12 +18,16 @@ $(document).ready(function(){
     }
     );
     
-    // Mimic user chat-input when buttons with class btn-secondary are clicked
-    // $(".btn-secondary").click(function() {
-    //     var userMessage = $(this).text();
-    //     $(".chat-input textarea").val(userMessage);
-    //     handleChat();
-    // });
+    $(".btn-secondary").click(function() {
+        var userMessage = $(this).text();
+        $(".chat-input textarea").val(userMessage);
+        handleChat();
+    });
+
+    // 聊天機器人頁面，送出訊息鍵
+    $("#send-btn").click(function(){
+        handleChat();
+    });
 
     // Enable TextArea to re-size automatically
     $(".chat-input textarea").on("input", function() {
@@ -61,9 +55,6 @@ function handleChat() {
     // Clear the textarea after sending the message
     $(".chat-input textarea").val("");
 
-    // Resize the chat input textarea to its original height
-    // $(".chat-input textarea").css("height", "auto");
-
     // Append userMessage to chatbox
     $(".chatbox").append(createChatLi(userMessage, "outgoing"));
     
@@ -76,13 +67,9 @@ function handleChat() {
         $(".chatbox").append(createChatLi("思考中...", "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     }, 500);
-    // Execute a function when the user presses a key on the keyboard
     
-    // Scroll to the bottom of the chatbox to show the latest message
-
-
     // Generate response from OpenAI
-    // generateResponse(userMessage);
+    generateResponse(userMessage);
 }
 
 function generateResponse(userMessage) {

@@ -75,7 +75,7 @@ function handleChat() {
     }, 500);
     
     // Generate response from OpenAI
-    send(userMessage);
+    generateResponse(userMessage);
 }
 
 function generateResponse(userMessage) {

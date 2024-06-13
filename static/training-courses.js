@@ -1,19 +1,7 @@
 function find_training_courses() {
     var endpoint = "openai-wenshin.openai.azure.com";
-
-    // curl 'https://${endpoint}/openai/assistants?api-version=2024-02-15-preview' \
-    // -H 'api-key: YOUR_API_KEY' \
-    // -H 'Content-Type: application/json' \
-    // -d '{
-    // "instructions": "請根據使用者的訊息，從training_courses.csv，找出相關的課程，介紹並提供連結",
-    // "name": "training_courses_finder",
-    // "tools": [
-    //     {
-    //     "type": "code_interpreter"
-    //     }
-    // ],
-    // "model": "wenshin-gpt-4o"
-    // }'
+    var thread_id = "";
+    var message = "我想學烹飪";
 
     // First request to setup an assistant
     var url = `https://${endpoint}/openai/assistants?api-version=2024-02-15-preview`;
@@ -57,6 +45,11 @@ function find_training_courses() {
         // if success, print response in json in textarea with id "test-textarea"
         .done(function(data) {
             $("#test-textarea").val(JSON.stringify(data, null, 2));
+            thread_id = data["id"];
         })
     });
+}
+
+function user_question(thread_id) {
+
 }

@@ -2,7 +2,7 @@ $(document).ready(function(){
     // if button with id "test-btn" is clicked, call find_training_courses function
     $("#test-btn").click(function(){
         console.log("test-btn clicked");
-        find_training_courses();
+        create_thread();
     });
 
     // 就促工具列表頁面, openai-button is clicked, call sendrequest function

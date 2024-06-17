@@ -1,7 +1,3 @@
-// Training keywords
-var training_keywords = ["訓練", "課程", "職訓", "我想學", "推薦我", "進修"];
-
-
 function params(userMessage) {
 
     // Set parameters for the normal chat

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import benefit, chatbot
+from .views import benefit, chatbot, analysis
 from .routers import router
 
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('employee/', include('employee.urls')),
     path('employer/', include('employer.urls')),
     path('plan/', include('plan.urls')),
+    path('analysis/', analysis),
     path('api/', include(router.urls))
 ]

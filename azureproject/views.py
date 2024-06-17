@@ -51,3 +51,6 @@ def benefit(request):
 
 def chatbot(request):
     return render(request, 'chatbot.html')
+
+def analysis(request):
+    return render(request, 'analysis.html')

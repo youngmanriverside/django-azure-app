@@ -19,7 +19,7 @@ from .views import benefit, chatbot, analysis
 from .routers import router
 
 urlpatterns = [
-    path('', chatbot),
+    path('', chatbot, name='chatbot'),
     path('benefit', benefit),
     path('health', include('restaurant_review.urls')),
     path('admin/', admin.site.urls),

@@ -1,6 +1,6 @@
 function getTrainingFinder(userMessage) {
     $.ajax({
-        url : "https://wda-azure-api.azurewebsites.net/trainingfinder",
+        url : "https://wda-azure-api.azurewebsites.net/trainingchat",
         crossDomain : true,
         headers: {
             'Access-Control-Allow-Origin': '*'

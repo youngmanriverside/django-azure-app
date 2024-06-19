@@ -32,6 +32,7 @@ function getOpenAiChat(userMessage) {
 
     // if success, replace createChatLi with response message
     .done(function(data) {
+        console.log(data);
         $(".chatbox li:contains('思考中...')").replaceWith(createChatLi(data.choices[0].message.content, "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     })

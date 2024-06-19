@@ -31,6 +31,12 @@
     background-color: #E3F2FD;
 }
 
+.container {
+    /* border: 2px solid #66b6d2; */
+    justify-content: center;
+}
+
+
 .row {
     /* border: 2px solid #66b6d2; */
     margin: 10px;

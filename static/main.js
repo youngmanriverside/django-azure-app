@@ -1,28 +1,85 @@
 $(document).ready(function(){
-    // 就促工具列表頁面, openai-button is clicked, call sendrequest function
-    $("#openai-button").click(function(){
-        var prompt = $("#openai-input").val();
-        sendrequest(prompt);
-    });
-
-    // 聊天機器人頁面，機器人方的按鈕
-    var buttons = [
-        "我想找工作",
-        "我想學AI",
-    ];
-    buttons.forEach(function(button) {
-        var buttonElement = document.createElement("button");
-        buttonElement.classList.add("btn-secondary");
-        buttonElement.textContent = button;
-        $(".chatbox").append(buttonElement);
+    $("#push-button").click(function(){
+        // run ai search function
+        ai_search();
+        console.log("ai_search is called");
     }
     );
-    
-    $(".btn-secondary").click(function() {
-        var userMessage = $(this).text();
-        $(".chat-input textarea").val(userMessage);
-        handleChat();
+    // Either one of input with name optradio is checked, buttons will be reloaded
+    $("input[name='optradio']").change(function(){
+        var buttons = [];
+        if ($("#training").prop("checked")) {
+            buttons = [
+                "我想學AI",
+                "我想學平面設計",
+                "我想學照顧服務",
+            ];
+        } else if ($("#benefit").prop("checked")) {
+            buttons = [
+                "我是失業青年",
+                "我是二度就業婦女",
+            ];
+        } else if ($("#qanda").prop("checked")) {
+            buttons = [
+                "外籍人士可參加職訓?",
+            ];
+        }
+        // if buttons is not empty, remove all buttons and append new buttons but remain the following
+        // <li class="chat incoming"><span class="material-symbols-outlined">smart_toy</span>
+        // <p>你好! 請問需要什麼協助?</p></li>
+        $(".chatbox").children().not(":first").remove();        
+        buttons.forEach(function(button) {
+            var buttonElement = document.createElement("button");
+            buttonElement.classList.add("btn-secondary");
+            buttonElement.textContent = button;
+            $(".chatbox").append(buttonElement);
+        }
+        );
+
+        $(".btn-secondary").click(function() {
+            var userMessage = $(this).text();
+            $(".chat-input textarea").val(userMessage);
+            handleChat();
+        });
     });
+
+    // // 聊天機器人頁面，機器人方的按鈕
+    // var buttons = [
+    //     "我想找工作",
+    //     "我想學AI",
+    // ];
+
+    // // 依照上方 radio button 的選擇，決定要顯示哪些按鈕
+    // if ($("#training").prop("checked")) {
+    //     buttons = [
+    //         "我想學AI",
+    //         "我想學平面設計",
+    //         "我想學照顧服務",
+    //     ];
+    // } else if ($("#benefit").prop("checked")) {
+    //     buttons = [
+    //         "我是失業青年",
+    //         "我是二度就業婦女",
+    //     ];
+    // } else if ($("#qanda").prop("checked")) {
+    //     buttons = [
+    //         "外籍人士是否可以參加職業訓練?",
+    //     ];
+    // }
+
+    // buttons.forEach(function(button) {
+    //     var buttonElement = document.createElement("button");
+    //     buttonElement.classList.add("btn-secondary");
+    //     buttonElement.textContent = button;
+    //     $(".chatbox").append(buttonElement);
+    // }
+    // );
+    
+    // $(".btn-secondary").click(function() {
+    //     var userMessage = $(this).text();
+    //     $(".chat-input textarea").val(userMessage);
+    //     handleChat();
+    // });
 
     // 聊天機器人頁面，送出訊息鍵
     $("#send-btn").click(function(){
@@ -68,14 +125,25 @@ function handleChat() {
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     }, 500);
     
-    // Training keywords
-    var training_keywords = ["訓練", "課程", "職訓", "我想學", "推薦我", "進修"];
 
-    // Generate response from OpenAI
-    // If userMessage contains a keyword from training_keywords, call getTrainingFinder function
-    if (training_keywords.some(keyword => userMessage.includes(keyword))) {
-        getTrainingFinder(userMessage);
+    index_names = {
+        "training": "training-courses",
+        "benefit": "labor-plan-original-30",
+        "qanda": "wda-qa",
+    }
+
+    // Decide which function to call based on which radio button is checked
+    if ($("#training").prop("checked")) {
+        indexName = index_names["training"];
+        azureAiSearch(userMessage, indexName);
+    } else if ($("#benefit").prop("checked")) {
+        indexName = index_names["benefit"];
+        azureAiSearch(userMessage, indexName);
+    } else if ($("#qanda").prop("checked")) {
+        indexName = index_names["qanda"];
+        azureAiSearch(userMessage, indexName);
     } else {
+        // Call the getOpenAiChat function
         getOpenAiChat(userMessage);
     }
 }

@@ -1,4 +1,7 @@
-function getTrainingFinder(userMessage) {
+function azureAiSearch(userMessage, indexName) {
+    console.log("Azure AI Search");
+    console.log(userMessage);
+    console.log(indexName);
     $.ajax({
         url : "https://wda-azure-api.azurewebsites.net/trainingchat",
         crossDomain : true,
@@ -9,11 +12,12 @@ function getTrainingFinder(userMessage) {
         contentType : 'application/json',
         data: JSON.stringify(
             {
-                'userContent': userMessage
+                "userContent": userMessage,
+                "indexName": indexName
             })
     }).done(function(response) {
-        console.log(response["response"]);
-        $(".chatbox li:contains('思考中...')").replaceWith(createChatLi(response["response"], "incoming"));
+        console.log(response)
+        $(".chatbox li:contains('思考中...')").replaceWith(createChatLi(response, "incoming"));
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
         $
     });

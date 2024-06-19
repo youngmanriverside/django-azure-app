@@ -3,9 +3,20 @@
 {% block title %}<title>Chatbot</title>{% endblock %}
 
 {% block content %}
+
+
 <div class="chatbot">
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="training" checked>找職訓
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="benefit">找就促工具
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="qanda">就業Q&A
+    </label>
     <header>
-        <h2>Chatbot</h2>
+        <h2>智能就業服務系統</h2>
     </header>
     <ul class="chatbox">
         <li class="chat incoming">
@@ -18,4 +29,5 @@
         <span id="send-btn" class="material-symbols-outlined" >send</span>
     </div>
 </div>
+
 {% endblock %}

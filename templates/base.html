@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="{% static 'css/mycss.css' %}?{% now "U" %}">
 	<link rel="stylesheet" href="{% static 'css/chatbot.css' %}?{% now "U" %}">
 	<link rel="stylesheet" href="{% static 'css/video.css' %}?{% now "U" %}">
+	<link rel="stylesheet" href="{% static 'css/switch.css' %}?{% now "U" %}">
     <script src="{% static 'jquery-3.7.1.min.js' %}"></script>
-	<script src="{% static 'main.js' %}"></script>
 	<script src="{% static 'key.js' %}"></script>
 	<script src="{% static 'azure-openai.js' %}"></script>
 	<script src="{% static 'azure-wda.js' %}"></script>
+	<script src="{% static 'azure-search.js' %}"></script>
+	<script src="{% static 'main.js' %}"></script>
 	<!-- Google Fonts Link For Icons -->
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     {% block javascript %}
@@ -30,15 +32,15 @@
 					<img src="{% static 'images/web-logo.png' %}" alt="logo" class="logo">
 				</a>
 			</li>
-			<li class="nav-item">
-				<a href="/employee" class="nav-link">我要找就促</a>
-			</li>
-			<li class="nav-item">
-				<a href="/analysis" class="nav-link">影片分析(尚未推出)</a>
-			</li>
 		</ul>
 		<nav class="navbar">
 			<ul class="nav">
+				<li class="nav-item">
+					<a href="/employee" class="nav-link">我要找就促</a>
+				</li>
+				<li class="nav-item">
+					<a href="/analysis" class="nav-link">影片分析(尚未推出)</a>
+				</li>
 				{% comment %} <li class="nav-item">
 					<a href="/plan" class="nav-link">就促工具列表</a>
 				</li> {% endcomment %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+<script>
+    $(document).ready(function() {
+
+    });
+</script>
+{% endblock %}
+
+{% block title %}<title>首頁</title>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col" id="home-button">
+        {% load static %}
+        {# draw me two anchors with images inside #}
+            <a href="/chatbot"><img class="home-button" src="static/images/labor.png" alt="image here" /></a>
+        </div>
+        <div class="col" id="home-button">
+            <a href="/employer"><img class="home-button" src="static/images/employer.png" alt="image here" /></a>
+        </div>
+    </div>
+    {# draw me two anchors with big buttons-like #}
+    <div class="row">
+        <div class="col" id="home-button">
+            <a href="/chatbot" class="btn btn-primary btn-lg">我是勞工</a>
+        </div>
+        <div class="col" id="home-button">
+            <a href="/employer" class="btn btn-primary btn-lg">我是雇主</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

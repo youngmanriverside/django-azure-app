@@ -6,6 +6,30 @@
     padding: 0;
 }
 
+/* home page */
+div #home-button {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* image in anchor tag */
+a .home-button {
+    width: 400px;
+    padding: 10px;
+}
+
+/* anchor with class btn btn-primary btn-lg */
+a.btn.btn-primary.btn-lg {
+    width: 200px;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Navbar */
 .navbar {
     background-color: #66b6d2;
@@ -45,7 +69,7 @@
 }
 
 .col {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
     margin: 10px;
     padding: 10px;
     justify-content: center;
@@ -79,6 +103,11 @@
 
 .div-plans {
     margin-top: 50px;
+}
+
+/* Radio Button */
+label.radio-inline {
+    margin-right: 10px;
 }
 
 /* Table */

@@ -54,3 +54,6 @@ def chatbot(request):
 
 def analysis(request):
     return render(request, 'analysis.html')
+
+def home(request):
+    return render(request, 'home.html')

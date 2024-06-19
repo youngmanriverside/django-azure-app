@@ -1,10 +1,9 @@
 $(document).ready(function(){
-    $("#push-button").click(function(){
-        // run ai search function
-        ai_search();
-        console.log("ai_search is called");
-    }
-    );
+    // All the radio buttons are unchecked by default
+    $("input[name='optradio']").prop("checked", false);
+
+   
+
     // Either one of input with name optradio is checked, buttons will be reloaded
     $("input[name='optradio']").change(function(){
         var buttons = [];

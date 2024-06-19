@@ -14,7 +14,7 @@ body {
 
 .chatbot {
 	border-radius: 10px;
-	background-color: white;
+	background-color: rgb(170, 222, 243);
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 25px;
@@ -25,7 +25,7 @@ body {
 
 .chatbot header {
 	border-radius: 10px 10px 0 0;
-	background-color: #44b0eb;
+	background-color: #6cc1ee;
 	color: white;
 	padding: 10px;
 	text-align: center;
@@ -117,6 +117,12 @@ body {
 
 .chat-input textarea:valid ~ span {
 	visibility: visible;
+}
+
+/* span with class="material-symbols-outlined" */
+.material-symbols-outlined {
+	font-size: 1.35rem;
+	color: #44b0eb;
 }
 
 @media(max-width: 490px) {

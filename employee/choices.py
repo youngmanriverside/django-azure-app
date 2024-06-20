@@ -51,22 +51,20 @@ choices_24_1 = {
 }
 
 choices_current = [
-    ('unemployed', '待業中'),
-    ('training', '職訓中'),
+    ('unemployed', '失業尋職中'),
+    ('training', '參訓無工作'),
     ('freelancer', '自由工作者'),
     ('employed', '在職中'),
-    ('retired', '已退休'),
+    ('retired', '已退休待業中'),
     ('student', '學生'),
 ]
 
 choices_unemployment_duration = [
     ('0-14', '未滿14天'),
     ('15-29', '15-29天'),
-    ('30-59', '30-59天'),
-    ('60-89', '60-89天'),
+    ('30-89', '30-89天'),
     ('90-179', '90-179天'),
     ('180+', '180天以上'),
-    ('None', '未曾就業')
 ]
 
 choices_anticipation = [

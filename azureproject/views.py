@@ -50,10 +50,38 @@ def benefit(request):
     return render(request, 'benefit.html', context)
 
 def chatbot(request):
-    return render(request, 'chatbot.html')
+    if request.method == 'POST':
+        # get the name of the employee from value of select option
+        name = request.POST.get('employee')
+        employee_example = Employee.objects.get(name=name)
+        employee_current_list = list(employee_current.objects.values_list('current_status', flat=True).filter(employee_name=employee_example))
+        employee_identity_list = list(employee_identity.objects.values_list('identity', flat=True).filter(employee_name=employee_example))
+        
+        employees = Employee.objects.all()
+
+        context = {
+            'employees': employees,
+            'employee_example': employee_example,
+            'employee_current_list': employee_current_list,
+            'employee_identity_list': employee_identity_list,
+        }
+        
+        return render(request, 'chatbot.html', context)
+    employees = Employee.objects.all()
+
+    context = {
+        'employees': employees,
+    }
+    return render(request, 'chatbot.html', context)
 
 def analysis(request):
     return render(request, 'analysis.html')
 
 def home(request):
     return render(request, 'home.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def demo(request):
+    return render(request, 'demo.html')

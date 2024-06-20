@@ -1,0 +1,21 @@
+.chat-button {
+    width: 100px;
+    height: 50px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #32a89b;
+    color: white;
+    font-size: 24px;
+}
+
+.chat-button-mini {
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #32a89b;
+    color: white;
+    font-size: 16px;
+}

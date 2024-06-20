@@ -2,142 +2,166 @@
 
 {% block javascript %}
 <script>
-    $(document).ready(function() {
-        // User information
-        var user_age_range = "";
-        var user_identity = "";
-        var user_current_status = "";
+$(document).ready(function() {
+    // User information
+    var user_age_range = "";
+    var user_identity = "";
+    var user_current_status = "";
 
-        // Create three buttons above chat incoming
-        var buttons = [
+    // Create three buttons above chat incoming
+    var buttons = [
+        {
+            text: "找課程",
+            payload: "找課程"
+        },
+        {
+            text: "找補助",
+            payload: "找補助"
+        },
+        {
+            text: "Q&A",
+            payload: "Q&A"
+        }
+    ];
+    var chatbox = $(".chatbox");
+    var chatbot = $(".chatbot");
+    var chatbotHeader = $(".chatbot header h2");
+    var chatbotIcon = $(".chatbot header span");
+    var chatbotName = "智能就業服務系統";
+    var chatbotIconText = "smart_toy";
+    var chatbotMessage = "你好! 請問需要什麼協助?";
+    var chatbotMessageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + chatbotMessage + '</p></li>';
+    chatbox.append(chatbotMessageTemplate);
+    chatbotHeader.text(chatbotName);
+    chatbotIcon.text(chatbotIconText);
+    buttons.forEach(function(button) {
+        var buttonTemplate = '<button class="chat-button" data-payload="' + button.payload + '" id="' + button.payload + '">' + button.text + '</button>';
+        chatbox.append(buttonTemplate);
+    });
+    
+    // If button with id "找補助" is clicked, continue creates buttons based on choices_age, and remove previous buttons and messages
+    $("#找補助").click(function() {
+        var choices_age = [
             {
-                text: "找課程",
-                payload: "找課程"
+                text: "16歲以下",
+                payload: "16歲以下"
             },
             {
-                text: "找補助",
-                payload: "找補助"
+                text: "16歲至18歲",
+                payload: "16歲至18歲"
             },
             {
-                text: "Q&A",
-                payload: "Q&A"
+                text: "18歲至29歲",
+                payload: "18歲至29歲"
+            },
+            {
+                text: "30歲至44歲",
+                payload: "30歲至44歲"
+            },
+            {
+                text: "45歲至65歲",
+                payload: "45歲至65歲"
+            },
+            {
+                text: "65歲以上",
+                payload: "65歲以上"
             }
         ];
-        var chatbox = $(".chatbox");
-        var chatbot = $(".chatbot");
-        var chatbotHeader = $(".chatbot header h2");
-        var chatbotIcon = $(".chatbot header span");
-        var chatbotName = "智能就業服務系統";
-        var chatbotIconText = "smart_toy";
-        var chatbotMessage = "你好! 請問需要什麼協助?";
-        var chatbotMessageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + chatbotMessage + '</p></li>';
-        chatbox.append(chatbotMessageTemplate);
-        chatbotHeader.text(chatbotName);
-        chatbotIcon.text(chatbotIconText);
-        buttons.forEach(function(button) {
-            var buttonTemplate = '<button class="chat-button" data-payload="' + button.payload + '" id="' + button.payload + '">' + button.text + '</button>';
-            chatbox.append(buttonTemplate);
+        chatbox.find(".chat-button").remove();
+        choices_age.forEach(function(choice) {
+            var choiceTemplate = '<button class="chat-button-mini age" data-payload="' + choice.payload + '">' + choice.text + '</button>';
+            chatbox.append(choiceTemplate);
         });
-        
-        // If button with id "找補助" is clicked, continue creates buttons based on choices_age, and remove previous buttons and messages
-        $("#找補助").click(function() {
-            var choices_age = [
-                {
-                    text: "16歲以下",
-                    payload: "16歲以下"
-                },
-                {
-                    text: "16歲至18歲",
-                    payload: "16歲至18歲"
-                },
-                {
-                    text: "18歲至29歲",
-                    payload: "18歲至29歲"
-                },
-                {
-                    text: "30歲至44歲",
-                    payload: "30歲至44歲"
-                },
-                {
-                    text: "45歲至65歲",
-                    payload: "45歲至65歲"
-                },
-                {
-                    text: "65歲以上",
-                    payload: "65歲以上"
-                }
-            ];
-            chatbox.find(".chat-button").remove();
-            choices_age.forEach(function(choice) {
-                var choiceTemplate = '<button class="chat-button-mini age" data-payload="' + choice.payload + '">' + choice.text + '</button>';
-                chatbox.append(choiceTemplate);
-            });
-        });
-
-        // Either one of the buttons with class "chat-button-mini age" is clicked,
-        // assign the text of the button to variable user_age_range,
-        // and remove previous buttons,
-        // and create new "chat-button-mini current" buttons based on choices_current_dict
-        $(".chatbox").on("click", ".chat-button-mini.age", function() {
-            user_age_range = $(this).text();
-            chatbox.find(".chat-button-mini").remove();
-            var choices_current_dict = {
-                'unemployed': '失業尋職中',
-                'training': '參訓無工作',
-                'freelancer': '自由工作者',
-                'employed': '在職中',
-                'retired': '已退休待業中',
-                'student': '學生',
-            };
-            Object.keys(choices_current_dict).forEach(function(key) {
-                var choiceTemplate = '<button class="chat-button-mini current" data-payload="' + key + '" id="' + key + '">' + choices_current_dict[key] + '</button>';
-                chatbox.append(choiceTemplate);
-            });
-        
-            // Either one of the buttons with class "chat-button-mini current" is clicked,
-            // assign the text of the button to a variable user_current_status,
-            // and remove previous buttons,
-            // and create new "chat-button-mini identity" buttons based on choices_identity_dict
-            choices_identity_dict = {
-                'Laidoff': '非自願離職',
-                'Lowincome': '中低收入戶',
-                'Disability': '身心障礙',
-                'Onlyincome': '獨立負擔家計',
-                'Aboriginal': '原住民',
-                'Longterm': '長期失業',
-                'rehabilitation': '更生人',
-                'Abused': '家暴被害人',
-                'Rejoinwomen': '二度就業婦女',
-                'Disaster': '受災失業者',
-                'Sexuallyabused': '性侵害被害人',
-                'Newimmigrant': '新住民',
-            };
-            $(".chatbox").on("click", ".chat-button-mini.current", function() {
-                user_current_status = $(this).text();
-                chatbox.find(".chat-button-mini").remove();
-                Object.keys(choices_identity_dict).forEach(function(key) {
-                    var choiceTemplate = '<button class="chat-button-mini identity" data-payload="' + key + '" id="' + key + '">' + choices_identity_dict[key] + '</button>';
-                    chatbox.append(choiceTemplate);
-                });
-            });
-
-            // Either one of the buttons with class "chat-button-mini identity" is clicked,
-            // assign the text of the button to a variable user_identity,
-            // and remove previous buttons,
-            // output a message with user_age_range, user_current_status, and user_identity
-            $(".chatbox").on("click", ".chat-button-mini.identity", function() {
-                user_identity = $(this).text();
-                chatbox.find(".chat-button-mini").remove();
-                var message = "您的年齡屬於" + user_age_range + "，目前狀態為" + user_current_status + "，身份為" + user_identity + "。";
-                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
-                chatbox.append(messageTemplate);
-            });
-
-        });
-
-        
-       
     });
+
+    // Either one of the buttons with class "chat-button-mini age" is clicked,
+    // assign the text of the button to variable user_age_range,
+    // and remove previous buttons,
+    // and create new "chat-button-mini current" buttons based on choices_current_dict
+    $(".chatbox").on("click", ".chat-button-mini.age", function() {
+        user_age_range = $(this).text();
+        chatbox.find(".chat-button-mini").remove();
+        var choices_current_dict = {
+            'unemployed': '失業尋職中',
+            'training': '參訓無工作',
+            'freelancer': '自由工作者',
+            'employed': '在職中',
+            'retired': '已退休待業中',
+            'student': '學生',
+        };
+        Object.keys(choices_current_dict).forEach(function(key) {
+            var choiceTemplate = '<button class="chat-button-mini current" data-payload="' + key + '" id="' + key + '">' + choices_current_dict[key] + '</button>';
+            chatbox.append(choiceTemplate);
+        });
+    
+        // Either one of the buttons with class "chat-button-mini current" is clicked,
+        // assign the text of the button to a variable user_current_status,
+        // and remove previous buttons,
+        // and create new "chat-button-mini identity" buttons based on choices_identity_dict
+        choices_identity_dict = {
+            'Laidoff': '非自願離職',
+            'Lowincome': '中低收入戶',
+            'Disability': '身心障礙',
+            'Onlyincome': '獨立負擔家計',
+            'Aboriginal': '原住民',
+            'Longterm': '長期失業',
+            'rehabilitation': '更生人',
+            'Abused': '家暴被害人',
+            'Rejoinwomen': '二度就業婦女',
+            'Disaster': '受災失業者',
+            'Sexuallyabused': '性侵害被害人',
+            'Newimmigrant': '新住民',
+        };
+        $(".chatbox").on("click", ".chat-button-mini.current", function() {
+            user_current_status = $(this).text();
+            chatbox.find(".chat-button-mini").remove();
+            Object.keys(choices_identity_dict).forEach(function(key) {
+                var choiceTemplate = '<button class="chat-button-mini identity" data-payload="' + key + '" id="' + key + '">' + choices_identity_dict[key] + '</button>';
+                chatbox.append(choiceTemplate);
+            });
+        });
+
+        // Either one of the buttons with class "chat-button-mini identity" is clicked,
+        // assign the text of the button to a variable user_identity,
+        // and remove previous buttons,
+        // output a message with user_age_range, user_current_status, and user_identity
+        $(".chatbox").on("click", ".chat-button-mini.identity", function() {
+            user_identity = $(this).text();
+            chatbox.find(".chat-button-mini").remove();
+            var message = "您的年齡屬於" + user_age_range + "，目前狀態為" + user_current_status + "，身份為" + user_identity + "。";
+            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="user_info">' + message + '</p></li>';
+            chatbox.append(messageTemplate);
+            // Pause for 1 second
+            setTimeout(function() {
+                // Output an incoming message "分析中..."
+                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="analyzing">分析中...</p></li>';
+                chatbox.append(messageTemplate);
+            }, 1000);
+
+            // Pause for 3 seconds and output an incoming message "找到了以下補助方案"
+            var message = "找到了以下補助方案";
+            setTimeout(function() {
+                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + message + '</p></li>';
+                chatbox.append(messageTemplate);
+            }, 3000);
+
+            var final_message = "1. **職業訓練計畫**：許多政府和非營利組織提供免費或低成本的職業訓練課程，這些課程可以幫助你獲得特定技能，增加就業機會。\n"
+            final_message += "2. **實習機會**：尋找與你興趣相關的實習機會，這不僅能讓你獲得實際工作經驗，還能幫助你建立人脈。\n"
+            final_message += "3. **青年就業輔導**：一些政府機構和非營利組織提供專門針對青少年的就業輔導服務，這些服務包括職業測評、履歷撰寫指導和面試技巧培訓。\n"
+            final_message += "4. **社會福利資源**：作為中低收入戶，你可能有資格申請一些社會福利資源，如生活補助、教育補助等，這些資源可以減輕你的經濟壓力，讓你更專注於學習和職業發展。\n"
+            final_message += "5. **職業博覽會和招聘會**：參加當地的職業博覽會和招聘會，這些活動通常會有許多企業參與，提供各種實習和工作機會。\n"
+            final_message += "6. **網上學習平台**：利用免費或低成本的網上學習平台（如Coursera、edX、Udemy等）來提升你的技能，這些平台提供各種課程，從技術技能到軟技能應有盡有。\n"
+            final_message += "7. **青年創業計畫**：如果你對創業有興趣，可以尋找一些專門針對青少年的創業計畫和資助，這些計畫通常提供資金、指導和資源，幫助你實現創業夢想。\n"
+            final_message += "建議你先評估自己的興趣和技能，然後選擇最適合你的就促工具和資源。祝你順利找到適合的職業發展方向！";
+            setTimeout(function() {
+                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + final_message + '</p></li>';
+                chatbox.append(messageTemplate);
+            }, 5000);
+    });
+    });
+    
+    
+});
 </script>
 {% endblock %}
 

@@ -19,3 +19,13 @@
     color: white;
     font-size: 16px;
 }
+
+/* p with id="analyzing" */
+#analyzing {
+    color: blue;
+    font-weight: bold;
+}
+
+#user_info {
+    color: blue;
+}

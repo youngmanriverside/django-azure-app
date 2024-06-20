@@ -41,6 +41,13 @@ $(document).ready(function() {
     
     // If button with id "找補助" is clicked, continue creates buttons based on choices_age, and remove previous buttons and messages
     $("#找補助").click(function() {
+        // chatbotMessage replaces with "請問您的年齡屬於哪個範圍?"
+        var message = "請問您的年齡屬於哪個範圍?";
+        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+        chatbox.find(".chat-button").remove();
+        chatbox.find(".chat").remove();
+        chatbox.append(messageTemplate);
+
         var choices_age = [
             {
                 text: "16歲以下",
@@ -78,9 +85,16 @@ $(document).ready(function() {
     // assign the text of the button to variable user_age_range,
     // and remove previous buttons,
     // and create new "chat-button-mini current" buttons based on choices_current_dict
-    $(".chatbox").on("click", ".chat-button-mini.age", function() {
+    $(".chatbox").on("click", ".chat-button-mini.age", function() {       
         user_age_range = $(this).text();
         chatbox.find(".chat-button-mini").remove();
+
+        var message = "請問您目前的就業狀態?";
+        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+        chatbox.find(".chat-button").remove();
+        chatbox.find(".chat").remove();
+        chatbox.append(messageTemplate);
+
         var choices_current_dict = {
             'unemployed': '失業尋職中',
             'training': '參訓無工作',
@@ -115,6 +129,13 @@ $(document).ready(function() {
         $(".chatbox").on("click", ".chat-button-mini.current", function() {
             user_current_status = $(this).text();
             chatbox.find(".chat-button-mini").remove();
+
+            var message = "請問您的身分別?";
+            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+            chatbox.find(".chat-button").remove();
+            chatbox.find(".chat").remove();
+            chatbox.append(messageTemplate);
+
             Object.keys(choices_identity_dict).forEach(function(key) {
                 var choiceTemplate = '<button class="chat-button-mini identity" data-payload="' + key + '" id="' + key + '">' + choices_identity_dict[key] + '</button>';
                 chatbox.append(choiceTemplate);
@@ -128,7 +149,7 @@ $(document).ready(function() {
         $(".chatbox").on("click", ".chat-button-mini.identity", function() {
             user_identity = $(this).text();
             chatbox.find(".chat-button-mini").remove();
-            var message = "您的年齡屬於" + user_age_range + "，目前狀態為" + user_current_status + "，身份為" + user_identity + "。";
+            var message = "您的年齡屬於" + user_age_range + "，目前狀態為" + user_current_status + "，身分別為" + user_identity + "。";
             var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="user_info">' + message + '</p></li>';
             chatbox.append(messageTemplate);
             // Pause for 1 second

@@ -85,3 +85,6 @@ def about(request):
 
 def demo(request):
     return render(request, 'demo.html')
+
+def demo2(request):
+    return render(request, 'demo2.html')

@@ -3,6 +3,26 @@
 {% block javascript %}
 <script>
     $(document).ready(function() {
+        // if span with class "note" exists, user-query-button text is "重新查詢"
+        if ($(".note").length) {
+            $("#user-query-button").text("重新查詢");
+        }  else {
+            $("#user-query-button").text("查詢");
+        }
+        
+        $('#query-type_0').click(function(){
+            // if ($(this).is(':checked')) alert('is checked'); 
+            // show employee-select and hide employer-select
+            $('#employee-select').attr('hidden', false);
+            $('#employer-select').attr('hidden', true);
+        });
+
+        $('#query-type_1').click(function(){
+            // if ($(this).is(':checked')) alert('is checked'); 
+            // show employer-select and hide employee-select
+            $('#employer-select').attr('hidden', false);
+            $('#employee-select').attr('hidden', true);
+        });
     });
 </script>
 {% endblock %}
@@ -15,23 +35,25 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col">
             <div class="m-3">
                 <form method="post" id="user-form">
                     {% csrf_token %}
                     <div>
-                        {{ user_qurey_form }}
-                        <button id="user-query-button" type="submit">Query</button>
+                        <h4>登錄資料</h4>
+                        {{ user_qurey_form.type }}
+                        <div id="employee-select" hidden>{{ user_qurey_form.employee }}</div>
+                        <div id="employer-select" hidden>{{ user_qurey_form.employer }}</div>
+                        <button action="/benefit" id="user-query-button" type="submit">查詢</button>
                     </div>
                 </form>
             </div>
             <div class="m-3">
                 <div>
-                    <h4>使用者資料</h4>
                     <table class="table">
                     <thead>
                         <tr>
-                            <th>使用者</th>
+                            <th>代碼</th>
                             <th>就業狀態</th>
                             <th>性別</th>
                             <th>年齡</th>
@@ -64,6 +86,7 @@
                     <h4>
                         共有 <strong style="color: red;">{{ plan_employee_list1|length }}</strong> 個就促工具可能適用。
                     </h4>
+                    <span class="note">*實際可申請的計畫及其條件可能因地區和個人狀況而異</span>
                     <table class="table table-hover">
                     <thead>
                         <tr>
@@ -106,6 +129,7 @@
                 </div>
             </div>
         </div>
+        {% comment %}
         <div class="col-5">
             <div class="header">
                 <img id="robot" src="/static/images/consultant-robot.png" alt="robot-logo"/>
@@ -129,6 +153,7 @@
                 </div>
             </div>
         </div>
+        {% endcomment %}
     </div>
 </div>
 {% endblock %}

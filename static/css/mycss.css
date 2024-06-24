@@ -88,6 +88,11 @@ span {
     font-size: 1.2em;
 }
 
+.note {
+    color: red;
+    font-weight: Lighter;
+}
+
 /* Header */
 .header img {
     margin-right: 10px;
@@ -147,6 +152,10 @@ label.radio-inline {
 }
 
 /* Table */
+table {
+    margin-top: 30px;
+}
+
 .th {
     text-wrap: nowrap;
 }

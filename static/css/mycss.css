@@ -13,6 +13,12 @@ div #home-button {
     justify-content: center;
 }
 
+/* anchor tag */
+a {
+    text-decoration: none;
+}
+
+
 /* image in anchor tag */
 a .home-button {
     width: 400px;
@@ -276,8 +282,8 @@ tr.hide-table-padding td {
 /* Button */
 .btn-primary {
     margin: 10px;
-    width: auto;
-    padding: 2px;
+    width: 100px;
+    padding: 5px;
     border: none;
     border-radius: 10px;
     background-color: #66b6d2;

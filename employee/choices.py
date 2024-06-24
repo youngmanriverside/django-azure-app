@@ -25,6 +25,7 @@ choices_education = [
 ]
 
 choices_identity = [
+    ('None', '無'),
     ('Laidoff', '非自願離職'),
     ('Lowincome', '中低收入戶 (含低收入戶)'),
     ('Disability', '身心障礙'),

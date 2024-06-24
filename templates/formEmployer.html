@@ -8,11 +8,12 @@
     <div class="row">
         <div class="col-6">
             <div class="form">
-                <h1>雇主登錄</h1>
+                <h4><a href="/demo" class="material-symbols-outlined">smart_toy</a>
+                尋找適合您的補助計畫，請先填寫以下資料</h4>
                 <form method="post" action="." class="form-inline">
                     {% csrf_token %}
                         {% crispy form_employer form_employer.helper %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">送出</button>
                 </form>
             </div>
         </div>

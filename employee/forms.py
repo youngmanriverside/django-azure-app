@@ -16,7 +16,7 @@ class EmployeeForm(forms.ModelForm):
         widget=forms.TextInput(
             attrs={
                 }),
-        label='姓名')
+        label='代號')
     
     gender = forms.ChoiceField(choices=choices_gender, widget=forms.RadioSelect(), label='性別', )
 

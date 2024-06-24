@@ -12,22 +12,31 @@
 {% block content %}
 <div class="container">
     <div class="row">
+        <div class="row">
+            <span>公立就業服務機構可以申請政府補助，您申請了沒？</span>
+            </div>
+            <div class="row">
+            <p>勞動部為了協助勞工和雇主，推出了多樣化的就業促進工具及雇主資源，每一項計畫都針對不同的需求和條件提供支持，但如何找到最適合您的工具與補助可能令人困惑。
+    為了解決這個問題，北分署推出「民眾及雇主資源推薦包系統」，快速為您推薦適合的就業促進工具或雇主資源，請立即嘗試吧！</p>
+            </div>
+    </div>
+    <div class="row">
         <div class="col" id="home-button">
         {% load static %}
         {# draw me two anchors with images inside #}
-            <a href="/demo"><img class="home-button" src="static/images/labor.png" alt="image here" /></a>
+            <a href="/employee"><img class="home-button" src="static/images/labor.png" alt="image here" /></a>
         </div>
         <div class="col" id="home-button">
-            <a href="/demo"><img class="home-button" src="static/images/employer.png" alt="image here" /></a>
+            <a href="/employer"><img class="home-button" src="static/images/employer.png" alt="image here" /></a>
         </div>
     </div>
     {# draw me two anchors with big buttons-like #}
     <div class="row">
         <div class="col" id="home-button">
-            <a href="/demo" class="btn btn-primary btn-lg">我是勞工</a>
+            <a href="/employee" class="btn btn-primary btn-lg">我是民眾</a>
         </div>
         <div class="col" id="home-button">
-            <a href="/demo2" class="btn btn-primary btn-lg">我是雇主</a>
+            <a href="/employer" class="btn btn-primary btn-lg">我是雇主</a>
         </div>
     </div>
 </div>

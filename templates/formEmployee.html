@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             <div class="form">
                 <h4><a href="/demo" class="material-symbols-outlined">smart_toy</a>
                 尋找適合您的補助計畫，請先填寫以下資料</h4>
+                <span>有「 * 」的項目務必選取</span>
                 <form method="post" action="." class="form-inline">
                     {% csrf_token %}
                         {% crispy form_employee form_employee.helper %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import plans_filter_form
 from employee.models import Employee, employee_current, employee_identity
+from employer.models import Employer
 from plan.models import plan_employee, plan_employee_details
 from itertools import chain
 
@@ -21,8 +22,8 @@ def benefit(request):
             # Filter the plan_employee object by current_status list, gender and age
             plan_employee_list1 = plan_employee.objects.filter(required_employee_current__in=employee_current_list)
             
-            if employee.gender == 'Male':
-                plan_employee_list1 = plan_employee_list1.exclude(required_employee_gender='female')
+            if employee.gender == '男':
+                plan_employee_list1 = plan_employee_list1.exclude(required_employee_gender='女')
             
             plan_employee_list1 = plan_employee_list1.filter(employee_age_lower_bound__lte=employee.age)
             plan_employee_list1 = plan_employee_list1.filter(employee_age_upper_bound__gte=employee.age)
@@ -46,7 +47,18 @@ def benefit(request):
             return render(request, 'benefit.html', context)
         
         elif type == '雇主':
-            pass
+            name = request.POST.get('employer')
+            if not name:
+                return redirect('/benefit')
+            employer = Employer.objects.get(name=name)
+
+
+
+            context = {
+                'employer': employer,
+            }
+
+            return render(request, 'benefit.html', context)
 
     user_qurey_form = plans_filter_form()
 

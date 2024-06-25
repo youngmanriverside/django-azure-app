@@ -10,7 +10,14 @@ class Employer(models.Model):
     def __str__(self):
         return f'{self.name}__{self.organization}'
     
+
 class plan_employer(models.Model):
+    organization = models.CharField(max_length=100, db_column='單位類型')
+    employment_insurance = models.CharField(max_length=100, db_column='是否為就保單位')
+    subsidy_requirement = models.CharField(max_length=100, null=True, blank=True, db_column='補助需求項目')
+
+
+class plan_employer_detail(models.Model):
     name = models.CharField(max_length=100, db_column='計畫名稱')
     division = models.CharField(max_length=100, db_column='所屬科室')
     type = models.CharField(max_length=100, db_column='計畫別')

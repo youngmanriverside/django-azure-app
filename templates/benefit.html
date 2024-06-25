@@ -139,8 +139,8 @@
                                     {% for object in all_plan_employee_details_list %}
                                     {% if plan.plan_name == object.plan_name %}
                                     <div class="card card-body">
-                                        {% load highlight %}
-                                        {{ object.apply|highlight:"公立就業服務機構"}}
+                                        {% comment %} {% load highlight %} {% endcomment %}
+                                        {{ object.apply }}
                                     </div>
                                     {% endif %}
                                     {% endfor %}

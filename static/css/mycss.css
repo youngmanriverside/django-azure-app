@@ -148,7 +148,9 @@ label.radio-inline {
 .card-body {
     margin: 10px;
     padding: 10px;
-    justify-content: center;
+    justify-content: left;
+    text-align: left;
+    text-wrap: wrap;
 }
 
 /* Table */

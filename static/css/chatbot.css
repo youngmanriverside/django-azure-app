@@ -132,3 +132,133 @@ body {
 		right: 0;
 	}
 }
+
+
+
+/* for future use 6/26 */
+.chatbot2 {
+	border: 1px solid red;
+	border-radius: 10px 0 0 10px;
+	background-color: rgb(170, 222, 243);
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 0px;
+	width: 100%;
+	box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),0 32px 64px -48px rgba(0,0,0,0.5);
+}
+
+.chatbot2 header {
+	border-radius: 10px 0 0 0;
+	background-color: #6cc1ee;
+	color: white;
+	padding: 10px;
+	text-align: center;
+}
+
+.chatbot2 header h2 {
+	font-size: 2.8rem;
+}
+
+.chatbot2 .chatbox {
+	height: 410px;
+	overflow-y: auto;
+	padding: 30px 20px 70px;
+}
+
+.chatbox .chat {
+	display: flex;
+}
+.chatbox .incoming span {
+	background: #44b0eb;
+	color: white;
+	padding: 0 5px;
+	align-self: flex-end;
+	border-radius: 4px;
+	cursor: default;
+	line-height: 32px;
+	margin: 0 10px 7px 0;
+	text-align: center;
+}
+
+.chatbox .outgoing {
+	margin: 20px 0;
+	justify-content: flex-end;
+}
+
+.chatbox .chat p {
+	background: #44b0eb;
+	border-radius: 10px 10px 0 10px;
+	color: white;
+  	white-space: pre-wrap;
+	font-size: 0.95rem;
+	max-width: 75%;
+	padding: 12px 16px;
+	white-space: pre-wrap;
+}
+
+.chatbox .chat p.error {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.chatbox .incoming p {
+	background: #f2f2f2;
+	border-radius: 10px 10px 10px 0;
+	color: black;
+}
+
+.chatbot2 .chat-input {
+	display: flex;
+	gap: 5px;
+	width: 100%;
+	background: #fff;
+	padding: 3px 20px;
+	border-top: 1px solid #ddd;
+	border-radius: 0 0 0 10px;
+}
+
+.chat-input textarea {
+	border: none;
+	font-size: 0.95rem;
+	height: 55px;
+	width: 100%;
+	max-height: 180px;
+	outline: none;
+	padding: 15px 15px 15px 0;
+	resize: none;
+}
+
+.chat-input span {
+	color: #44b0eb;
+	font-size: 1.35rem;
+	height: 55px;
+	cursor: pointer;
+	align-self: flex-end;
+	display: flex;
+	align-items: center;
+	visibility: hidden;
+}
+
+.chat-input textarea:valid ~ span {
+	visibility: visible;
+}
+
+/* span with class="material-symbols-outlined" */
+.material-symbols-outlined {
+	font-size: 1.35rem;
+	color: #44b0eb;
+}
+
+@media(max-width: 490px) {
+	.chatbot2 {
+		width: 100%;
+		height: 100%;
+		bottom: 0;
+		right: 0;
+	}
+}
+
+.chatbot2-info {
+	border: 5px solid red;
+	height: 100%;
+}

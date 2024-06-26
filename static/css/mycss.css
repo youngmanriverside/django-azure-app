@@ -117,8 +117,19 @@ span {
 
 }
 
-.col-md-6 {
-    border: 2px solid #66b6d2;
+
+.col-md-6.left{
+    /* border: 2px solid #66b6d2; */
+    border-right: 0px;
+    padding: 0px;
+}
+
+
+.col-md-6.right{
+    background-color: #9abadb;
+    /* border: 2px solid #66b6d2; */
+    border-left: 0px;
+    border-radius: 0px 20px 20px 0px;
     padding: 0px;
 }
 

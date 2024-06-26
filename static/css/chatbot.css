@@ -137,7 +137,7 @@ body {
 
 /* for future use 6/26 */
 .chatbot2 {
-	border: 1px solid red;
+	/* border: 1px solid red; */
 	border-radius: 10px 0 0 10px;
 	background-color: rgb(170, 222, 243);
 	margin-left: auto;
@@ -259,6 +259,11 @@ body {
 }
 
 .chatbot2-info {
-	border: 5px solid red;
+	/* border: 5px solid red; */
 	height: 100%;
+}
+
+.chatbot2-info-item {
+	border: 3px solid #d5d5db;
+	border-radius: 0 0 10px 10px;
 }

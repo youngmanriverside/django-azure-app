@@ -178,7 +178,34 @@ $(document).ready(function() {
             setTimeout(function() {
                 var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + final_message + '</p></li>';
                 chatbox.append(messageTemplate);
+                // Scroll to the bottom of the chatbox
+                chatbox.scrollTop(chatbox[0].scrollHeight);
             }, 5000);
+
+            // Append a message "您的email為 example@tibame.com?"
+            message_email = "您的email為 example@tibame.com?";
+            setTimeout(function() {
+                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + message_email + '</p></li>';
+                chatbox.append(messageTemplate);
+
+                var send_or_not = ['寄送結果', '放棄']
+                send_or_not.forEach(function(choice) {
+                    var choiceTemplate = '<button class="chat-button-mini email" data-payload="' + choice + '">' + choice + '</button>';
+                    chatbox.append(choiceTemplate);
+                });
+                chatbox.scrollTop(chatbox[0].scrollHeight);
+            }, 7000);
+
+            // If button with class "chat-button-mini email" is clicked, output a message "已寄出" or "已放棄"
+            $(".chatbox").on("click", ".chat-button-mini.email", function() {
+                // Remove previous buttons
+                chatbox.find(".chat-button-mini").remove();
+                var message = "已" + $(this).text();
+                var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + message + '</p></li>';
+                chatbox.append(messageTemplate);
+                chatbox.scrollTop(chatbox[0].scrollHeight);
+
+            });      
     });
     });
     

@@ -115,16 +115,22 @@
                     <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th class="th">計畫名稱</th>
                             <th class="th">計畫別</th>
+                            <th class="th">目的</th>
+                            <th class="th">計畫窗口</th>
                             <th class="th">申請資格</th>
                         </tr>
                     </thead>
                     <tbody>
                     {% for plan in plan_employee_list1 %}
                         <tr>
-                            <td class="td">{{ plan.plan_name }}</td>
-                            <td class="td">{{ plan.plan_type }}</td>
+                            <td class="td"><strong>{{ plan.plan_type }}</strong></td>
+                        {% for object in all_plan_employee_details_list %}
+                            {% if plan.plan_name == object.plan_name %}
+                            <td class="td">{{ object.purpose }}</td>
+                            <td class="td">{{ object.contact }}</td>
+                            {% endif %}
+                        {% endfor %}
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <button type="button" class="btn btn-outline-primary collapsed" data-bs-toggle="collapse" data-bs-target="#{{ plan.plan_name }}" aria-expanded="false" aria-controls="collapseProduct0">

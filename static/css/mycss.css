@@ -170,6 +170,7 @@ label.radio-inline {
 }
 
 .card-body {
+    background-color: #9abadb;
     margin: 10px;
     padding: 10px;
     justify-content: left;
@@ -187,7 +188,7 @@ table {
 }
 
 .td {
-    text-wrap: nowrap;
+    text-wrap: wrap;
 }
 
 /* Form */
@@ -303,6 +304,7 @@ table {
 /* Collapse */
 
 .collapseContainingDiv td {
+    background-color: #9abadb;
     padding: 0 !important;
 }
 

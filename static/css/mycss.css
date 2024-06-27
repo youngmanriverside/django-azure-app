@@ -76,7 +76,7 @@ a.btn.btn-primary.btn-lg {
 }
 
 .col {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
     margin: 10px;
     padding: 10px;
     justify-content: center;
@@ -110,7 +110,7 @@ span {
 
 /* Div */
 .col-4 {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
     margin: 10px;
     padding: 10px;
     justify-content: center;

@@ -1,4 +1,12 @@
 /* video */
-.demo {
-    width: 40%;
+.video-input {
+    width: 100%;
+    height: 50%;
+    transform: rotate(270deg);
+}
+
+/* analysis chart */
+.analysis-chart {
+    width: 100%;
+    
 }

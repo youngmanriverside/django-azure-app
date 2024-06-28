@@ -3,65 +3,31 @@
 {% block title %}<title>Analysis</title>{% endblock %}
 
 {% block content %}
-<div class='container-fluid'>
+<div class='container'>
     <div class='row'>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
+        <div class='col'>
+            <video class="video-input" controls>
+                <source src="/static/videos/example-1.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
         </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
-    <div class='row'>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class='col-xs-12 col-md-4'>
-            <video class="demo" controls>
-                <source src="/static/IMG_6303.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class='col'>
+            <div class='row'>
+                <h2>Analysis - chart</h2>
+                <div class="col">
+                    <img class="analysis-chart" src="/static/images/bar-chart-example.png" alt="analysis-chart">
+                </div>
+                <div class="col">
+                    <img class="analysis-chart" src="/static/images/pie-chart-example.svg" alt="analysis-chart">
+                </div>
+            </div>
+            <div class='row'>
+                <h2>Analysis - feedback</h2>
+                <div class="col">
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi quibusdam reiciendis, similique necessitatibus adipisci iste, eligendi quis omnis ea veritatis voluptate laborum autem vel et! Qui at dicta iure.</li>
+                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi quibusdam reiciendis, similique necessitatibus adipisci iste, eligendi quis omnis ea veritatis voluptate laborum autem vel et! Qui at dicta iure.</li>
+                </div>
+            </div>
         </div>
     </div>
 </div>

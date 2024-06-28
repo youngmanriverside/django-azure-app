@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}<title>Chatbot</title>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="chatbot">
+                <header>
+                    <h2>智能就業服務系統</h2>
+                </header>
+                <label class="radio-inline">
+                    <input type="radio" name="optradio" id="training" checked>找職訓
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="optradio" id="benefit">找就促
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="optradio" id="qanda">就業Q&A
+                </label>
+                
+                <ul class="chatbox">
+                    <li class="chat incoming">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <p>你好! 請問需要什麼協助?</p>
+                    </li>
+                </ul>
+                <div class="chat-input">
+                    <textarea placeholder="請輸入訊息..." required></textarea>
+                    <span id="send-btn" class="material-symbols-outlined" >send</span>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3>就業促進</h3>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post">
+                    {% csrf_token %}
+                        <select class="form-select" aria-label="Default select example" name="employee">
+                            <option selected>選擇範例</option>
+                            {% for employee in employees %}
+                                <option value="{{ employee.name }}">{{ employee.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">姓名</th>
+                                <th scope="col">身分</th>
+                                <th scope="col">狀態</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td id="example-name">{{ employee_example.name }}</td>
+                                {% for current in employee_current_list %}
+                                    <td id="example-current">{{ current }}</td>
+                                {% endfor %}
+                                {% for identity in employee_identity_list %}
+                                    <td id="example-identity">{{ identity }}</td>
+                                {% endfor %}
+                            </tr>
+                        </tbody>
+                    </table>
+                    {# Create a button called "就業促進" #}
+                    <a id="ask-benefit" class="btn btn-primary">問問機器人</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% comment %}
+<div class="chatbot">
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="training" checked>找職訓
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="benefit">找就促
+    </label>
+    <label class="radio-inline">
+        <input type="radio" name="optradio" id="qanda">就業Q&A
+    </label>
+    <header>
+        <h2>智能就業服務系統</h2>
+    </header>
+    <ul class="chatbox">
+        <li class="chat incoming">
+            <span class="material-symbols-outlined">smart_toy</span>
+            <p>你好! 請問需要什麼協助?</p>
+        </li>
+    </ul>
+    <div class="chat-input">
+        <textarea placeholder="請輸入訊息..." required></textarea>
+        <span id="send-btn" class="material-symbols-outlined" >send</span>
+    </div>
+</div>
+{% endcomment %}
+{% comment %} <div class="container">
+    <div class="col">
+        <div class="row">
+            1
+        </div>
+        <div class="row">
+            2
+        </div>
+    </div>
+</div> {% endcomment %}
+
+{% endblock %}

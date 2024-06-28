@@ -1,29 +1,175 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+<script>
+$(document).ready(function() {
+    // User information
+    var employer_insurance = "";
+    var employer_org = "";
+    var employer_subsity = "";
+
+    // Create three buttons above chat incoming
+    var buttons = [
+        {
+            text: "找補助",
+            payload: "找補助"
+        },
+        {
+            text: "Q&A",
+            payload: "Q&A"
+        }
+    ];
+    var chatbox = $(".chatbox");
+    var chatbot = $(".chatbot");
+    var chatbotHeader = $(".chatbot header h2");
+    var chatbotIcon = $(".chatbot header span");
+    var chatbotName = "智能就業服務系統";
+    var chatbotIconText = "smart_toy";
+    var chatbotMessage = "你好! 請問需要什麼協助?";
+    var chatbotMessageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + chatbotMessage + '</p></li>';
+    chatbox.append(chatbotMessageTemplate);
+    chatbotHeader.text(chatbotName);
+    chatbotIcon.text(chatbotIconText);
+    buttons.forEach(function(button) {
+        var buttonTemplate = '<button class="chat-button" data-payload="' + button.payload + '" id="' + button.payload + '">' + button.text + '</button>';
+        chatbox.append(buttonTemplate);
+    });
+    
+    // If button with id "找補助" is clicked, continue creates buttons based on choices_age, and remove previous buttons and messages
+    $("#找補助").click(function() {
+        // chatbotMessage replaces with "請問您的就業保險狀態是?"
+        var message = "請問您的就業保險狀態是?";
+        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+        chatbox.find(".chat-button").remove();
+        chatbox.find(".chat").remove();
+        chatbox.append(messageTemplate);
+
+        var choices_insurance = [
+            {
+                text: "是",
+                payload: "是"
+            },
+            {
+                text: "否",
+                payload: "否"
+            }
+        ];
+        chatbox.find(".chat-button").remove();
+        choices_insurance.forEach(function(choice) {
+            var choiceTemplate = '<button class="chat-button-mini insurance" data-payload="' + choice.payload + '">' + choice.text + '</button>';
+            chatbox.append(choiceTemplate);
+        });
+    });
+
+    // If button with class "insurance" is clicked, continue creates buttons based on choices_organization, and remove previous buttons and messages
+    $(document).on("click", ".insurance", function() {
+        employer_insurance = $(this).data("payload");
+        console.log(employer_insurance);
+        // chatbotMessage replaces with "請問您的就業組織類型是?"
+        var message = "請問您的就業組織類型是?";
+        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+        chatbox.find(".chat-button-mini").remove();
+        chatbox.find(".chat").remove();
+        chatbox.append(messageTemplate);
+
+        var choice_organization = {
+            'Private sector': '民營事業',
+            'ThirdSector': '民間團體',
+            'Private school': '私立學校',
+            'Public school': '公立學校',
+            'Public sector': '公營事業',
+            'Others': '其他'
+        };
+        chatbox.find(".chat-button-mini").remove();
+        for (var key in choice_organization) {
+            var choiceTemplate = '<button class="chat-button-mini organization" data-payload="' + key + '">' + choice_organization[key] + '</button>';
+            chatbox.append(choiceTemplate);
+        }
+    });
+
+    // If button with class "organization" is clicked, continue creates buttons based on choices_subsidy, and remove previous buttons and messages
+    $(document).on("click", ".organization", function() {
+        employer_org = $(this).data("payload");
+        console.log(employer_org);
+        // chatbotMessage replaces with "請問您需要哪種就業補助?"
+        var message = "請問您需要哪種就業補助?";
+        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
+        chatbox.find(".chat-button-mini").remove();
+        chatbox.find(".chat").remove();
+        chatbox.append(messageTemplate);
+
+        var choice_subsidy = {
+            'New employment': '新雇用',
+            'Continued employment': '續聘',
+            'Pre-service training': '職前訓練',
+            'On-job training': '在職訓練',
+            'Employment stabilization': '穩定就業',
+            'Cooperative': '世代合作',
+            'Retirement consultation': '退休輔導',
+        }
+
+        chatbox.find(".chat-button-mini").remove();
+        for (var key in choice_subsidy) {
+            var choiceTemplate = '<button class="chat-button-mini subsidy" data-payload="' + key + '">' + choice_subsidy[key] + '</button>';
+            chatbox.append(choiceTemplate);
+        }
+    });
+
+    // If button with class "subsidy" is clicked, output final message
+    // and remove previous buttons,
+    // output a message with employer_insurance, employer_org, and employer_subsity
+    $(document).on("click", ".subsidy", function() {
+        employer_subsity = $(this).data("payload");
+        console.log(employer_subsity);
+        chatbox.find(".chat-button-mini").remove();
+
+        // Pause for 1 second
+        setTimeout(function() {
+            // Output an incoming message "分析中..."
+            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="analyzing">分析中...</p></li>';
+            chatbox.append(messageTemplate);
+        }, 1000);
+
+        // Pause for 3 seconds and output an incoming message "找到了以下補助方案"
+        var message = "找到了以下補助方案";
+        setTimeout(function() {
+            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + message + '</p></li>';
+            chatbox.append(messageTemplate);
+        }, 3000);
+
+        var final_message = "感謝您的回答! 根據您的需求，以下是一些建議：\n"
+        final_message = "1. **職業訓練計畫**：許多政府和非營利組織提供免費或低成本的職業訓練課程，這些課程可以幫助你獲得特定技能，增加就業機會。\n"
+        final_message += "2. **實習機會**：尋找與你興趣相關的實習機會，這不僅能讓你獲得實際工作經驗，還能幫助你建立人脈。\n"
+        final_message += "3. **青年就業輔導**：一些政府機構和非營利組織提供專門針對青少年的就業輔導服務，這些服務包括職業測評、履歷撰寫指導和面試技巧培訓。\n"
+        final_message += "4. **社會福利資源**：作為中低收入戶，你可能有資格申請一些社會福利資源，如生活補助、教育補助等，這些資源可以減輕你的經濟壓力，讓你更專注於學習和職業發展。\n"
+        final_message += "5. **職業博覽會和招聘會**：參加當地的職業博覽會和招聘會，這些活動通常會有許多企業參與，提供各種實習和工作機會。\n"
+        final_message += "6. **網上學習平台**：利用免費或低成本的網上學習平台（如Coursera、edX、Udemy等）來提升你的技能，這些平台提供各種課程，從技術技能到軟技能應有盡有。\n"
+        final_message += "7. **青年創業計畫**：如果你對創業有興趣，可以尋找一些專門針對青少年的創業計畫和資助，這些計畫通常提供資金、指導和資源，幫助你實現創業夢想。\n"
+        final_message += "建議你先評估自己的興趣和技能，然後選擇最適合你的就促工具和資源。祝你順利找到適合的職業發展方向！";
+
+        setTimeout(function() {
+            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + final_message + '</p></li>';
+            chatbox.append(messageTemplate);
+        }, 5000);
+
+    });
+
+});
+</script>
+{% endblock %}
+
 {% block title %}<title>Chatbot</title>{% endblock %}
 
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col">
-            <div class="chatbot">
+        <div class="col-md-6 left">
+            <div class="chatbot2">
                 <header>
-                    <h2>智能就業服務系統</h2>
-                </header>
-                <label class="radio-inline">
-                    <input type="radio" name="optradio" id="training" checked>找職訓
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="optradio" id="benefit">找就促
-                </label>
-                <label class="radio-inline">
-                    <input type="radio" name="optradio" id="qanda">就業Q&A
-                </label>
-                
+                    <h2>Chatbot</h2>
+                </header>                
                 <ul class="chatbox">
                     <li class="chat incoming">
-                        <span class="material-symbols-outlined">smart_toy</span>
-                        <p>你好! 請問需要什麼協助?</p>
                     </li>
                 </ul>
                 <div class="chat-input">
@@ -32,83 +178,34 @@
                 </div>
             </div>
         </div>
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h3>就業促進</h3>
+        <div class="col-md-6 right">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="chatbot2-info-item">
+                        <img src="https://via.placeholder.com/150" alt="employer" class="img-fluid">
+                        <h3>就業保險</h3>
+                        <p>是否有就業保險?</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <form action="" method="post">
-                    {% csrf_token %}
-                        <select class="form-select" aria-label="Default select example" name="employee">
-                            <option selected>選擇範例</option>
-                            {% for employee in employees %}
-                                <option value="{{ employee.name }}">{{ employee.name }}</option>
-                            {% endfor %}
-                        </select>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">姓名</th>
-                                <th scope="col">身分</th>
-                                <th scope="col">狀態</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="example-name">{{ employee_example.name }}</td>
-                                {% for current in employee_current_list %}
-                                    <td id="example-current">{{ current }}</td>
-                                {% endfor %}
-                                {% for identity in employee_identity_list %}
-                                    <td id="example-identity">{{ identity }}</td>
-                                {% endfor %}
-                            </tr>
-                        </tbody>
-                    </table>
-                    {# Create a button called "就業促進" #}
-                    <a id="ask-benefit" class="btn btn-primary">問問機器人</a>
+                <div class="col-md-4">
+                    <div class="chatbot2-info-item">
+                        <img src="https://via.placeholder.com/150" alt="employer" class="img-fluid">
+                        <h3>就業保險</h3>
+                        <p>是否有就業保險?</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="chatbot2-info-item">
+                        <img src="https://via.placeholder.com/150" alt="employer" class="img-fluid">
+                        <h3>就業保險</h3>
+                        <p>是否有就業保險?</p>
+                        <a href="#" class="btn btn-primary">了解更多</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-{% comment %}
-<div class="chatbot">
-    <label class="radio-inline">
-        <input type="radio" name="optradio" id="training" checked>找職訓
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="optradio" id="benefit">找就促
-    </label>
-    <label class="radio-inline">
-        <input type="radio" name="optradio" id="qanda">就業Q&A
-    </label>
-    <header>
-        <h2>智能就業服務系統</h2>
-    </header>
-    <ul class="chatbox">
-        <li class="chat incoming">
-            <span class="material-symbols-outlined">smart_toy</span>
-            <p>你好! 請問需要什麼協助?</p>
-        </li>
-    </ul>
-    <div class="chat-input">
-        <textarea placeholder="請輸入訊息..." required></textarea>
-        <span id="send-btn" class="material-symbols-outlined" >send</span>
-    </div>
 </div>
-{% endcomment %}
-{% comment %} <div class="container">
-    <div class="col">
-        <div class="row">
-            1
-        </div>
-        <div class="row">
-            2
-        </div>
-    </div>
-</div> {% endcomment %}
-
 {% endblock %}

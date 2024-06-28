@@ -68,7 +68,7 @@ def benefit(request):
 
     return render(request, 'benefit.html', context)
 
-def chatbot(request):
+def chatbot_old(request):
     if request.method == 'POST':
         # get the name of the employee from value of select option
         name = request.POST.get('employee')
@@ -105,5 +105,5 @@ def about(request):
 def demo(request):
     return render(request, 'demo.html')
 
-def demo2(request):
-    return render(request, 'demo2.html')
+def chatbot(request):
+    return render(request, 'chatbot.html')

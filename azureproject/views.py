@@ -99,8 +99,8 @@ def analysis(request):
 def home(request):
     return render(request, 'home.html')
 
-def about(request):
-    return render(request, 'about.html')
+def interview(request):
+    return render(request, 'interview.html')
 
 def demo(request):
     return render(request, 'demo.html')

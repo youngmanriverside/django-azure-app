@@ -1,0 +1,8 @@
+.mock-interviewr {
+    display: flex;
+    justify-content: center;
+}
+
+#interviewr {
+    width: 60%;
+}

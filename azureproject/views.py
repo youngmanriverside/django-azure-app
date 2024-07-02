@@ -3,8 +3,8 @@ from .forms import plans_filter_form
 from employee.models import Employee, employee_current, employee_identity
 from employer.models import Employer
 from plan.models import plan_employee, plan_employee_details
-from itertools import chain
-
+import requests
+import json
 
 def benefit(request):
     if request.method == 'POST':
@@ -94,6 +94,24 @@ def chatbot_old(request):
     return render(request, 'chatbot.html', context)
 
 def analysis(request):
+    if request.method == 'POST':
+        # Send post request to https://wda-gemini-api.azurewebsites.net/video
+        # with local video file example-1.mp4
+        # Get the response from the API
+        # Pass the response to the template
+        url = 'https://wda-gemini-api.azurewebsites.net/video'
+        files = {'video': open('example-1.mp4', 'rb')}
+        response = requests.post(url, files=files)
+
+        # convert response.text to json
+        response = json.loads(response.text)
+
+
+        context = {
+            'response': response, # response is a dictionary
+        }
+
+        return render(request, 'analysis.html', context)
     return render(request, 'analysis.html')
 
 def home(request):

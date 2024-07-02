@@ -31,3 +31,4 @@ class plans_filter_form(forms.Form):
                                         label='登錄代號',
                                         queryset=Employer.objects.all().values_list('name', flat=True),
                                         )
+

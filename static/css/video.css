@@ -1,8 +1,6 @@
 /* video */
 .video-input {
     width: 100%;
-    height: 50%;
-    transform: rotate(270deg);
 }
 
 /* analysis chart */

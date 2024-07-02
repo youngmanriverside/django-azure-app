@@ -32,3 +32,6 @@ class plans_filter_form(forms.Form):
                                         queryset=Employer.objects.all().values_list('name', flat=True),
                                         )
 
+
+class UploadVideoForm(forms.Form):
+    video_file = forms.FileField()

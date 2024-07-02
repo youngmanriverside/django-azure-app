@@ -1,15 +1,5 @@
 {% extends "base.html" %}
 
-{% block javascript %}
-<script src="//unpkg.com/d3"></script>
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-<script>
-    var video_analysis_response = {{ response }};
-    console.log(video_analysis_response);
-
-</script>
-{% endblock %}
-
 {% block title %}<title>Analysis</title>{% endblock %}
 
 {% block content %}
@@ -23,10 +13,19 @@
                 </video>
             </div>
             <div class="row">
-                <form action="" method="post">
-                {% csrf_token %}
-                    <button name="foo" value="upvote">Analyze</button>
+                <form method="post" action="." class="form-inline" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                
+                    <button type="submit">Analyze</button>
                 </form>
+                {% if form.errors %}
+                <ul class="errors">
+                    {% for field, error_list in form.errors.items %}
+                    <li for="{{ field }}">{{ error_list.as_text }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
             </div>
             <div class="row">            
             <textarea class="form-control" id="video-analysis-response" rows="10" readonly>

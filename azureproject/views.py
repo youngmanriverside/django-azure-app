@@ -1,10 +1,44 @@
 from django.shortcuts import render, redirect
-from .forms import plans_filter_form
+from .forms import plans_filter_form, UploadVideoForm
 from employee.models import Employee, employee_current, employee_identity
 from employer.models import Employer
 from plan.models import plan_employee, plan_employee_details
 import requests
 import json
+
+def analysis(request):
+    if request.method == 'POST':
+        # Send post request to https://wda-gemini-api.azurewebsites.net/video
+        # with local video file example-1.mp4
+        # Get the response from the API
+        # Pass the response to the template
+
+        # Get the video file from the form
+        form = UploadVideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            video_file = request.FILES['video_file']
+
+            url = 'https://wda-gemini-api.azurewebsites.net/video'
+            files = {
+                'video': video_file,
+                }
+            response = requests.post(url, files=files)
+
+            # convert response.text to json
+            response = json.loads(response.text)
+
+            context = {
+                'response': response, # response is a dictionary
+            }
+
+            return render(request, 'analysis.html', context)
+        
+    form = UploadVideoForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'analysis.html', context)
+
 
 def benefit(request):
     if request.method == 'POST':
@@ -68,51 +102,6 @@ def benefit(request):
 
     return render(request, 'benefit.html', context)
 
-def chatbot_old(request):
-    if request.method == 'POST':
-        # get the name of the employee from value of select option
-        name = request.POST.get('employee')
-        employee_example = Employee.objects.get(name=name)
-        employee_current_list = list(employee_current.objects.values_list('current_status', flat=True).filter(employee_name=employee_example))
-        employee_identity_list = list(employee_identity.objects.values_list('identity', flat=True).filter(employee_name=employee_example))
-        
-        employees = Employee.objects.all()
-
-        context = {
-            'employees': employees,
-            'employee_example': employee_example,
-            'employee_current_list': employee_current_list,
-            'employee_identity_list': employee_identity_list,
-        }
-        
-        return render(request, 'chatbot.html', context)
-    employees = Employee.objects.all()
-
-    context = {
-        'employees': employees,
-    }
-    return render(request, 'chatbot.html', context)
-
-def analysis(request):
-    if request.method == 'POST':
-        # Send post request to https://wda-gemini-api.azurewebsites.net/video
-        # with local video file example-1.mp4
-        # Get the response from the API
-        # Pass the response to the template
-        url = 'https://wda-gemini-api.azurewebsites.net/video'
-        files = {'video': open('example-1.mp4', 'rb')}
-        response = requests.post(url, files=files)
-
-        # convert response.text to json
-        response = json.loads(response.text)
-
-
-        context = {
-            'response': response, # response is a dictionary
-        }
-
-        return render(request, 'analysis.html', context)
-    return render(request, 'analysis.html')
 
 def home(request):
     return render(request, 'home.html')

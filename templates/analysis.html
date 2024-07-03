@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+<script src="//unpkg.com/d3"></script>
+<script>
+
+</script>
+{% endblock%}
+
 {% block title %}<title>Analysis</title>{% endblock %}
 
 {% block content %}
@@ -7,9 +14,15 @@
     <div class='row'>
         <div class='col'>
             <div class="row">
-                <video class="video-input" controls autoplay>
-                    <source src="/static/videos/example-1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
+                <video class="video-input" controls>
+                {% if response %}
+                    <h2>Your video</h2>
+                    {% load static %}
+                    <source src="{% static 'videos/user/user.mp4' %}" type="video/mp4">
+                {% else %}
+                    <h2>Demo video</h2>
+                    <source src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
+                {% endif %}
                 </video>
             </div>
             <div class="row">
@@ -17,7 +30,7 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                 
-                    <button type="submit">Analyze</button>
+                    <button id="video-analyze" type="submit">Analyze</button>
                 </form>
                 {% if form.errors %}
                 <ul class="errors">
@@ -26,31 +39,51 @@
                     {% endfor %}
                 </ul>
                 {% endif %}
-            </div>
-            <div class="row">            
-            <textarea class="form-control" id="video-analysis-response" rows="10" readonly>
-            {{ response }}
-            </textarea>
+                <div class="row">
+                    {% if response %}
+                    <h2>Overall</h2>
+                    <p>{{ response.總結建議 }}</p>
+                    <h2>Suggestion</h2>
+                    <p>{{ response.建議 }}</p>
+                    {% else %}
+                    <h2>Overall</h2>
+                    <p>整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</p>
+                    <h2>Suggestion</h2>
+                    <p>整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
+        {% if response %}
         <div class='col'>
             <div class='row'>
-                <h2>Analysis - chart</h2>
-                <div class="col">
-                    <img class="analysis-chart" src="/static/images/bar-chart-example.png" alt="analysis-chart">
+                <h2>Your analysis</h2>
+                <div id="radar-chart-div">
+                    
                 </div>
-                <div class="col">
-                    <img class="analysis-chart" src="/static/images/pie-chart-example.svg" alt="analysis-chart">
-                </div>
+                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+                <script>
+                    $(document).ready(function(){
+                        // Load the JSON data from the Django view
+                        var graphJSON = '{{ graph_json | safe }}';
+
+                        // Render the Plotly chart inside the div
+                        Plotly.plot('radar-chart-div', JSON.parse(graphJSON), {});
+                    });
+                </script>
             </div>
+            
+        </div>
+        {% else %}
+        <div class='col'>
             <div class='row'>
-                <h2>Analysis - feedback</h2>
-                <div class="col">
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi quibusdam reiciendis, similique necessitatibus adipisci iste, eligendi quis omnis ea veritatis voluptate laborum autem vel et! Qui at dicta iure.</li>
-                    <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi quibusdam reiciendis, similique necessitatibus adipisci iste, eligendi quis omnis ea veritatis voluptate laborum autem vel et! Qui at dicta iure.</li>
+                <h2>Analysis</h2>
+                <div>
+                    <img src="/static/images/example-analysis.png" alt="placeholder" class="img-fluid">
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

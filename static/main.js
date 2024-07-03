@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     // All the radio buttons are unchecked by default
     $("input[name='optradio']").prop("checked", false);
 

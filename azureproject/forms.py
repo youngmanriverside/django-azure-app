@@ -34,4 +34,4 @@ class plans_filter_form(forms.Form):
 
 
 class UploadVideoForm(forms.Form):
-    video_file = forms.FileField()
+    video_file = forms.FileField(label='Select a video file')

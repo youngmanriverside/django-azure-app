@@ -43,7 +43,8 @@ function setupStream(stream) {
 	};
 
 	recorder.onstop = e => {
-		const blob = new Blob(chunks, { type: 'audio/wav; codecs=opus' });
+		const blob = new Blob(chunks, { type: "audio/wav" });
+
 		
 		uploadBlob(blob);
 
@@ -80,6 +81,9 @@ function uploadBlob(blob) {
 	const formData = new FormData();
 	formData.append('audio', blob);
 
+	console.log(formData);
+
+
 	url = 'https://' + speech_region + '.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed'
 
 	$.ajax({
@@ -91,11 +95,10 @@ function uploadBlob(blob) {
 		},
 		data: formData,
 		processData: false,
-		contentType: 'audio/wav',
+		contentType: false,
 		success: function(data) {
 			console.log(data);
-			// console.log data in json format
-			console.log(JSON.stringify(data));
-		}
+			$('#transcript').text(data.DisplayText);
+		},
 	});
 }

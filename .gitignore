@@ -130,3 +130,4 @@ dmypy.json
 .azure
 dockerfile
 test.py
+static/js/key.js

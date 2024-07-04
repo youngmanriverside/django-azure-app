@@ -194,3 +194,6 @@ def demo(request):
 
 def chatbot(request):
     return render(request, 'chatbot.html')
+
+def home2(request):
+    return render(request, 'home2.html')

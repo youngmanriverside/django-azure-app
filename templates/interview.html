@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+<script src="/static/js/voice-record.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+
 {% block title %}<title>Interview practice</title>{% endblock %}
 
 {% block content %}
@@ -21,6 +30,12 @@
             </div>
             <div class='row'>
                 <h4 style="text-align: center;">0:00 / 2:00</h4>
+                <div>
+                    <button class="mic-toggle" id="mic">
+                        <span class="material-icons">mic</span>
+                    </button>
+                    <audio class="playback" controls></audio>
+                </div>
                 <div class="row">
                     <h4>Feedback</h4>
                     <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam incidunt aliquid numquam provident sed a odit dolorum mollitia reprehenderit. Ut quae voluptatem maxime saepe. Minus hic quisquam nemo corrupti provident.</p>

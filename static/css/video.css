@@ -6,5 +6,36 @@
 /* analysis chart */
 .analysis-chart {
     width: 100%;
-    
+}
+
+/* voice input */
+.mic-toggle {
+    appearance: none;
+    border: none;
+    outline: none;
+    background: none;
+    cursor: pointer;
+}
+
+.mic-toggle:after,
+.mic-toggle:before {
+    --pad: 0rem;
+    content: '';
+    display: block;
+    /* position: absolute; */
+    z-index: 0;
+    background-color: rgba(220, 20, 60, 0.2);
+    top: var(--pad);
+    left: var(--pad);
+    right: var(--pad);
+    bottom: var(--pad);
+    border-radius: 50%;
+}
+
+.mic-toggle:hover:before {
+    --pad: -1rem;
+}
+
+.mic-toggle:hover:after {
+    --pad: -2rem;
 }

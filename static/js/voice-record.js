@@ -11,7 +11,7 @@ let chunks = [];
 
 $(document).ready(function() {
 
-	$('#mic').click(toggleMic);
+	$('#mic-icon').click(toggleMic);
 
 	playback = document.getElementsByClassName('playback')[0];
 
@@ -78,8 +78,6 @@ function uploadBlob(blob) {
 	const formData = new FormData();
 	formData.append("audio_file", blob);
 
-	console.log(formData);
-
 	const csrfToken = document
 		.querySelector('meta[name="csrf-token"]')
 		.getAttribute("content");
@@ -99,6 +97,22 @@ function uploadBlob(blob) {
 		contentType: false,
 		success: function(data) {
 			console.log(data);
+			$('#user-answer').css('visibility', 'visible');
+			// Add a paragraph with the data['transcript'] to the div with id 'user-answer'
+			$('#user-answer').append('<h2>' + "Your answer" + '</h2>');
+			$('#user-answer').append('<p>' + data['transcript'] + '</p>');
+
+			// Request Gemini api to evaluate the answer
+			question = $('#interview_question').text();
+			console.log(question);
+			evaluate_result = evaluate_interview_question(question=question, user_answer=data['transcript'])
+
+			console.log(evaluate_result);
+
+			// Add content to the p with id 'interview_question_analysis', 'interview_question_evaluation', 'interview_question_suggestion'
+			// $('#interview_question_analysis').text(evaluate_result['analysis']);
+			// $('#interview_question_evaluation').text(evaluate_result['evaluation']);
+			// $('#interview_question_suggestion').text(evaluate_result['suggestion']);
 		},
 		error: function(err) {
 			console.error(err);

@@ -1,8 +1,18 @@
 .mock-interviewr {
     display: flex;
     justify-content: center;
+    padding: 20px;
 }
 
 #interviewr {
     width: 60%;
+}
+
+#mic-icon {
+    font-size: 40px;
+}
+
+#mic-icon:hover {
+    cursor: pointer;
+    color: red;
 }

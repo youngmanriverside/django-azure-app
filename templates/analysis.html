@@ -26,19 +26,21 @@
                 </video>
             </div>
             <div class="row">
-                <form method="post" action="." class="form-inline" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                
-                    <button id="video-analyze" type="submit">Analyze</button>
-                </form>
-                {% if form.errors %}
-                <ul class="errors">
-                    {% for field, error_list in form.errors.items %}
-                    <li for="{{ field }}">{{ error_list.as_text }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
+                <div class="row">
+                    <form method="post" action="." class="form-inline" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.video_file }}
+                    
+                        <button id="video-analyze" type="submit">Analyze</button>
+                    </form>
+                    {% if form.errors %}
+                    <ul class="errors">
+                        {% for field, error_list in form.errors.items %}
+                        <li for="{{ field }}">{{ error_list.as_text }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
                 <div class="row">
                     {% if response %}
                     <h2>Overall</h2>

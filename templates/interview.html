@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block javascript %}
-<script src="/static/js/voice-record.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 {% endblock %}
 
@@ -19,30 +18,37 @@
                 <img id="interviewr" src="/static/images/interviewer.jpeg" alt="mock-interviewer">
             </div>
             <div class="row">
-                <h4> Interviewer: </h4>
-                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto commodi quibusdam reiciendis, similique necessitatibus adipisci iste, eligendi quis omnis ea veritatis voluptate laborum autem vel et! Qui at dicta iure. </p>
+                <h2 style="text-align: center;">Question</h2>
+                <p id="interview_question">{{ question }}</p>
             </div>
         </div>
         <div class='col'>
             <div class='row'>
-                <h2>Question</h2>
-                <p>In situations where your marketing campaign didn't achieve the expected results, how do you analyze its performance and pivot your approach?</p>
-            </div>
-            <div class='row'>
-                <h4 style="text-align: center;">0:00 / 2:00</h4>
-                <div>
-                    <button class="mic-toggle" id="mic">
-                        <span class="material-icons">mic</span>
-                    </button>
-                    <audio class="playback" controls></audio>
+                <div class="row">
+                    <div class="col">
+                        <button class="mic-toggle" id="mic">
+                            <span class="material-icons" id="mic-icon">mic</span>
+                        </button>
+                    </div>
+                    <div class="col">
+                        <audio class="playback" controls></audio>
+                    </div>
+                    
+                </div>
+                <div class='row' id="user-answer" style="visibility: hidden;">
+                    
                 </div>
                 <div class="row">
-                    <h4>Feedback</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ullam incidunt aliquid numquam provident sed a odit dolorum mollitia reprehenderit. Ut quae voluptatem maxime saepe. Minus hic quisquam nemo corrupti provident.</p>
+                    <h4>Analysis</h4>
+                    <p id="interview_question_analysis"></p>
                 </div>
                 <div class="row">
-                    <h4>Sample response</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                    <h4>Evaluation</h4>
+                    <p id="interview_question_evaluation"></p>
+                </div>
+                <div class="row">
+                    <h4>Suggestion</h4>
+                    <p id="interview_question_suggestion"></p>
                 </div>
             </div>
         </div>

@@ -18,37 +18,33 @@
                 <img id="interviewr" src="/static/images/interviewer.jpeg" alt="mock-interviewer">
             </div>
             <div class="row">
+                <div class="col">
+                    <button class="mic-toggle" id="mic">
+                        <span class="material-icons" id="mic-icon">mic</span>
+                    </button>
+                </div>
+                <div class="col">
+                    <audio class="playback" controls></audio>
+                </div>
+            </div>
+            <div class="row">
                 <h2 style="text-align: center;">Question</h2>
                 <p id="interview_question">{{ question }}</p>
+            </div>
+            <div class='row' id="user-answer" style="visibility: hidden;">
+                    
             </div>
         </div>
         <div class='col'>
             <div class='row'>
-                <div class="row">
-                    <div class="col">
-                        <button class="mic-toggle" id="mic">
-                            <span class="material-icons" id="mic-icon">mic</span>
-                        </button>
-                    </div>
-                    <div class="col">
-                        <audio class="playback" controls></audio>
-                    </div>
+                <div class="row" id="interview_question_analysis" style="visibility: hidden;">
                     
                 </div>
-                <div class='row' id="user-answer" style="visibility: hidden;">
-                    
+                <div class="row" id="interview_question_evaluation" style="visibility: hidden;">
+                
                 </div>
-                <div class="row">
-                    <h4>Analysis</h4>
-                    <p id="interview_question_analysis"></p>
-                </div>
-                <div class="row">
-                    <h4>Evaluation</h4>
-                    <p id="interview_question_evaluation"></p>
-                </div>
-                <div class="row">
-                    <h4>Suggestion</h4>
-                    <p id="interview_question_suggestion"></p>
+                <div class="row" id="interview_question_suggestion" style="visibility: hidden;">
+                
                 </div>
             </div>
         </div>

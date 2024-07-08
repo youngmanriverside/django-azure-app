@@ -3,11 +3,54 @@ from .forms import plans_filter_form, UploadVideoForm
 from employee.models import Employee, employee_current, employee_identity
 from employer.models import Employer
 from plan.models import plan_employee, plan_employee_details
-import requests
-import json
+import requests, os, json, tempfile
 import plotly.graph_objects as go
-import pandas as pd
+from google.cloud import speech
 
+def transcribe(request):
+    if request.method == 'POST':
+        audio_file = request.FILES['audio_file']        
+        
+        with tempfile.NamedTemporaryFile(suffix=".webm", delete=True) as tmp_file:
+            for chunk in audio_file.chunks():
+                tmp_file.write(chunk)
+
+            tmp_file.flush()
+            with open(tmp_file.name, "rb") as file_for_transcription:
+                content = file_for_transcription.read()
+                print(file_for_transcription)
+
+                # Save the audio file to the local directory
+                with open('static/audio/test.webm', 'wb+') as destination:
+                    for chunk in audio_file.chunks():
+                        destination.write(chunk)
+                
+
+                    #setting Google credential
+                    os.environ['GOOGLE_APPLICATION_CREDENTIALS']= 'google_secret_key.json'
+                    # create client instance 
+                    client = speech.SpeechClient()
+
+                    audio = speech.RecognitionAudio(content=content)
+
+                    config = speech.RecognitionConfig(
+                        enable_automatic_punctuation=True,
+                        # audio_channel_count=2,
+                        language_code="en-US",
+                    )
+
+                    # Sends the request to google to transcribe the audio
+                    response = client.recognize(request={"config": config, "audio": audio})
+                    
+                    print(response)
+                    print(response.results)
+
+                    transcript = ", ".join([result.alternatives[0].transcript for result in response.results])
+                    print(transcript)
+                
+
+
+    return render(request, 'transcribe.html', {"Good": "Good"})
 
 def analysis(request):
     if request.method == 'POST':

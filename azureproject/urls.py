@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import benefit, chatbot, analysis, home, interview, demo, home2
+from .views import benefit, chatbot, analysis, home, interview, demo, home2, transcribe
 from .routers import router
 
 urlpatterns = [
@@ -31,5 +31,6 @@ urlpatterns = [
     path('plan/', include('plan.urls')),
     path('analysis/', analysis),
     path('interview', interview),
+    path('transcribe/', transcribe, name='transcribe'),
     path('api/', include(router.urls))
 ]

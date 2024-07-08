@@ -43,13 +43,10 @@ function setupStream(stream) {
 	};
 
 	recorder.onstop = e => {
-		const blob = new Blob(chunks, { type: "audio/wav" });
+		const blob = new Blob(chunks, { type: "audio/webm" });
 
 		
 		uploadBlob(blob);
-
-		console.log(blob);
-		console.log(typeof(blob));
 
 		chunks = [];
 		const audioURL = window.URL.createObjectURL(blob);
@@ -79,26 +76,50 @@ function toggleMic() {
 
 function uploadBlob(blob) {
 	const formData = new FormData();
-	formData.append('audio', blob);
+	formData.append("audio_file", blob);
 
 	console.log(formData);
 
+	const csrfToken = document
+		.querySelector('meta[name="csrf-token"]')
+		.getAttribute("content");
 
-	url = 'https://' + speech_region + '.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed'
+	// Send the blob to the django server with url /transcribe (same origin)
+	url = '/transcribe/';
 
 	$.ajax({
 		url: url,
 		type: 'POST',
-		crossDomain: true,
-		headers: {
-			'Ocp-Apim-Subscription-Key': speech_key,
-		},
 		data: formData,
+		headers: {
+			"X-CSRFToken": csrfToken,
+		},
+		credentials: 'same-origin',
 		processData: false,
 		contentType: false,
 		success: function(data) {
 			console.log(data);
-			$('#transcript').text(data.DisplayText);
+		},
+		error: function(err) {
+			console.error(err);
 		},
 	});
+
+	// url = 'https://' + speech_region + '.stt.speech.microsoft.com/speech/recognition/conversation/cognitiveservices/v1?language=en-US&format=detailed'
+
+	// $.ajax({
+	// 	url: url,
+	// 	type: 'POST',
+	// 	crossDomain: true,
+	// 	headers: {
+	// 		'Ocp-Apim-Subscription-Key': speech_key,
+	// 	},
+	// 	data: formData,
+	// 	processData: false,
+	// 	contentType: false,
+	// 	success: function(data) {
+	// 		console.log(data);
+	// 		$('#transcript').text(data.DisplayText);
+	// 	},
+	// });
 }

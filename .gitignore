@@ -131,3 +131,4 @@ dmypy.json
 dockerfile
 test.py
 static/js/key.js
+google_secret_key.json

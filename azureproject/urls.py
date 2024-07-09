@@ -24,7 +24,7 @@ urlpatterns = [
     path('demo', demo, name='chatbot'),
     path('chatbot', chatbot, name='chatbot'),
     path('benefit', benefit),
-    path('health', include('restaurant_review.urls')),
+    # path('health', include('restaurant_review.urls')),
     path('admin/', admin.site.urls),
     path('employee/', include('employee.urls')),
     path('employer/', include('employer.urls')),

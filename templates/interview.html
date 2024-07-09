@@ -2,6 +2,7 @@
 
 {% load static %}
 {% block javascript %}
+<script src="{% static 'js/tts.js' %}"></script>
 <script src="{% static 'js/voice-record.js' %}"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script>
@@ -20,6 +21,7 @@ $(document).ready(function() {
 {% block title %}<title>Interview practice</title>{% endblock %}
 
 {% block content %}
+<button onclick="text_to_speech()">Play</button>
 <div class='container'>
     <div class='row'>
         <div class='col'>

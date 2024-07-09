@@ -14,16 +14,18 @@
     <div class='row'>
         <div class='col'>
             <div class="row">
-                <video class="video-input" controls>
+            {% load static %}
                 {% if response %}
-                    <h2>Your video</h2>
-                    {% load static %}
+                <h2 style="text-align: center;">Your video</h2>
+                <video class="video-input" controls>
                     <source src="{% static 'videos/user/user.mp4' %}" type="video/mp4">
-                {% else %}
-                    <h2>Demo video</h2>
-                    <source src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
-                {% endif %}
                 </video>
+                {% else %}
+                <h2 style="text-align: center;">Demo video</h2>
+                <video class="video-input" controls>
+                    <source src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
+                </video>
+                {% endif %}
             </div>
             <div class="row">
                 <div class="row">
@@ -48,10 +50,10 @@
                     <h2>Suggestion</h2>
                     <p>{{ response.建議 }}</p>
                     {% else %}
-                    <h2>Overall</h2>
-                    <p>整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</p>
-                    <h2>Suggestion</h2>
-                    <p>整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</p>
+                    <h2 style="text-align: center;">Overall</h2>
+                    <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
+                    <h2 style="text-align: center;">Suggestion</h2>
+                    <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
                     {% endif %}
                 </div>
             </div>
@@ -59,7 +61,7 @@
         {% if response %}
         <div class='col'>
             <div class='row'>
-                <h2>Your analysis</h2>
+                <h2 style="text-align: center;">Analysis</h2>
                 <div id="radar-chart-div">
                     
                 </div>
@@ -74,13 +76,15 @@
                     });
                 </script>
             </div>
-            
         </div>
         {% else %}
         <div class='col'>
             <div class='row'>
-                <h2>Analysis</h2>
-                <div>
+                <h2 style="text-align: center;">Analysis</h2>
+                <div id="radar-chart-div">
+                    <img src="/static/images/example-analysis.png" alt="placeholder" class="img-fluid">
+                </div>
+                <div id="radar-chart-div">
                     <img src="/static/images/example-analysis.png" alt="placeholder" class="img-fluid">
                 </div>
             </div>

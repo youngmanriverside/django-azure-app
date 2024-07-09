@@ -22,6 +22,12 @@ button[id="video-analyze"] {
     width: 100%;
 }
 
+#radar-chart-div {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
 /* voice input */
 .mic-toggle {
     appearance: none;

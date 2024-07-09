@@ -1,18 +1,46 @@
 .mock-interviewr {
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
 }
 
 #interviewr {
-    width: 60%;
+    width: 70%;
 }
 
+
+/* mic icon */
 #mic-icon {
-    font-size: 40px;
+    font-size: 50px;
+}
+
+#mic-icon.active {
+    color: #ff0000;
 }
 
 #mic-icon:hover {
     cursor: pointer;
-    color: red;
+}
+
+/* playback */
+.playback {
+    /* margin-left: 30px; */
+}
+
+/* User answer */
+
+#user-answer {
+    background-color: #d1f2f2;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    text-color: #626fd1;
+}
+
+/* AI response */
+.ai-response {
+    background-color: #d1f2f2;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
 }

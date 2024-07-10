@@ -7,46 +7,40 @@
 </script>
 {% endblock %}
 
-{% block title %}<title>首頁</title>{% endblock %}
+{% block title %}<title>Home</title>{% endblock %}
 
+{% load static %}
 {% block content %}
-<div class="container">
+<div class="container" id="grid_home">
     <div class="row">
-        <div class="row">
-            <span>Find a job? or Find welfare?</span>
-        </div> 
-    </div>
-    <div class="row">
-        <div class="col" id="home-button">
-        {% load static %}
-        {# draw me two anchors with images inside #}
-            <a href="/employee"><img class="home-button" src="static/images/labor.png" alt="image here" /></a>
+        <div class="col" id="enhance">
+            <a class="row" href="/interview/">
+                <div class="row">
+                    <img src="/static/images/interviewerGIF.webp" alt="interview-scene">
+                </div>
+                <div class="row">
+                    <span>Mock interview</span>
+                    <p>Practice your interview skills with a mock interview.</p>
+                </div>
+            </a>
+            <a class="row" href="/interview/analysis">
+                <div class="row">
+                    <img src="/static/images/video-analysis.gif" alt="interview-scene">
+                </div>
+                <div class="row">
+                    <span>Analyze yourself</span>
+                    <p>Upload your interview video and get feedback on your performance.</p>
+                </div>
+            </a>
         </div>
-        <div class="col" id="home-button">
-            <a href="/employer"><img class="home-button" src="static/images/employer.png" alt="image here" /></a>
-        </div>
-    </div>
-    {# draw me two anchors with big buttons-like #}
-    <div class="row">
-        <div class="col" id="home-button">
-            <a href="/employee" class="btn btn-primary btn-lg">我是民眾</a>
-        </div>
-        <div class="col" id="home-button">
-            <a href="/employer" class="btn btn-primary btn-lg">我是雇主</a>
-        </div>
-    </div>
-</div>
-{% comment %}
-{# Create buttons for MediaRecorder API #}
-<div class="container">
-    <div class="row">
         <div class="col">
-            <button id="start" class="btn btn-primary">Start Recording</button>
-            <button id="stop" class="btn btn-primary">Stop Recording</button>
-            <button id="play" class="btn btn-primary">Play Recording</button>
-            <button id="download" class="btn btn-primary">Download Recording</button>
+            <div class="row">
+                <h1>Welcome to Interviewr</h1>
+            </div>
+            <div class="row">
+                <h1>Welcome to Interviewr</h1>
+            </div>
         </div>
     </div>
 </div>
-{% endcomment %}
 {% endblock %}

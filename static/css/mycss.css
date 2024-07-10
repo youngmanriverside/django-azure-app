@@ -124,13 +124,13 @@ a.btn.btn-primary.btn-lg {
 }
 
 .row {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
     margin: 5px;
     justify-content: center;
 }
 
 .col {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
     margin: 5px;
     justify-content: center;
 }

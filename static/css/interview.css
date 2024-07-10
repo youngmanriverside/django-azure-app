@@ -27,6 +27,28 @@
     /* margin-left: 30px; */
 }
 
+/* question */
+#play_question {
+    background-color: #d1f2f2;
+    border-radius: 10px;
+    hover: pointer;
+
+    span {
+        padding: 0px;
+        font-size: 15px;
+        color: red;
+    }
+
+    span:hover {
+        cursor: pointer;
+    }
+}
+
+#play_question:hover {
+    cursor: pointer;
+}
+
+
 /* User answer */
 
 #user-answer {

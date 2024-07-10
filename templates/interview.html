@@ -21,12 +21,11 @@ $(document).ready(function() {
 {% block title %}<title>Interview practice</title>{% endblock %}
 
 {% block content %}
-<button onclick="text_to_speech()">Play</button>
 <div class='container'>
     <div class='row'>
         <div class='col'>
             <div class='mock-interviewr'>
-                <img id="interviewr" src="/static/images/interviewrGIF.webp" alt="mock-interviewer">
+                <img id="interviewr" src="/static/images/interviewer.jpeg" alt="mock-interviewer">
             </div>
             <div class="row">
                 <div class="col" style="align-items: center;">
@@ -39,7 +38,12 @@ $(document).ready(function() {
             </div>
             <div class="row">
                 <h2 style="text-align: center;">Question</h2>
-                <p id="interview_question">{{ question }}</p>
+                <a id="play_question">
+                    <div >
+                        <span class="material-icons">play_arrow</span>
+                        <div id="question">{{ question }}</div>
+                    </div>
+                </a>
             </div>
             <div class='row' id="user-answer" style="visibility: hidden;">
                     

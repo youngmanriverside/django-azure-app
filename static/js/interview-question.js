@@ -1,5 +1,10 @@
 $(document).ready(function() {
-
+    // If anchor with id "play_question" is clicked, call text_to_speech function
+    // with the text of inside div with id "question"
+    var text = $('#question').text();
+    $('#play_question').click(function() {
+        text_to_speech(text);
+    });
     
 });
 

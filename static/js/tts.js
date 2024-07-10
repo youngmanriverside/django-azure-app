@@ -1,8 +1,10 @@
 function text_to_speech(text) {
-    console.log("text_to_speech")
     if (!text) {
-        text = "Hello, azure app service!";
+        text = "Hello, there is no text to speech.";
     }
+
+    console.log(text);
+
     url = "https://wda-gemini-api.azurewebsites.net/texttospeech"
 
     formData = new FormData();
@@ -14,18 +16,14 @@ function text_to_speech(text) {
         data: formData,
         processData: false,
         contentType: false,
-        credentials: 'same-origin',
-
+        Headers: {
+            "Access-Control-Allow-Origin": "*"
+        }
     })
-    .done(function(data) {
-        console.log(data);
-        
-        const blob = new Blob([data], { type: 'audio/mpeg' });
-        const audioUrl = window.URL.createObjectURL(blob);
-        
-        console.log(audioUrl);
-
-        const audio = new Audio(audioUrl);
+    .done(function(url) {
+        console.log("tts done!");
+        var audio = new Audio(url);
         audio.play();
     })
+
 }

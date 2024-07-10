@@ -9,9 +9,26 @@
 }
 
 
-/* mic icon */
+/* mic */
+div#mic {
+    /* text-align: right; */
+    /* border: 2px solid #1a2e4b; */
+}
+
+#recording {
+    visibility: hidden;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    color: black;
+}
+
 #mic-icon {
-    font-size: 50px;
+    /* border: 2px solid #1a2e4b; */
+    width: 36px;
+    padding: 0px;
+    font-size: 30px;
+    color: #1a2e4b;
 }
 
 #mic-icon.active {
@@ -20,6 +37,16 @@
 
 #mic-icon:hover {
     cursor: pointer;
+    color: teal;
+}
+
+#recording {
+    text-align: center;
+    /* visibility: hidden; */
+
+    span {
+        color: red;
+    }
 }
 
 /* playback */

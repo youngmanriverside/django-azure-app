@@ -10,30 +10,35 @@
 {% block title %}<title>Analysis</title>{% endblock %}
 
 {% block content %}
+{% if error %}
+<div class="alert alert-danger" role="alert">
+    {{ error }}
+</div>
+{% endif %}
 <div class='container'>
     <div class='row'>
         <div class='col'>
             <div class="row">
             {% load static %}
                 {% if response %}
-                <h2 style="text-align: center;">Your video</h2>
+                <h3 style="text-align: center;">Your video</h3>
                 <video class="video-input" controls>
                     <source src="{% static 'videos/user/user.mp4' %}" type="video/mp4">
                 </video>
                 {% else %}
-                <h2 style="text-align: center;">Demo video</h2>
+                <h3 style="text-align: center;">Demo video</h3>
                 <video class="video-input" controls>
-                    <source src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
+                    <source id="user_video" src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
                 </video>
                 {% endif %}
-            </div>
-            <div class="row">
                 <div class="row">
-                    <form method="post" action="." class="form-inline" enctype="multipart/form-data">
+                    <form method="post" action="/interview/analysis" class="form-inline" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.video_file }}
-                    
+                        {{ form.as_p }}
+                        {% if response %}
+                        {% else %}
                         <button id="video-analyze" type="submit">Analyze</button>
+                        {% endif %}
                     </form>
                     {% if form.errors %}
                     <ul class="errors">
@@ -43,16 +48,22 @@
                     </ul>
                     {% endif %}
                 </div>
+            </div>
+            <div class="row">
                 <div class="row">
                     {% if response %}
-                    <h2>Overall</h2>
-                    <p>{{ response.總結建議 }}</p>
-                    <h2>Suggestion</h2>
-                    <p>{{ response.建議 }}</p>
+                    <h3 style="text-align: center;">Overall</h3>
+                    <div class="ai-response">
+                        {{ response.整體表現 }}
+                    </div>
+                    <h3 style="text-align: center;">Suggestion</h3>
+                    <div class="ai-response">
+                        {{ response.改進建議 }}
+                    </div>
                     {% else %}
-                    <h2 style="text-align: center;">Overall</h2>
+                    <h3 style="text-align: center;">Overall</h3>
                     <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
-                    <h2 style="text-align: center;">Suggestion</h2>
+                    <h3 style="text-align: center;">Suggestion</h3>
                     <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
                     {% endif %}
                 </div>
@@ -61,7 +72,7 @@
         {% if response %}
         <div class='col'>
             <div class='row'>
-                <h2 style="text-align: center;">Analysis</h2>
+                <h3 style="text-align: center;">Analysis</h3>
                 <div id="radar-chart-div">
                     
                 </div>
@@ -80,12 +91,12 @@
         {% else %}
         <div class='col'>
             <div class='row'>
-                <h2 style="text-align: center;">Analysis</h2>
+                <h3 style="text-align: center;">Analysis</h3>
                 <div id="radar-chart-div">
-                    <img src="/static/images/example-analysis.png" alt="placeholder" class="img-fluid">
+                    <img src="/static/images/bar-chart-example.png" alt="placeholder" class="img-fluid">
                 </div>
                 <div id="radar-chart-div">
-                    <img src="/static/images/example-analysis.png" alt="placeholder" class="img-fluid">
+                    <img src="/static/images/pie-chart-example.svg" alt="placeholder" class="img-fluid">
                 </div>
             </div>
         </div>

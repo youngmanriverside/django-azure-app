@@ -120,17 +120,22 @@ a.btn.btn-primary.btn-lg {
 }
 
 .container {
-    border: 2px solid #66b6d2;
+    /* border: 2px solid #66b6d2; */
+    border-radius: 10px;
 }
 
 .row {
     /* border: 2px solid #66b6d2; */
+    border-radius: 10px;
+    background-color: rgb(232,232,232);
     margin: 5px;
     justify-content: center;
 }
 
 .col {
     /* border: 2px solid #66b6d2; */
+    border-radius: 10px;
+    background-color: rgb(240,240,240);
     margin: 5px;
     justify-content: center;
 }

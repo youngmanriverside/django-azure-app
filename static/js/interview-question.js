@@ -18,6 +18,13 @@ function evaluate_interview_question(question, user_answer) {
     formData.append("question", question);
     formData.append("user_answer", user_answer);
 
+    system_instructions = `
+                Please evaluate the user's response to the question.
+                Give analysis / evaluation / suggested_modification each in 50 words.
+                Return the result in JSON format.
+            `;
+    formData.append("system_instructions", system_instructions);
+
     $.ajax({
         url: url,
         type: 'POST',

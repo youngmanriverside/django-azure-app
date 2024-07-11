@@ -34,6 +34,7 @@ def plot(response_json):
         yaxis_title='分數',
         width=500)
 
-
+    print("Plotting the graph...")
+    
     return fig
 

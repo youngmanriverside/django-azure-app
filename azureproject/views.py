@@ -124,8 +124,8 @@ def benefit(request):
 def home(request):
     return render(request, 'home.html')
 
-def demo(request):
-    return render(request, 'demo.html')
+def chatbot_new(request):
+    return render(request, 'chatbot_new.html')
 
 def chatbot(request):
     return render(request, 'chatbot.html')

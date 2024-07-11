@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import benefit, chatbot, home, demo, home2, transcribe
+from .views import benefit, chatbot, home, chatbot_new, home2, transcribe
 
 urlpatterns = [
     path('', home2, name='home'),
     path('home2', home, name='home2'),
-    path('demo', demo, name='chatbot'),
+    path('chatbot-new', chatbot_new, name='chatbot'),
     path('chatbot', chatbot, name='chatbot'),
     path('benefit', benefit),
     # path('health', include('restaurant_review.urls')),

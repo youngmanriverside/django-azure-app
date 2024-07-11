@@ -29,7 +29,7 @@ button[id="video-analyze"] {
 #radar-chart-div {
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 80%;
 }
 
 /* voice input */

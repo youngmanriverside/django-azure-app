@@ -18,27 +18,26 @@
 <div class='container'>
     <div class='row'>
         <div class='col'>
-            <div class="row">
+            <div class="row" style="background-color: azure;">
             {% load static %}
-                {% if response %}
+                {% if response_json %}
                 <h3 style="text-align: center;">Your video</h3>
                 <video class="video-input" controls>
                     <source src="{% static 'videos/user/user.mp4' %}" type="video/mp4">
                 </video>
                 {% else %}
                 <h3 style="text-align: center;">Demo video</h3>
-                <video class="video-input" controls>
+                <video class="video-input" controls autoplay>
                     <source id="user_video" src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
                 </video>
-                {% endif %}
-                <div class="row">
+                
+                    <h5 style="text-align: center; margin-top: 5px;">Upload Yours</h5>
                     <form method="post" action="/interview/analysis" class="form-inline" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {{ form.as_p }}
-                        {% if response %}
-                        {% else %}
+                        {{ form.video_file }}
+                        
                         <button id="video-analyze" type="submit">Analyze</button>
-                        {% endif %}
+                        
                     </form>
                     {% if form.errors %}
                     <ul class="errors">
@@ -47,29 +46,29 @@
                         {% endfor %}
                     </ul>
                     {% endif %}
-                </div>
+                {% endif %}
             </div>
             <div class="row">
                 <div class="row">
-                    {% if response %}
+                    {% if response_json %}
                     <h3 style="text-align: center;">Overall</h3>
                     <div class="ai-response">
-                        {{ response.整體表現 }}
+                        {{ response_json.整體表現 }}
                     </div>
                     <h3 style="text-align: center;">Suggestion</h3>
                     <div class="ai-response">
-                        {{ response.改進建議 }}
+                        {{ response_json.改進建議 }}
                     </div>
                     {% else %}
                     <h3 style="text-align: center;">Overall</h3>
                     <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
                     <h3 style="text-align: center;">Suggestion</h3>
-                    <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
+                    <div class="ai-response">建議面試者多加練習，放鬆肢體動作，提升語氣的豐富度，並適當分享個人經驗或案例，讓自我介紹更具體、更有說服力。同時，可以嘗試增加一些笑容，讓整體形象更親和。</div>
                     {% endif %}
                 </div>
             </div>
         </div>
-        {% if response %}
+        {% if response_json %}
         <div class='col'>
             <div class='row'>
                 <h3 style="text-align: center;">Analysis</h3>
@@ -90,13 +89,10 @@
         </div>
         {% else %}
         <div class='col'>
-            <div class='row'>
+            <div class='row' style="padding: 50px 0;">
                 <h3 style="text-align: center;">Analysis</h3>
                 <div id="radar-chart-div">
-                    <img src="/static/images/bar-chart-example.png" alt="placeholder" class="img-fluid">
-                </div>
-                <div id="radar-chart-div">
-                    <img src="/static/images/pie-chart-example.svg" alt="placeholder" class="img-fluid">
+                    <img src="/static/images/analysis-example.png" alt="placeholder" class="img-fluid">
                 </div>
             </div>
         </div>

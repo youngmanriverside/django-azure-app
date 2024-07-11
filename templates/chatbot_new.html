@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+	{% load static %}
+	<script src="{% static 'js/gemini_chat.js' %}"></script>
+{% endblock%}
+
 {% block title %}<title>Chatbot</title>{% endblock %}
 
 {% block content %}

@@ -1,3 +1,8 @@
+$(document).ready(function(){
+	$("#chatbox").append("AI : 你好，有什麼可以幫助你的嗎？" + "\n");
+
+});
+
 $(function(){
     $("#submitmsg").click(chatWithLLM);
     $("#usermsg").keypress(function(e){

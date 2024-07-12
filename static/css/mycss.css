@@ -63,10 +63,16 @@ a {
     padding-right: 25px;
 }
 
+.nav-item .nav-link.active {
+    background-color: #1a2e4b;
+    color: white;
+}
+
 .nav-link {
     color: white;
     font-weight: bold;
 }
+
 
 /* assistant-icon */
 #assistant-icon {
@@ -128,7 +134,7 @@ a.btn.btn-primary.btn-lg {
     /* border: 2px solid #66b6d2; */
     border-radius: 10px;
     background-color: azure;
-    margin: 5px;
+    /* margin: 5px; */
     justify-content: center;
 }
 
@@ -184,6 +190,7 @@ h1 {
 .col-md-6.left{
     /* border: 2px solid #66b6d2; */
     border-right: 0px;
+    height: 100%;
 }
 
 .col-md-6.right{

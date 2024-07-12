@@ -110,7 +110,7 @@ function handleChat() {
         "qanda": "wda-qa",
     }
 
-    // Decide which function to call based on which radio button is checked
+    // Decide which function to call based on which button with class 'nav-item' is active
     if ($("#training").prop("checked")) {
         indexName = index_names["training"];
         azureAiSearch(userMessage, indexName);

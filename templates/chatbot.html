@@ -3,42 +3,49 @@
 {% load static %}
 {% block javascript %}
 <script src="{% static 'js/gemini-api.js' %}"></script>
+<script src="{% static 'js/chatbot.js' %}"></script>
 <script>
-$(document).ready(function() {
-    // if button with class 'nav-link' is added 'active' class,
-    // call function to select request url
-    $('.nav-link').click(function() {
-        
+    $(document).ready(function(){
+        // If button with id "find_welfare"
+        $('#find_welfare').click(function(){
+            tab = "找補助"
+            setChatMode(tab);
+        });
+        // If button with id "find_courses"
+        $('#find_courses').click(function(){
+            tab = "找職訓"
+            setChatMode(tab);
+        });
+        // If button with id "find_jobs"
+        $('#find_jobs').click(function(){
+            tab = "找職缺"
+            setChatMode(tab);
+        });
     });
-});
 </script>
+
 {% endblock %}
 
 {% block title %}<title>Chatbot</title>{% endblock %}
 
 {% block content %}
 <div class="container">
-<div class="row">
-    <ul class="nav nav-pills" id="pills-tab" role="tablist">
-		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">找補助</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">找職訓</button>
-		</li>
-		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">找職缺</button>
-		</li>
-	</ul>
+    <div class="row">
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="find_welfare" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">找補助</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="find_courses" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">找職訓</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="find_jobs" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">找職缺</button>
+            </li>
+        </ul>
     </div>
-    <div class="row" style="height: 550px;">
+    <div class="row" style="height: 550px; border-radius: 0 0 10px 10px;">
         <div class="col-md-6 left">
-            <div class="chatbot2">
-            {% comment %}
-                <header>
-                    <h2>Chatbot</h2>
-                </header>      
-            {% endcomment %}          
+            <div class="chatbot">        
                 <ul class="chatbox">
                     <li class="chat incoming">
                     </li>

@@ -1,153 +1,136 @@
 $(document).ready(function() {
-    // User information
-    var employer_insurance = "";
-    var employer_org = "";
-    var employer_subsity = "";
+    console.log("chatbot.js loaded");
 
-    // Create three buttons above chat incoming
-    var buttons = [
-        {
-            text: "找補助",
-            payload: "找補助"
-        },
-        {
-            text: "Q&A",
-            payload: "Q&A"
-        }
-    ];
-    var chatbox = $(".chatbox");
-    var chatbot = $(".chatbot");
-    var chatbotHeader = $(".chatbot header h2");
-    var chatbotIcon = $(".chatbot header span");
-    var chatbotName = "智能就業服務系統";
-    var chatbotIconText = "Face";
-    var chatbotMessage = "你好! 請問需要什麼協助?";
-    var chatbotMessageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + chatbotMessage + '</p></li>';
-    chatbox.append(chatbotMessageTemplate);
-    chatbotHeader.text(chatbotName);
-    chatbotIcon.text(chatbotIconText);
-    buttons.forEach(function(button) {
-        var buttonTemplate = '<button class="chat-button" data-payload="' + button.payload + '" id="' + button.payload + '">' + button.text + '</button>';
-        chatbox.append(buttonTemplate);
+    welcomeMessage();
+
+    // Set chatbox url
+    setChatMode();
+    
+    // If button with id "chat_welfare" is clicked, call function findWelfare
+    $(".chatbox").on("click", "#chat_welfare", function() {
+        findWelfare();
     });
     
-    // If button with id "找補助" is clicked, continue creates buttons based on choices_age, and remove previous buttons and messages
-    $("#找補助").click(function() {
-        // chatbotMessage replaces with "請問您的就業保險狀態是?"
-        var message = "請問您的就業保險狀態是?";
-        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
-        chatbox.find(".chat-button").remove();
-        chatbox.find(".chat").remove();
-        chatbox.append(messageTemplate);
-
-        var choices_insurance = [
-            {
-                text: "是",
-                payload: "是"
-            },
-            {
-                text: "否",
-                payload: "否"
-            }
-        ];
-        chatbox.find(".chat-button").remove();
-        choices_insurance.forEach(function(choice) {
-            var choiceTemplate = '<button class="chat-button-mini insurance" data-payload="' + choice.payload + '">' + choice.text + '</button>';
-            chatbox.append(choiceTemplate);
-        });
-    });
-
-    // If button with class "insurance" is clicked, continue creates buttons based on choices_organization, and remove previous buttons and messages
-    $(document).on("click", ".insurance", function() {
-        employer_insurance = $(this).data("payload");
-        console.log(employer_insurance);
-        // chatbotMessage replaces with "請問您的就業組織類型是?"
-        var message = "請問您的就業組織類型是?";
-        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
-        chatbox.find(".chat-button-mini").remove();
-        chatbox.find(".chat").remove();
-        chatbox.append(messageTemplate);
-
-        var choice_organization = {
-            'Private sector': '民營事業',
-            'ThirdSector': '民間團體',
-            'Private school': '私立學校',
-            'Public school': '公立學校',
-            'Public sector': '公營事業',
-            'Others': '其他'
-        };
-        chatbox.find(".chat-button-mini").remove();
-        for (var key in choice_organization) {
-            var choiceTemplate = '<button class="chat-button-mini organization" data-payload="' + key + '">' + choice_organization[key] + '</button>';
-            chatbox.append(choiceTemplate);
-        }
-    });
-
-    // If button with class "organization" is clicked, continue creates buttons based on choices_subsidy, and remove previous buttons and messages
-    $(document).on("click", ".organization", function() {
-        employer_org = $(this).data("payload");
-        console.log(employer_org);
-        // chatbotMessage replaces with "請問您需要哪種就業補助?"
-        var message = "請問您需要哪種就業補助?";
-        var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p>' + message + '</p></li>';
-        chatbox.find(".chat-button-mini").remove();
-        chatbox.find(".chat").remove();
-        chatbox.append(messageTemplate);
-
-        var choice_subsidy = {
-            'New employment': '新雇用',
-            'Continued employment': '續聘',
-            'Pre-service training': '職前訓練',
-            'On-job training': '在職訓練',
-            'Employment stabilization': '穩定就業',
-            'Cooperative': '世代合作',
-            'Retirement consultation': '退休輔導',
-        }
-
-        chatbox.find(".chat-button-mini").remove();
-        for (var key in choice_subsidy) {
-            var choiceTemplate = '<button class="chat-button-mini subsidy" data-payload="' + key + '">' + choice_subsidy[key] + '</button>';
-            chatbox.append(choiceTemplate);
-        }
-    });
-
-    // If button with class "subsidy" is clicked, output final message
-    // and remove previous buttons,
-    // output a message with employer_insurance, employer_org, and employer_subsity
-    $(document).on("click", ".subsidy", function() {
-        employer_subsity = $(this).data("payload");
-        console.log(employer_subsity);
-        chatbox.find(".chat-button-mini").remove();
-
-        // Pause for 1 second
-        setTimeout(function() {
-            // Output an incoming message "分析中..."
-            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="analyzing">分析中...</p></li>';
-            chatbox.append(messageTemplate);
-        }, 1000);
-
-        // Pause for 3 seconds and output an incoming message "找到了以下補助方案"
-        var message = "找到了以下補助方案";
-        setTimeout(function() {
-            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + message + '</p></li>';
-            chatbox.append(messageTemplate);
-        }, 3000);
-
-        var final_message = "感謝您的回答! 根據您的需求，以下是一些建議：\n"
-        final_message = "1. **職業訓練計畫**：許多政府和非營利組織提供免費或低成本的職業訓練課程，這些課程可以幫助你獲得特定技能，增加就業機會。\n"
-        final_message += "2. **實習機會**：尋找與你興趣相關的實習機會，這不僅能讓你獲得實際工作經驗，還能幫助你建立人脈。\n"
-        final_message += "3. **青年就業輔導**：一些政府機構和非營利組織提供專門針對青少年的就業輔導服務，這些服務包括職業測評、履歷撰寫指導和面試技巧培訓。\n"
-        final_message += "4. **社會福利資源**：作為中低收入戶，你可能有資格申請一些社會福利資源，如生活補助、教育補助等，這些資源可以減輕你的經濟壓力，讓你更專注於學習和職業發展。\n"
-        final_message += "5. **職業博覽會和招聘會**：參加當地的職業博覽會和招聘會，這些活動通常會有許多企業參與，提供各種實習和工作機會。\n"
-        final_message += "6. **網上學習平台**：利用免費或低成本的網上學習平台（如Coursera、edX、Udemy等）來提升你的技能，這些平台提供各種課程，從技術技能到軟技能應有盡有。\n"
-        final_message += "7. **青年創業計畫**：如果你對創業有興趣，可以尋找一些專門針對青少年的創業計畫和資助，這些計畫通常提供資金、指導和資源，幫助你實現創業夢想。\n"
-        final_message += "建議你先評估自己的興趣和技能，然後選擇最適合你的就促工具和資源。祝你順利找到適合的職業發展方向！";
-
-        setTimeout(function() {
-            var messageTemplate = '<li class="chat incoming"><span class="material-symbols-outlined">' + chatbotIconText + '</span><p id="final_message">' + final_message + '</p></li>';
-            chatbox.append(messageTemplate);
-        }, 5000);
-
-    });
-
 });
+
+function welcomeMessage() {
+    // Welcome message "你好，請問需要什麼協助？"in chatbox
+    var welcomeMessage = document.createElement("li");
+    welcomeMessage.classList.add("chat");
+    welcomeMessage.classList.add("incoming");
+    var spanElement = document.createElement("span");
+    spanElement.classList.add("material-symbols-outlined");
+    spanElement.textContent = "robot_2";
+    var pElement = document.createElement("p");
+    pElement.textContent = "你好! 請問需要什麼協助?";
+
+    welcomeMessage.appendChild(spanElement);
+    welcomeMessage.appendChild(pElement);
+    $(".chatbox").append(welcomeMessage);
+}
+
+function setChatMode(tab) {
+    // Clear all buttons in chatbox
+    $(".chatbox button").remove();
+
+    // Clear all incoming and outgoing messages in chatbox
+    $(".chatbox li").remove();
+
+    welcomeMessage();
+
+    // Defult tab for chatbox is "找補助" if no tab is given
+    if (tab === undefined) {
+        tab = "找補助";
+    }
+    var buttonElement = document.createElement("button");
+    buttonElement.classList.add("btn-secondary");
+    buttonElement.id = "chat_welfare";
+    buttonElement.textContent = "開始" + tab;
+    $(".chatbox").append(buttonElement);
+}
+
+function findWelfare() {
+    console.log("findWelfare called");
+    // Clear all buttons in chatbox
+    $(".chatbox button").remove();
+
+    // Declare variables for finding welfare
+    var user_info = {
+        gender : "",
+        age : "",
+        current_status : "",
+        unemployment_duration : "",
+        identity : "",
+    }
+
+    // Create a list of questions to ask
+    var questions = [
+        "請問您的性別是?",
+        "請問您的年齡是?",
+        "請問您目前的狀況是?",
+        "請問您待業多久了?",
+        "請問您的身分是?"
+    ];
+    
+    // Create a list of options for each question
+    var options = [
+        ["男", "女"],
+        ["15-16", "16-18", "18-29", "30-44", "45-64", "65+"],
+        ["失業尋職中", "參訓無工作", "自由工作者", "在職中", "已退休待業中", "學生"],
+        ["0-14", "15-29", "30-89", "90-179", "180+"],
+        ["無", "非自願離職", "中低收入戶", "身心障礙", "獨立負擔家計者", "原住民", "長期失業", "更生人", "家暴被害人", "二度就業婦女", "受災失業者", "性侵害被害人", "新住民"]
+    ];
+
+    // Ask questions and if options are clicked, assign the option value to user_info
+    var questionIndex = 0;
+    var optionIndex = 0;
+    var questionElement = document.createElement("li");
+    questionElement.classList.add("chat");
+    questionElement.classList.add("incoming");
+    var pElement = document.createElement("p");
+    pElement.textContent = questions[questionIndex];
+    questionElement.appendChild(pElement);
+    $(".chatbox").append(questionElement);
+
+    // Create options for each question
+    for (var i = 0; i < options[questionIndex].length; i++) {
+        var optionElement = document.createElement("li");
+        optionElement.classList.add("chat");
+        optionElement.classList.add("outgoing");
+        var pElement = document.createElement("p");
+        pElement.textContent = options[questionIndex][i];
+        optionElement.appendChild(pElement);
+        $(".chatbox").append(optionElement);
+    }
+
+    $(".chatbox").on("click", ".outgoing", function() {
+        user_info[Object.keys(user_info)[questionIndex]] = $(this).text();
+        questionIndex++;
+        if (questionIndex < questions.length) {
+            $(".chatbox li").remove();
+            var questionElement = document.createElement("li");
+            questionElement.classList.add("chat");
+            questionElement.classList.add("incoming");
+            var pElement = document.createElement("p");
+            pElement.textContent = questions[questionIndex];
+            questionElement.appendChild(pElement);
+            $(".chatbox").append(questionElement);
+
+            for (var i = 0; i < options[questionIndex].length; i++) {
+                var optionElement = document.createElement("li");
+                optionElement.classList.add("chat");
+                optionElement.classList.add("outgoing");
+                var pElement = document.createElement("p");
+                pElement.textContent = options[questionIndex][i];
+                optionElement.appendChild(pElement);
+                $(".chatbox").append(optionElement);
+            }
+        } else {
+            console.log(user_info);
+            sendChatQuery(user_info, "welfare");
+        }
+    });
+
+    
+
+}

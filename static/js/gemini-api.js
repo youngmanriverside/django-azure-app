@@ -1,5 +1,6 @@
-function find_courses(userMessage) {
-    console.log("find_courses");
+function sendChatQuery(userMessage, findType) {
+    console.log("sendChatQuery called for " + findType);
+
 
     formData = new FormData();
     formData.append("user_question", userMessage);

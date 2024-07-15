@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import plans_filter_form
 from employee.models import Employee, employee_current, employee_identity
-from employer.models import Employer
 from plan.models import plan_employee, plan_employee_details
 import os, json, tempfile
 from google.cloud import speech
@@ -94,20 +93,6 @@ def benefit(request):
                 'employee_identity_list': employee_identity_list,
                 'plan_employee_list1': plan_employee_list1,
                 'all_plan_employee_details_list': all_plan_employee_details_list,
-            }
-
-            return render(request, 'benefit.html', context)
-        
-        elif type == '雇主':
-            name = request.POST.get('employer')
-            if not name:
-                return redirect('/benefit')
-            employer = Employer.objects.get(name=name)
-
-
-
-            context = {
-                'employer': employer,
             }
 
             return render(request, 'benefit.html', context)

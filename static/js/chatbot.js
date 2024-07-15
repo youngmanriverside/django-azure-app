@@ -127,7 +127,10 @@ function findWelfare() {
             }
         } else {
             console.log(user_info);
-            sendChatQuery(user_info, "welfare");
+            user_message = "我是一名" + user_info["age"] + "歲的" + user_info["gender"] + "，目前的狀況是" + user_info["current_status"] + "，已經待業" + user_info["unemployment_duration"] + "天，身分是" + user_info["identity"] + "。";
+            sendChatQuery(user_message, "welfare");
+
+            
         }
     });
 

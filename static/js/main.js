@@ -1,64 +1,5 @@
 $(document).ready(function(){
 
-    // All the radio buttons are unchecked by default
-    $("input[name='optradio']").prop("checked", false);
-
-    // Either one of input with name optradio is checked, buttons will be reloaded
-    $("input[name='optradio']").change(function(){
-        var buttons = [];
-        if ($("#training").prop("checked")) {
-            buttons = [
-                "我想學AI",
-                "我想學平面設計",
-                "我想學照顧服務",
-            ];
-        } else if ($("#benefit").prop("checked")) {
-            buttons = [
-                "我是失業青年",
-                "我是二度就業婦女",
-            ];
-        } else if ($("#qanda").prop("checked")) {
-            buttons = [
-                "外籍人士可參加職訓?",
-            ];
-        }
-        // if buttons is not empty, remove all buttons and append new buttons but remain the following
-        // <li class="chat incoming"><span class="material-symbols-outlined">smart_toy</span>
-        // <p>你好! 請問需要什麼協助?</p></li>
-        $(".chatbox").children().not(":first").remove();        
-        buttons.forEach(function(button) {
-            var buttonElement = document.createElement("button");
-            buttonElement.classList.add("btn-secondary");
-            buttonElement.textContent = button;
-            $(".chatbox").append(buttonElement);
-        }
-        );
-
-        $(".btn-secondary").click(function() {
-            var userMessage = $(this).text();
-            $(".chat-input textarea").val(userMessage);
-            handleChat();
-        });
-    });
-
-    // if button with id "ask-benefit" is clicked, collect user information and send user input to chatbot with radio button "benefit" checked
-    $("#ask-benefit").click(function() {
-        // Get example info from table cell with id "example-name", "example-current" and "example-identity"
-        var exampleCurrent = $("#example-current").text();
-        exampleCurrent = choices_current_dict[exampleCurrent];
-        var exampleIdentity = $("#example-identity").text();
-        exampleIdentity = choices_identity_dict[exampleIdentity];
-        // if exampleIdentity not in choices_identity_dict, exampleIdentity = choices_24_1_dict[exampleIdentity]
-        if (exampleIdentity === undefined) {
-            exampleIdentity = choices_24_1_dict[$("#example-identity").text()];
-        }
-        var userMessage = "我目前就業狀態為" + exampleCurrent + "，" + "同時是" + exampleIdentity + "，" + "請問我可以申請什麼補助?";
-        console.log(userMessage);
-        $(".chat-input textarea").val(userMessage);
-        $("#benefit").prop("checked", true);
-        handleChat();
-    });
-
     // 聊天機器人頁面，送出訊息鍵
     $("#send-btn").click(function(){
         handleChat();
@@ -85,7 +26,9 @@ function handleChat() {
     // if userMessage is None, return
     if (!userMessage) {
         return;
-    }    
+    } else {
+        getOpenAiChat(userMessage);
+    }
 
     // Clear the textarea after sending the message
     $(".chat-input textarea").val("");
@@ -103,27 +46,6 @@ function handleChat() {
         $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
     }, 500);
     
-
-    index_names = {
-        "training": "training-courses",
-        "benefit": "labor-plan-original-30",
-        "qanda": "wda-qa",
-    }
-
-    // Decide which function to call based on which button with class 'nav-item' is active
-    if ($("#training").prop("checked")) {
-        indexName = index_names["training"];
-        azureAiSearch(userMessage, indexName);
-    } else if ($("#benefit").prop("checked")) {
-        indexName = index_names["benefit"];
-        azureAiSearch(userMessage, indexName);
-    } else if ($("#qanda").prop("checked")) {
-        indexName = index_names["qanda"];
-        azureAiSearch(userMessage, indexName);
-    } else {
-        // Call the getOpenAiChat function
-        getOpenAiChat(userMessage);
-    }
 }
 
 function createChatLi(message, className) {

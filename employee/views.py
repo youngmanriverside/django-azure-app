@@ -1,7 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import EmployeeForm
 from .models import Employee, employee_current, employee_identity
-from employer.models import Employer
 from .choices import choices_current
 
 # Create your views here.
@@ -68,13 +67,10 @@ def applicants(request):
     employee_current_list = employee_current.objects.all()
     employee_identity_list = employee_identity.objects.all()
 
-    # Get all the Employer objects
-    employer_list = Employer.objects.all()
 
     context = {
         'employee_list': employee_list,
         'employee_current_list': employee_current_list,
         'employee_identity_list': employee_identity_list,
-        'employer_list': employer_list,
     }
     return render(request, 'applicants.html', context)

@@ -1,4 +1,5 @@
 function getOpenAiChat(userMessage) {
+    console.log("getOpenAiChat");
     var url = "https://openai-wenshin.openai.azure.com/openai/deployments/wenshin-gpt-4o/chat/completions?api-version=2024-02-15-preview";
     var parameter = {
         "messages":[

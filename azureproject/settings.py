@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'azureproject',
     'employee',
-    'employer',
     'plan',
     'interview',
 ]

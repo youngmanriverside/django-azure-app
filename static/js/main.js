@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+    // tab to determine the chat mode
+    var tab = "";
+
     // 聊天機器人頁面，送出訊息鍵
     $("#send-btn").click(function(){
         handleChat();
@@ -24,8 +27,11 @@ $(document).ready(function(){
 function handleChat() {
     var userMessage = $(".chat-input textarea").val();
     // if userMessage is None, return
+    // else if userMessage is not None and tab is "找職訓", call sendChatQuery with userMessage and "courses"
     if (!userMessage) {
         return;
+    } else if (tab === "找職訓") {
+        sendChatQuery(userMessage, "courses");
     } else {
         getOpenAiChat(userMessage);
     }

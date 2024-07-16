@@ -409,11 +409,11 @@ tr.hide-table-padding td {
 
 .btn-secondary {
     width: auto;
-    padding: 5px;
+    padding: 8px;
     margin: 5px;
     border: none;
     border-radius: 10px;
-    background-color: #66b6d2;
+    background-color: #3b9ea8;
     color: white;
 }
 

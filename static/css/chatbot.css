@@ -150,3 +150,9 @@
 	}
 }
 
+
+#ai-response-area {
+	border: none;
+	border-radius: 0 0 10px 10px;
+	resize: none;
+}

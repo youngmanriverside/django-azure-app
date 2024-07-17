@@ -30,10 +30,12 @@ function sendChatQuery(userMessage, findType) {
     })
     .done(function(data) {
         console.log(data);
+
         $(".chatbox li:contains('思考中...')").replaceWith(createChatLi("適用的方案出來拉", "incoming"));
 
         // Clear the text in div with id "ai-response-area"
         $("#ai-response-area").empty();
+
 
         // Display the result of welfare in div with id "ai-response-area" directly
         // if data["output_text"] is a string, if "\n" is in the string, split the string by "\n" and display each element in a new line

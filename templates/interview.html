@@ -25,10 +25,11 @@ $(document).ready(function() {
     <div class='row'>
         <div class='col'>
             <div class='mock-interviewr'>
-                <img id="interviewr" src="/static/images/interviewer.jpeg" alt="mock-interviewer">
+                    <img id="interviewr" src="/static/images/interviewerGIF.webp" alt="interview-scene">
             </div>
             <div class="row">
                 <div class="row" style="align-items: center;">
+                    <span style="color:slategrey">Tap to record</span>
                     <span class="material-icons" id="mic-icon">mic</span>
                 </div>
                 <div class="row">
@@ -36,11 +37,12 @@ $(document).ready(function() {
                 </div>
                 
             </div>
-            <div class="row">
+            <div class="row" style="margin-top: 10px;">
                 <h2 style="text-align: center;">Question</h2>
                 <a id="play_question">
-                    <div >
+                    <div>
                         <span class="material-icons">play_arrow</span>
+                        <span style="color:slategrey">Tap to play</span>
                         <div id="question">{{ question }}</div>
                     </div>
                 </a>
@@ -50,7 +52,13 @@ $(document).ready(function() {
             </div>
         </div>
         <div class='col'>
-            <div class='row'>
+            <div class="row" id="interview_question_header">
+                <h3>Analysis will be displayed here</h3>
+                <div class="row">
+                    <img src="/static/images/html-skeleton-division.png" alt="skeleton" style="height: 500px;">
+                </div>
+            </div>
+            <div id="interview_question_result" class='row' style="visibility: hidden;">
                 <div class="ai-response" id="interview_question_analysis" style="visibility: hidden;">
                     
                 </div>

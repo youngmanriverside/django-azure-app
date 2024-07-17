@@ -1,10 +1,17 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% block javascript %}
-<script src="//unpkg.com/d3"></script>
+<script src="{% static 'js/video-analysis.js' %}"></script>
 <script>
+$(document).ready(function() {
+    var response_json = '{{ response_json|escapejs }}'
 
+    plotGraph(response_json);
+});
 </script>
+<script src="//unpkg.com/d3"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 {% endblock%}
 
 {% block title %}<title>Analysis</title>{% endblock %}
@@ -21,17 +28,18 @@
             <div class="row" style="background-color: azure;">
             {% load static %}
                 {% if response_json %}
-                <h3 style="text-align: center;">Your video</h3>
-                <video class="video-input" controls>
+                <h3 style="text-align: center;"></h3>
+                <div id="whole-response" hidden>{{ response_json }}</div>
+                <video class="video-input" style="margin-bottom: 20px;" controls>
                     <source src="{% static 'videos/user/user.mp4' %}" type="video/mp4">
                 </video>
                 {% else %}
-                <h3 style="text-align: center;">Demo video</h3>
-                <video class="video-input" controls autoplay>
+                <h3 style="text-align: center;"></h3>
+                <video class="video-input" style="margin-bottom: 20px;" controls autoplay>
                     <source id="user_video" src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
                 </video>
                 
-                    <h5 style="text-align: center; margin-top: 5px;">Upload Yours</h5>
+                    <h5 style="text-align: center; margin-top: 5px;"></h5>
                     <form method="post" action="/interview/analysis" class="form-inline" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.video_file }}
@@ -51,18 +59,28 @@
             <div class="row">
                 <div class="row">
                     {% if response_json %}
-                    <h3 style="text-align: center;">Overall</h3>
+                    <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">內容</h3>
+                    <div class="ai-response">
+                        <span class="analysis-score">言語內容:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.總評分 }}&nbsp;</strong>/ 100</span>
+                        <span class="analysis-score">表達邏輯:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.表達邏輯 }}&nbsp;</strong>/ 100</span>
+                    </div>
+                    <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">表現</h3>
                     <div class="ai-response">
                         {{ response_json.整體表現 }}
                     </div>
-                    <h3 style="text-align: center;">Suggestion</h3>
+                    <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">建議</h3>
                     <div class="ai-response">
                         {{ response_json.改進建議 }}
                     </div>
                     {% else %}
-                    <h3 style="text-align: center;">Overall</h3>
+                    <h3 style="text-align: center;">內容</h3>
+                    <div class="ai-response">
+                        <span class="analysis-score">言語內容:&nbsp;&nbsp;&nbsp;<strong>87&nbsp;</strong>/ 100</span>
+                        <span class="analysis-score">表達邏輯:&nbsp;&nbsp;&nbsp;<strong>92&nbsp;</strong>/ 100</span>
+                    </div>
+                    <h3 style="text-align: center;">表現</h3>
                     <div class="ai-response">整體表現良好，展現出專業的形象，但可以嘗試增加一些表情、動作的變化，讓整體表現更生動活潑，更能吸引觀眾的注意力。</div>
-                    <h3 style="text-align: center;">Suggestion</h3>
+                    <h3 style="text-align: center;">建議</h3>
                     <div class="ai-response">建議面試者多加練習，放鬆肢體動作，提升語氣的豐富度，並適當分享個人經驗或案例，讓自我介紹更具體、更有說服力。同時，可以嘗試增加一些笑容，讓整體形象更親和。</div>
                     {% endif %}
                 </div>
@@ -70,28 +88,22 @@
         </div>
         {% if response_json %}
         <div class='col'>
-            <div class='row'>
-                <h3 style="text-align: center;">Analysis</h3>
-                <div id="radar-chart-div">
+            <div class='row' id="graph_area">
+                <h3 style="text-align: center;">聽覺分析</h3>
+                <div class="row" id="graph_auditory">
                     
                 </div>
-                <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-                <script>
-                    $(document).ready(function(){
-                        // Load the JSON data from the Django view
-                        var graphJSON = '{{ graph_json | safe }}';
-
-                        // Render the Plotly chart inside the div
-                        Plotly.plot('radar-chart-div', JSON.parse(graphJSON), {});
-                    });
-                </script>
-            </div>
+                <h3 style="text-align: center;">視覺分析</h3>
+                <div class="row" id="graph_visual">
+                    
+                </div>
+            </div>  
         </div>
         {% else %}
         <div class='col'>
             <div class='row' style="padding: 50px 0;">
-                <h3 style="text-align: center;">Analysis</h3>
-                <div id="radar-chart-div">
+                <h3 style="text-align: center;">分析</h3>
+                <div>
                     <img src="/static/images/analysis-example.png" alt="placeholder" class="img-fluid">
                 </div>
             </div>

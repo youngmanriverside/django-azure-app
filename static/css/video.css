@@ -1,6 +1,7 @@
 /* video */
 .video-input {
-    width: 100%;
+    width: 80%;
+    height: 300px;
 }
 
 #user-video {
@@ -18,6 +19,14 @@ button[id="video-analyze"] {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 5px;
+}
+
+/* Analysis-score */
+.analysis-score {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #3d82db;
 }
 
 
@@ -41,3 +50,14 @@ button[id="video-analyze"] {
     cursor: pointer;
 }
 
+/* Plots */
+#graph_area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#graph_auditory, #graph_visual {
+    display: flex;
+    justify-content: center;
+}

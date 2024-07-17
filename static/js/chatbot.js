@@ -34,6 +34,7 @@ function welcomeMessage() {
 }
 
 function setChatMode(tab) {
+
     // Clear all buttons in chatbox
     $(".chatbox button").remove();
 
@@ -76,7 +77,7 @@ function findWelfare() {
         "請問您的性別是?",
         "請問您的年齡是?",
         "請問您目前的狀況是?",
-        "請問您待業多久了?",
+        "請問您待業天數?",
         "請問您的身分是?"
     ];
     
@@ -104,13 +105,15 @@ function findWelfare() {
     options[questionIndex].forEach(function(option) {
         var optionElement = document.createElement("button");
         optionElement.classList.add("btn-secondary");
+        // Add class "welfare" to button
+        optionElement.classList.add("welfare");
         optionElement.textContent = option;
         $(".chatbox").append(optionElement);
     }
     );
     
-    // If button with class "btn-secondary" is clicked, assign the value of the button to user_info and ask the next question
-    $(".chatbox").on("click", ".btn-secondary", function() {
+    // If button with class "btn-secondary welfare" is clicked, assign the value of the button to user_info and ask the next question
+    $(".chatbox").on("click", ".btn-secondary.welfare", function() {
         user_info[Object.keys(user_info)[questionIndex]] = $(this).text();
         questionIndex += 1;
         optionIndex += 1;
@@ -122,10 +125,22 @@ function findWelfare() {
             options[questionIndex].forEach(function(option) {
                 var optionElement = document.createElement("button");
                 optionElement.classList.add("btn-secondary");
+                // Add class "welfare" to button
+                optionElement.classList.add("welfare");
+                // if questions are last set of questions, add class "last" to button
+                if (questionIndex === questions.length - 1) {
+                    optionElement.classList.add("last");
+                }
                 optionElement.textContent = option;
                 $(".chatbox").append(optionElement);
             });
-        } else {
+        }
+        // only if btn-secondary with class "last" is clicked, send user_info to sendChatQuery
+
+        else if (questionIndex === questions.length && $(this).hasClass("last")) {
+            
+            // Clear all btn-secondary buttons in chatbox
+            $(".chatbox button").remove();
 
             // If all questions are answered, show user_info in chatbox
             console.log(user_info);

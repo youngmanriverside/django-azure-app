@@ -34,6 +34,9 @@ function evaluate_interview_question(question, user_answer) {
 		contentType: false,
         success: function(data) {
             console.log(data);
+            $('#interview_question_header').css('visibility', 'hidden');
+            $('#interview_question_result').css('visibility', 'visible');
+
             $('#interview_question_analysis').css('visibility', 'visible');
             $('#interview_question_analysis').append('<h3 style="text-align: center;">' + "Analysis" + '</h3>');
 			$('#interview_question_analysis').append('<p>' + data["analysis"] + '</p>');

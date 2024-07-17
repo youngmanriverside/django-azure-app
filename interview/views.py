@@ -14,13 +14,18 @@ def analysis(request):
             video_file = request.FILES['video_file']
 
             prompt = '''
-                1. 請針對面試者下列的表現做出評分(1-10分):
-                - 視覺評價: 臉部情緒特徵、肢體動作、眼神交流、微笑是否自然、衣著整潔等。
-                - 言語內容: 1. 言語用字: 是否得體、2. 表達邏輯: 是否清晰、通順，抑或前後矛盾。
-                - 聽覺評價: 1.語速: 是否太快/太慢、2. 聲調: 是否沉穩/太高/太低、3. 言語和聲紋: 能否展現自信、大方、好相處的態度，抑或畏縮、沒自信。
+                1. 請針對面試者下列的表現做出評分(1-100分):
+                - 視覺評價: 1. 臉部情緒特徵(30%): 是否友善、正向、自信? 或是木訥、膽怯、害羞。 2. 肢體動作(20%): 是否沉穩、自信、大方； 3. 眼神交流 (15%)、4. 微笑是否自然 (15%)、5. 衣著整潔(20%)。
+                - 聽覺評價: 1. 語速(20%): 是否太快/太慢、2. 音調(30%): 太高或太低、3. 言語和聲紋(50%): 能否展現沉穩、熱情、自信、大方、好相處的態度，抑或畏縮、沒自信。
+                - 言語內容: 1. 言語用字(30%): 是否得體、2. 表達邏輯 (70%): 是否清晰、通順，抑或前後矛盾。
                 
-                2. 請列出面試者的優點、缺點、整體表現、改進建議。
-                請以繁體中文及json格式呈現回答。
+                請根據上述分析，請按權重為視覺評價、聽覺評價、言語內容，分別產生各項的總評分(1-100分):
+                
+                2. 請評價面試者的
+                - 整體表現
+                - 改進建議。
+                請以繁體中文回答，並以json格式回傳結果。
+
             '''
 
             url = 'https://wda-gemini-api.azurewebsites.net/video'
@@ -30,21 +35,29 @@ def analysis(request):
             data = {
                 'prompt': prompt,
             }
+
             response = requests.post(url, files=files, data=data)
 
             if response.status_code == 200:                
-                # convert response.text to json
-                response_json = json.loads(response.text)
+                
+                print("Response status code: ", response.status_code)
+
+                # Replace ' with " in the response
+                response_text = response.text.replace("'", '"')
+                
+                # Load the response text to json format
+                response_json = json.loads(response_text)
 
                 print(response_json)
-                
-                fig = plot(response_json)
 
-                graph_json = fig.to_json()
+                print(type(response_json))
+
+                
+
+
 
                 context = {
-                    'response_json': response_json, # response is a dictionary
-                    'graph_json': graph_json,
+                    'response_json': response_json,
                 }
 
                 # Write the video file to the local directory staic/user/user.mp4

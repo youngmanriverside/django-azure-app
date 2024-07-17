@@ -152,7 +152,9 @@
 
 
 #ai-response-area {
+	color: #44b0eb;
 	border: none;
 	border-radius: 0 0 10px 10px;
-	resize: none;
+	overflow-y: auto;
+	max-height: 550px;
 }

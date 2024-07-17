@@ -55,6 +55,10 @@ div#mic {
 }
 
 /* question */
+#question {
+    padding: 10px;
+}
+
 #play_question {
     background-color: #d1f2f2;
     border-radius: 10px;
@@ -87,6 +91,10 @@ div#mic {
 }
 
 /* AI response */
+#interview_question_header {
+    text-align: center;
+    visibitlity: visible;
+}
 .ai-response {
     background-color: #d1f2f2;
     border-radius: 10px;

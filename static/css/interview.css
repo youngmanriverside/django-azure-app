@@ -24,11 +24,10 @@ div#mic {
 }
 
 #mic-icon {
-    /* border: 2px solid #1a2e4b; */
-    width: 36px;
+    /* width: 36px;
     padding: 0px;
     font-size: 30px;
-    color: #1a2e4b;
+    color: #1a2e4b; */
 }
 
 #mic-icon.active {
@@ -46,6 +45,59 @@ div#mic {
 
     span {
         color: red;
+    }
+}
+
+.mic-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 100px;
+  }
+
+.mic {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    background-color: #27e5f3;
+    color: #fff;
+    font-size: 33px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.25s;
+}
+      
+.mic::before {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+    background-color: inherit;
+    z-index: -1;
+}
+      
+.listening {
+    background-color: #0da9d9;
+    z-index: 0;
+}
+
+.listening::before {
+    animation: listening 1.3s infinite;
+}
+      
+@keyframes listening {
+    from {
+        opacity: 0.25;
+    }
+    to {
+        transform: scale(2);
+        opacity: 0.1;
     }
 }
 
@@ -95,6 +147,13 @@ div#mic {
     text-align: center;
     visibitlity: visible;
 }
+
+.hide_this > h3,
+.hide_this > div.row,
+.hide_this > img {
+    display: none;
+}
+
 .ai-response {
     background-color: #d1f2f2;
     border-radius: 10px;

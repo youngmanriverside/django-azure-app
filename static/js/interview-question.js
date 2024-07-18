@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    
+    $('.mic').click(function() {
+        $('.mic').toggleClass('listening');
+    });
+
     // If anchor with id "play_question" is clicked, call text_to_speech function
     // with the text of inside div with id "question"
     var text = $('#question').text();
@@ -18,12 +23,13 @@ function evaluate_interview_question(question, user_answer) {
     formData.append("question", question);
     formData.append("user_answer", user_answer);
 
-    system_instructions = `
-                Please evaluate the user's response to the question.
-                Give analysis / evaluation / suggested_modification each in 50 words.
-                Return the result in JSON format.
+    system_instruction = `
+                請針對用戶對問題的回答提供
+                1. 評價 / 建議，每個部分50字。
+                2. 整體表現評分 (1-10, with one digit after decimal point)。
+                請以繁體中文回答，返回JSON格式的結果。
             `;
-    formData.append("system_instructions", system_instructions);
+    formData.append("system_instruction", system_instruction);
 
     $.ajax({
         url: url,
@@ -34,32 +40,35 @@ function evaluate_interview_question(question, user_answer) {
 		contentType: false,
         success: function(data) {
             console.log(data);
-            $('#interview_question_header').css('visibility', 'hidden');
+            
+			// Hide the interview question header
+			var interview_question_header = document.getElementById('interview_question_header');
+            interview_question_header.classList.add('hide_this');
+
+            // $('#interview_question_header').css('visibility', 'hidden');
             $('#interview_question_result').css('visibility', 'visible');
 
-            $('#interview_question_analysis').css('visibility', 'visible');
-            $('#interview_question_analysis').append('<h3 style="text-align: center;">' + "Analysis" + '</h3>');
-			$('#interview_question_analysis').append('<p>' + data["analysis"] + '</p>');
+            $('#interview_question_score').css('visibility', 'visible');
+            $('#interview_question_score').append('<h3 style="text-align: center;">' + "Score" + '</h3>');
             if (data["analysis"] == null) {
-                $('#interview_question_analysis').append('<p>' + data["分析"] + '</p>');
+                $('#interview_question_score').append('<h4 style="font-size: 30px; text-align: center; color: #3d82db;">' + '<strong>' + data["整體表現評分"] + '</strong>' + " / 10" + '</h4>');
             }
 
 			$('#interview_question_evaluation').css('visibility', 'visible');
             $('#interview_question_evaluation').append('<h3 style="text-align: center;">' + "Evaluation" + '</h3>');
-			$('#interview_question_evaluation').append('<p>' + data["evaluation"] + '</p>');
             if (data["evaluation"] == null) {
                 $('#interview_question_evaluation').append('<p>' + data["評價"] + '</p>');
             }
 
 			$('#interview_question_suggestion').css('visibility', 'visible');
             $('#interview_question_suggestion').append('<h3 style="text-align: center;">' + "Suggestion" + '</h3>');
-			$('#interview_question_suggestion').append('<p>' + data["suggested_modification"] + '</p>');
             if (data["suggested_modification"] == null) {
                 $('#interview_question_suggestion').append('<p>' + data["建議"] + '</p>');
             }
         },
         error: function(err) {
             console.error(err);
+            alert("Error: " + err + ". Please try again.");
         },
     });
 }

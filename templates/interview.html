@@ -30,7 +30,12 @@ $(document).ready(function() {
             <div class="row">
                 <div class="row" style="align-items: center;">
                     <span style="color:slategrey">Tap to record</span>
-                    <span class="material-icons" id="mic-icon">mic</span>
+                    <span class="material-icons">mic</span>
+                    <div class="mic-area">
+                        <button type="button" class="mic" id="mic-icon">
+                            <i class="fa fa-microphone"></i>
+                        </button>
+                    </div>
                 </div>
                 <div class="row">
                     <audio class="playback" controls></audio>
@@ -47,9 +52,7 @@ $(document).ready(function() {
                     </div>
                 </a>
             </div>
-            <div class='row' id="user-answer" style="visibility: hidden;">
-                    
-            </div>
+            
         </div>
         <div class='col'>
             <div class="row" id="interview_question_header">
@@ -58,8 +61,11 @@ $(document).ready(function() {
                     <img src="/static/images/html-skeleton-division.png" alt="skeleton" style="height: 500px;">
                 </div>
             </div>
+            <div class='row' id="user-answer" style="visibility: hidden;">
+                    
+            </div>
             <div id="interview_question_result" class='row' style="visibility: hidden;">
-                <div class="ai-response" id="interview_question_analysis" style="visibility: hidden;">
+                <div class="ai-response" id="interview_question_score" style="visibility: hidden;">
                     
                 </div>
                 <div class="ai-response" id="interview_question_evaluation" style="visibility: hidden;">

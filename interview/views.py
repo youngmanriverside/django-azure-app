@@ -87,11 +87,15 @@ def interview(request):
 
     # Get one question from questions randomly
     import random
-    question = random.choice(questions).question
+    question_set = random.choice(questions)
+    question = question_set.question
+    question_zh = question_set.question_zh
 
     print(question)
+    print(question_zh)
 
     context = {
         'question': question,
+        'question_zh': question_zh,
     }
     return render(request, 'interview.html', context)

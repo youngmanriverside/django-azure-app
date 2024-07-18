@@ -24,13 +24,16 @@ $(document).ready(function() {
 <div class='container'>
     <div class='row'>
         <div class='col'>
-            <div class='mock-interviewr'>
-                    <img id="interviewr" src="/static/images/interviewerGIF.webp" alt="interview-scene">
+            <div class='row mock-interviewr'>
+                <div class="row">
+                    <img id="interviewer" src="/static/images/irasutoya-interviewer.png" alt="interview-scene">
+                </div>
+                <div class="row">
+                    <span style="font-size: x-large; color:black">模擬面試 開始！</span>
+                </div>
             </div>
             <div class="row">
                 <div class="row" style="align-items: center;">
-                    <span style="color:slategrey">Tap to record</span>
-                    <span class="material-icons">mic</span>
                     <div class="mic-area">
                         <button type="button" class="mic" id="mic-icon">
                             <i class="fa fa-microphone"></i>
@@ -43,7 +46,6 @@ $(document).ready(function() {
                 
             </div>
             <div class="row" style="margin-top: 10px;">
-                <h2 style="text-align: center;">Question</h2>
                 <a id="play_question">
                     <div>
                         <span class="material-icons">play_arrow</span>
@@ -51,12 +53,21 @@ $(document).ready(function() {
                         <div id="question">{{ question }}</div>
                     </div>
                 </a>
+                <div id="accordion">
+                    <a href="#collapseOne" class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        翻譯 (中文)
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            {{ question_zh }}
+                        </div>
+                    </div>
+                </div>
             </div>
-            
         </div>
         <div class='col'>
             <div class="row" id="interview_question_header">
-                <h3>Analysis will be displayed here</h3>
+                <h3 style="margin: 30px;">Analysis will be displayed here</h3>
                 <div class="row">
                     <img src="/static/images/html-skeleton-division.png" alt="skeleton" style="height: 500px;">
                 </div>

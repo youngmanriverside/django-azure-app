@@ -1,18 +1,18 @@
 # Run this script in Django shell
 # Command: python manage.py shell < loadcsv.py
 
-from employer.models import plan_employer_detail, plan_employer
 from interview.models import interview_question
 import pandas as pd
 
 print("Import done")
 
-# Read tsv file into a pandas dataframe
-df = pd.read_csv('static/data/interview_questions.tsv', sep='\t')
+# Read csv file into a pandas dataframe
+df = pd.read_csv('static/data/interview_questions_new.csv')
 
-# Loop through the dataframe and create a new interview_question object for each row
-for index, row in df.iterrows():
-    interview_question.objects.create(
-        # question_competency=row['Competency'],
-        question=row['Interview Question']
-    )
+# Iterate through the dataframe,
+# assign text in the "Question" column to the question field of the interview_question model
+# assign translated text in the "Question_zh" column to the question_zh field of the interview_question model
+for i in range(len(df)):
+    question = df.loc[i, 'Question']
+    question_zh = df.loc[i, 'Question_zh']
+    interview_question.objects.create(question=question, question_zh=question_zh)

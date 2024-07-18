@@ -38,14 +38,41 @@ $(document).ready(function() {
                 <video class="video-input" style="margin-bottom: 20px;" controls autoplay>
                     <source id="user_video" src="{% static 'videos/example-1.mp4' %}" type="video/mp4">
                 </video>
-                
                     <h5 style="text-align: center; margin-top: 5px;"></h5>
                     <form method="post" action="/interview/analysis" class="form-inline" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.video_file }}
                         
                         <button id="video-analyze" type="submit">Analyze</button>
-                        
+                        <script>
+                            $('#video-analyze').click(function() {
+                                // create a div showing "Analyzing..."
+                                var div = document.createElement('div');
+                                div.className = 'loading';
+                                div.innerHTML = 'Analyzing...';
+                                
+                                // insert to the div with id "plot-area" at the top
+                                var plot_area = document.getElementById('plot-area');
+                                plot_area.insertBefore(div, plot_area.firstChild);
+
+                                // Set timeout to append another div with "Please wait..."
+                                setTimeout(function() {
+                                    var div = document.createElement('div');
+                                    div.className = 'loading';
+                                    div.innerHTML = 'Please wait...';
+                                    plot_area.insertBefore(div, plot_area.firstChild);
+                                }, 4000);
+
+                                // Set timeout to append another div with "Almost there..."
+                                setTimeout(function() {
+                                    var div = document.createElement('div');
+                                    div.className = 'loading';
+                                    div.innerHTML = 'Almost there...';
+                                    plot_area.insertBefore(div, plot_area.firstChild);
+                                }, 6500);
+
+                            });
+                        </script>
                     </form>
                     {% if form.errors %}
                     <ul class="errors">
@@ -100,11 +127,14 @@ $(document).ready(function() {
             </div>  
         </div>
         {% else %}
-        <div class='col'>
+        <div class='col' id="plot-area">
             <div class='row' style="padding: 50px 0;">
                 <h3 style="text-align: center;">分析</h3>
                 <div>
-                    <img src="/static/images/analysis-example.png" alt="placeholder" class="img-fluid">
+                    <img src="/static/images/plot-auditory-example.png" alt="placeholder" class="img-fluid">
+                </div>
+                <div>
+                    <img src="/static/images/plot-visual-example.png" alt="placeholder" class="img-fluid">
                 </div>
             </div>
         </div>

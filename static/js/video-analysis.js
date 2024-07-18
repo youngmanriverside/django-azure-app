@@ -65,4 +65,3 @@ function plotGraph(response_json) {
     Plotly.newPlot('graph_auditory', data_auditory, layout);
     Plotly.newPlot('graph_visual', data_visual, layout);
 }
-

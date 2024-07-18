@@ -21,10 +21,23 @@ def analysis(request):
                 
                 請根據上述分析，請按權重為視覺評價、聽覺評價、言語內容，分別產生各項的總評分(1-100分):
                 
-                2. 請評價面試者的
+                2. 請提供面試者的
                 - 整體表現
                 - 改進建議。
-                請以繁體中文回答，並以json格式回傳結果。
+                請以繁體中文回答。
+                以json格式回傳結果，格式如下:
+                response = {
+                    "整體表現": "",
+                    "改進建議": "",
+                    '聽覺評價': {'總評分': , '言語和聲紋': , '語速': , '音調': },
+                    '視覺評價': {'微笑是否自然': ,
+                            '眼神交流': ,
+                            '總評分': ,
+                            '肢體動作': ,
+                            '臉部情緒特徵': ,
+                            '衣著整潔': },
+                    '言語內容': {'總評分': , '表達邏輯': , '言語用字': },
+                                    }
 
             '''
 
@@ -48,13 +61,13 @@ def analysis(request):
                 # Load the response text to json format
                 response_json = json.loads(response_text)
 
-                print(response_json)
+                from pprint import pprint
+                pprint(response_json)
 
-                print(type(response_json))
+                # print(type(response_json))
 
-                
-
-
+                # print(response_json["改進建議"])
+                # print(response_json["整體表現"])
 
                 context = {
                     'response_json': response_json,

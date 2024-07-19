@@ -15,16 +15,37 @@ function plotGraph(response_json) {
     visual_categories = ["眼神交流", "微笑是否自然", "肢體動作", "臉部情緒特徵", "衣著整潔"]
     visual_values = [response_json["視覺評價"]["眼神交流"], response_json["視覺評價"]["微笑是否自然"], response_json["視覺評價"]["肢體動作"], response_json["視覺評價"]["臉部情緒特徵"], response_json["視覺評價"]["衣著整潔"]]
 
-    console.log(auditory_values)
-    console.log(visual_values)
-    // Plot radar charts for auditory and visual evaluation
+    
+    // Plot radar chart for visual evaluation and bar chart for auditory evaluation
     var data_auditory = [{
-        type: 'scatterpolar',
-        r: auditory_values,
-        theta: auditory_categories,
-        fill: 'toself',
+        x: auditory_categories,
+        y: auditory_values,
+        type: 'bar',
+        width: 0.5,
+        marker: {
+            color: 'rgb(115, 147, 179)',
+        },
         name: 'Auditory Evaluation'
     }];
+
+    // layout for bar chart with three categories
+    layout_auditory = {
+        paper_bgcolor: 'rgba(255, 87, 51, 0)',
+        width: 450,
+        height: 350,
+        margin: {
+            l: 30,
+            r: 30,
+            b: 30,
+            t: 30,
+            pad: 4
+        },
+        title: {
+            x: 0.5,
+            xanchor: 'center',
+        },
+    }
+
 
     var data_visual = [{
         type: 'scatterpolar',
@@ -34,7 +55,7 @@ function plotGraph(response_json) {
         name: 'Visual Evaluation'
     }];
 
-    layout = {
+    layout_visual = {
         paper_bgcolor: 'rgba(255, 87, 51, 0)',
         polar: {
             radialaxis: {
@@ -62,6 +83,6 @@ function plotGraph(response_json) {
         }
     }
 
-    Plotly.newPlot('graph_auditory', data_auditory, layout);
-    Plotly.newPlot('graph_visual', data_visual, layout);
+    Plotly.newPlot('graph_auditory', data_auditory, layout_auditory);
+    Plotly.newPlot('graph_visual', data_visual, layout_visual);
 }

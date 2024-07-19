@@ -42,11 +42,11 @@ $(document).ready(function() {
                     <form method="post" action="/interview/analysis" class="form-inline" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form.video_file }}
-                        
                         <button id="video-analyze" type="submit">Analyze</button>
                         <script>
                             $('#video-analyze').click(function() {
                                 // create a div showing "Analyzing..."
+                                console.log('Analyzing...');
                                 var div = document.createElement('div');
                                 div.className = 'loading';
                                 div.innerHTML = 'Analyzing...';
@@ -61,7 +61,7 @@ $(document).ready(function() {
                                     div.className = 'loading';
                                     div.innerHTML = 'Please wait...';
                                     plot_area.insertBefore(div, plot_area.firstChild);
-                                }, 4000);
+                                }, 5000);
 
                                 // Set timeout to append another div with "Almost there..."
                                 setTimeout(function() {
@@ -69,11 +69,12 @@ $(document).ready(function() {
                                     div.className = 'loading';
                                     div.innerHTML = 'Almost there...';
                                     plot_area.insertBefore(div, plot_area.firstChild);
-                                }, 6500);
+                                }, 8500);
 
                             });
                         </script>
                     </form>
+
                     {% if form.errors %}
                     <ul class="errors">
                         {% for field, error_list in form.errors.items %}

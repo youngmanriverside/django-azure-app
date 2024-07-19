@@ -65,10 +65,12 @@ function evaluate_interview_question(question, user_answer) {
             if (data["suggested_modification"] == null) {
                 $('#interview_question_suggestion').append('<p>' + data["建議"] + '</p>');
             }
+
+            $('.loading').css('visibility', 'hidden');
         },
         error: function(err) {
             console.error(err);
-            alert("Error: " + err + ". Please try again.");
+            alert("Error occured. Please try again.");
         },
     });
 }

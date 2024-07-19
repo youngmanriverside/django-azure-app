@@ -32,12 +32,30 @@ $(document).ready(function() {
                     <span style="font-size: x-large; color:black">模擬面試 開始！</span>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id="audio-area">
                 <div class="row" style="align-items: center;">
-                    <div class="mic-area">
+                    <div class="row mic-area">
                         <button type="button" class="mic" id="mic-icon">
                             <i class="fa fa-microphone"></i>
                         </button>
+                        <script>
+                            var clicked = 0;
+                            $('#mic-icon').click(function() {
+                                clicked++;
+                                
+                                if (clicked % 2 == 0) {
+                                    // Replace the text in div with class 'loading' with 'Analyzing...'
+                                    var div_loading = document.getElementsByClassName('loading');
+                                    div_loading[0].innerHTML = 'Analyzing...';
+                                } else {
+                                    var div = document.createElement('div');
+                                    div.className = 'row loading';
+                                    div.innerHTML = 'Recording...';
+                                    // Add to the bottom of the div with id 'audio-area'
+                                    document.getElementById('audio-area').appendChild(div);
+                                }
+                            });
+                        </script>
                     </div>
                 </div>
                 <div class="row">

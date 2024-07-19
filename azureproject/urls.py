@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from .views import benefit, chatbot, home, chatbot_new, home2, transcribe
+from .views import benefit, chatbot, home, chatbot_new, home2
 
 urlpatterns = [
     path('', home2, name='home'),
@@ -26,6 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('employee/', include('employee.urls')),
     path('plan/', include('plan.urls')),
-    path('transcribe/', transcribe, name='transcribe'),
     path('interview/', include('interview.urls')),
     ]

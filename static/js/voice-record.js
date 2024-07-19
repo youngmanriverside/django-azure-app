@@ -45,7 +45,6 @@ function setupStream(stream) {
 	recorder.onstop = e => {
 		const blob = new Blob(chunks, { type: "audio/webm" });
 
-		
 		uploadBlob(blob);
 
 		chunks = [];
@@ -83,7 +82,10 @@ function uploadBlob(blob) {
 		.getAttribute("content");
 
 	// Send the blob to the django server with url /transcribe (same origin)
-	url = '/transcribe/';
+	// url = 'http://127.0.0.1:5000/transcribe';
+	url = 'https://wda-gemini-api.azurewebsites.net/transcribe';
+
+	console.log(url)
 
 	$.ajax({
 		url: url,

@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .forms import UploadVideoForm
 import requests, json
-from .graph import plot
 
 # Create your views here.
 def analysis(request):

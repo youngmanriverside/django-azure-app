@@ -94,7 +94,7 @@ function uploadBlob(blob) {
 		headers: {
 			"X-CSRFToken": csrfToken,
 		},
-		credentials: 'same-origin',
+		crossDomain : true,
 		processData: false,
 		contentType: false,
 		success: function(data) {

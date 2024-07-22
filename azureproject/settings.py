@@ -173,3 +173,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://example.com",
     "http://127.0.0.1:8000"
 ]
+
+# CSRF TRUSTED_ORIGINS = all
+CSRF_TRUSTED_ORIGINS = ['*']

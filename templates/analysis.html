@@ -87,10 +87,9 @@ $(document).ready(function() {
             <div class="row">
                 <div class="row">
                     {% if response_json %}
-                    <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">內容</h3>
+                    <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">總評分</h3>
                     <div class="ai-response">
-                        <span class="analysis-score">言語內容:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.總評分 }}&nbsp;</strong>/ 100</span>
-                        <span class="analysis-score">表達邏輯:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.表達邏輯 }}&nbsp;</strong>/ 100</span>
+                        <span class="analysis-score">&nbsp;&nbsp;&nbsp;<strong>{{ overall_score }}&nbsp;</strong>/ 100</span>
                     </div>
                     <h3 style="text-align: center; margin-top: 20px; margin-bottom: 0px;">表現</h3>
                     <div class="ai-response">
@@ -116,6 +115,10 @@ $(document).ready(function() {
         </div>
         {% if response_json %}
         <div class='col'>
+            <div class="ai-response">
+                <span class="analysis-score">言語內容:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.總評分 }}&nbsp;</strong>/ 100</span>
+                <span class="analysis-score">表達邏輯:&nbsp;&nbsp;&nbsp;<strong>{{ response_json.言語內容.表達邏輯 }}&nbsp;</strong>/ 100</span>
+            </div>
             <div class='row' id="graph_area">
                 <h3 style="text-align: center;">聽覺分析</h3>
                 <div class="row" id="graph_auditory">

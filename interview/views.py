@@ -30,6 +30,7 @@ def analysis(request):
                     "改進建議": "",
                     "聽覺評價": {"總評分": , "言語和聲紋": , "語速": , "音調": },
                     "視覺評價": {
+                            "總評分": ,
                             "微笑是否自然": ,
                             "眼神交流": ,
                             "總評分": ,
@@ -72,8 +73,16 @@ def analysis(request):
                 # print(response_json["改進建議"])
                 # print(response_json["整體表現"])
 
+                # Overall score
+                # print(response_json["視覺評價"]["總評分"])
+                # print(response_json["聽覺評價"]["總評分"])
+                # print(response_json["言語內容"]["總評分"])
+                overall_score = (response_json["視覺評價"]["總評分"] + response_json["聽覺評價"]["總評分"] + response_json["言語內容"]["總評分"]) / 3
+
+
                 context = {
                     'response_json': response_json,
+                    'overall_score': overall_score,
                 }
 
                 # Write the video file to the local directory staic/user/user.mp4

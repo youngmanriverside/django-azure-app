@@ -34,7 +34,7 @@ if 'CODESPACE_NAME' in os.environ:
 # Application definition
 
 INSTALLED_APPS = [
-    # 'restaurant_review.apps.RestaurantReviewConfig',
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,9 +51,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -167,12 +167,15 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # CORS
-CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOWED_ORIGINS = [
-    "https://example.com",
+    "https://wdawda.azurewebsites.net",
+    "https://django-jobai-0722-7kowvvrmxa-de.a.run.app",
     "http://127.0.0.1:8000"
 ]
 
-# CSRF TRUSTED_ORIGINS = all
-CSRF_TRUSTED_ORIGINS = ['*']
+# CSRF TRUSTED_ORIGINS
+CSRF_TRUSTED_ORIGINS = [
+    "https://wdawda.azurewebsites.net",
+    "https://django-jobai-0722-7kowvvrmxa-de.a.run.app",
+]

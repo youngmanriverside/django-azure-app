@@ -74,10 +74,9 @@ def analysis(request):
                 # print(response_json["整體表現"])
 
                 # Overall score
-                # print(response_json["視覺評價"]["總評分"])
-                # print(response_json["聽覺評價"]["總評分"])
-                # print(response_json["言語內容"]["總評分"])
                 overall_score = (response_json["視覺評價"]["總評分"] + response_json["聽覺評價"]["總評分"] + response_json["言語內容"]["總評分"]) / 3
+                # Show overall score in integer
+                overall_score = int(overall_score)
 
 
                 context = {

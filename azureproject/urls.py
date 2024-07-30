@@ -19,7 +19,7 @@ from .views import benefit, chatbot, home, chatbot_new, home2
 
 urlpatterns = [
     path('', home2, name='home'),
-    path('home2', home, name='home2'),
+   # path('home2', home, name='home2'),
     path('chatbot-new', chatbot_new, name='chatbot'),
     path('chatbot', chatbot, name='chatbot'),
     path('benefit', benefit),

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/f2f8f686-d0b4-48c6-971d-5f8812305e7c/resourceGroups/azure-genai/providers/Microsoft.Web/sites/jobxAI",
+    "appService.deploySubpath": "."
+}

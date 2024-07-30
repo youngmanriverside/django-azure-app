@@ -21,7 +21,7 @@ function sendChatQuery(userMessage, findType) {
     console.log(formData);
 
     $.ajax({
-        url : "https://gcp-api-rag.azurewebsites.net/find_courses",
+        url : "https://geminirag-yqk5u6r6fa-ue.a.run.app/find_courses",
         crossDomain : true,
         type : 'POST',
         data : formData,

@@ -16,7 +16,7 @@ $(document).ready(function() {
 
 function evaluate_interview_question(question, user_answer) {
 
-    url = 'https://interview-yqk5u6r6fa-ue.a.run.app/interview_question'; //更換
+    url = 'https://gemini-interview-4y2bi5ds5a-ue.a.run.app/interview_question'; //更換
 
     // Apply formData to send the data to the server
     var formData = new FormData();

@@ -169,13 +169,13 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 # CORS
 
 CORS_ALLOWED_ORIGINS = [
-    "https://wdawda.azurewebsites.net",
+    "https://jobxai.azurewebsites.net",
     "https://jobxai-4y2bi5ds5a-ue.a.run.app",
     "http://127.0.0.1:8000"
 ]
 
 # CSRF TRUSTED_ORIGINS
 CSRF_TRUSTED_ORIGINS = [
-    "https://wdawda.azurewebsites.net",
+    "https://jobxai.azurewebsites.net",
     "https://jobxai-4y2bi5ds5a-ue.a.run.app",
 ]

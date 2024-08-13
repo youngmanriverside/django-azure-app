@@ -5,7 +5,7 @@ function text_to_speech(text) {
 
     console.log(text);
 
-    url = "https://wda-gemini-api.azurewebsites.net/texttospeech"
+    url = "https://gemini-interview-4y2bi5ds5a-ue.a.run.app/texttospeech"
 
     formData = new FormData();
     formData.append("text", text);

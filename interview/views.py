@@ -45,7 +45,7 @@ def analysis(request):
 
             '''
 
-            url = 'https://wda-gemini-api.azurewebsites.net/video'
+            url = 'https://gemini-interview-4y2bi5ds5a-ue.a.run.app/video'
             files = {
                 'video': video_file,
                 }

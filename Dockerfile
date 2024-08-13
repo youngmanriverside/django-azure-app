@@ -1,24 +1,26 @@
-# 使用 Python 基礎映像
-FROM python:3.10-slim
+# Dockerize a django app with python 3.10.0
+# Start from the official Python image
+FROM python:3.10.0
 
-# 設定工作目錄
+# Set environment varibles
+# CORS_ORIGIN all
+ENV CORS_ORIGIN *
+ENV PYTHONUNBUFFERED=1
+ENV SECRET_KEY 46eaa0c6722fc1885b99c1b39f4c7517d7d7d25fee19e61087e2dbc904b0df01
+
+# Set work directory
 WORKDIR /app
 
-# 複製 pyproject.toml 和 poetry.lock 並安裝依賴
-COPY pyproject.toml poetry.lock* /app/
-RUN pip install poetry && poetry install --no-root
+# Copy project
+COPY . .
 
-# 複製專案文件
-COPY . /app/
+# Install dependencies
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
 
-# 安裝 uwsgi
-RUN poetry add uwsgi
+# Expose port
+EXPOSE 8000
 
-# 設定環境變數
-ENV PORT 8000 \
-    TZ=Asia/Taipei \
-    PYTHONUNBUFFERED=1
-
-
-CMD uwsgi -w app:app --http :$PORT
+# Run the application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 

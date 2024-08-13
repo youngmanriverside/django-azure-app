@@ -83,7 +83,7 @@ function uploadBlob(blob) {
 
 	// Send the blob to the django server with url /transcribe (same origin)
 	// url = 'http://127.0.0.1:5000/transcribe';
-	url = 'https://wda-gemini-api.azurewebsites.net/transcribe';
+	url = 'https://gemini-interview-4y2bi5ds5a-ue.a.run.app/transcribe';
 
 	console.log(url)
 

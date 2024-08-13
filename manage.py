@@ -31,4 +31,5 @@ def main():
 
 
 if __name__ == '__main__':
+    port = os.getenv('PORT', '8000')
     main()
